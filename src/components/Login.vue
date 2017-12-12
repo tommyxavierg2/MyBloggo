@@ -4,36 +4,79 @@
     <div>
         <div class="input-group">
           <label>Email:</label>
-          <input type="email" placeholder="Email" v-model='email'></input>
+          <input type="email" placeholder="Email" v-model='$data.loginUser.email' v-on:change="validateEmail($data.loginUser.email)"></input>
         </div>
         <div class="input-group">
           <label>Password:</label>
-          <input type="password" placeholder="Password" v-model='password'></input>
+          <input type="password" placeholder="Password" v-model='$data.loginUser.password' v-on:change="validateUser($data.loginUser.email, $data.loginUser.password)"></input>
         </div>
         <div>
-          <button type="button" @click="test">Enter</button>
+          <button v-if="$data.isUserValidated" type="button" @click="login()">Enter</button>
         </div>
     </div>
   </div>
 </template>
 
 <script>
-  var loginUser = {
-    email: '',
-    password: ''
-  }
+ import axios from 'axios'
+ axios.defaults.baseURL = "http://localhost:3000/";
+ import toastr from 'toastr'
+ toastr.options = {
+   timeOut: 2000,
+   positionClass: 'toast-top-right',
+   showMethod: "fadeIn",
+   hideMethod: "fadeOut"
+ }
+ export default {
+    data() {
+      return {
+        loginUser: { email: '', password: '' },
+        isUserValidated: false,
+        loggedUser: {}
+      }
+    },
 
-  export default {
-      data() {
-        return loginUser
+    created: function() {
+      this.$data.loggedUser = localStorage.getItem('userData');
+      if(this.$data.loggedUser) {
+        this.$router.push('Home');
+      }
+    },
+
+
+    methods: {
+      validateEmail: function(loginEmail) {
+        axios.get(`users?email=${loginEmail}`).then(res => {
+          let isEmailAvailable = Object.keys(res.data).length;
+          if(isEmailAvailable == 0) {
+            toastr.warning('Email not registered, please verify.');
+          } else {
+            toastr.success('Email validated');
+          }
+        }).catch(err => toastr.error(err));
       },
 
-      methods: {
-        test: function() {
-          alert(loginUser.email);
-        }
+      validateUser: function(loginEmail, loginPassword) {
+        axios.get(`users?email=${loginEmail}&password=${loginPassword}`)
+        .then(res => {
+          let isUserCorrect = Object.keys(res.data).length;
+          if(isUserCorrect == 0) {
+            toastr.warning('This user is not registered please verify and try again');
+          } else {
+            this.$data.isUserValidated = true;
+            toastr.warning(`You've been validated ${loginEmail}, press the Enter button to log in`);
+          }
+        }).catch(err => {
+          toastr.warning(err);
+        });
+      },
+
+      login: function() {
+        localStorage.setItem('userData', JSON.stringify(this.$data.loginUser));
+        this.$router.push('Home');
       }
     }
+ }
 </script>
 
 <style>

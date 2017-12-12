@@ -22,15 +22,40 @@
   </div>
 </template>
 
-<script>
+<script>import axios from 'axios'
+axios.defaults.baseURL = "http://localhost:3000";
+import toastr from 'toastr'
+toastr.options = {
+  timeOut: 2000,
+  positionClass: 'toast-top-right',
+  showMethod: "fadeIn",
+  hideMethod: "fadeOut"
+}
+
+var userData
   export default {
-    data () {
+    data(){
       return {}
+    },
+
+    created: function() {
+      userData = localStorage.getItem('userData');
+      if(!userData) {
+        toastr.success('In order to comment, like or place a post you first need to log In');
+      }
     }
   }
 </script>
 
 <style media="screen">
+  #homeView {
+    text-align: center;
+  }
+
+  ol {
+    border: 1px solid black;
+  }
+
   li {
     border: 1px solid black;
   }
