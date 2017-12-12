@@ -1,5 +1,3 @@
-# y
-
 > A blog
 
 ## Build Setup
