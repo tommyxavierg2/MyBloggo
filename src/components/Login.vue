@@ -28,7 +28,7 @@
    hideMethod: "fadeOut"
  }
  export default {
-    data() {
+    data: function() {
       return {
         loginUser: { email: '', password: '' },
         isUserValidated: false,
