@@ -1,18 +1,31 @@
 <template>
   <div id="loginView">
-    <h1>Welcome to bloggo</h1>
+    <div id="menu">
+      <label class="menuItems">Posts</label> |
+      <label class="menuItems">New Post</label> |
+      <label class="menuItems">MyPosts</label> |
+      <label class="menuItems">Settings</label>
+    </div>
+    <h1 class="titles">Welcome to bloggo</h1>
     <div>
-        <div class="input-group">
-          <label>Email:</label>
-          <input type="email" placeholder="Email" v-model='loginUser.email' v-on:change="validateEmail(loginUser.email)"></input>
-        </div>
-        <div class="input-group">
-          <label>Password:</label>
-          <input type="password" placeholder="Password" v-model='loginUser.password' v-on:change="validateUser(loginUser.email, loginUser.password)"></input>
-        </div>
-        <div>
-          <button id="loginButton" type="button" @click="login()" disabled>Enter</button>
-        </div>
+      <div class="input-group">
+        <span class="input-group-addon">Email:</span>
+        <input type="email" placeholder="Email" v-model='loginUser.email'
+               v-on:change="validateEmail(loginUser.email)" class="form-control"></input>
+      </div>
+      <div class="input-group">
+          <span class="input-group-addon">Password:</span>
+          <input type="password" placeholder="Password" v-model='loginUser.password'
+                 v-on:change="validateUser(loginUser.email, loginUser.password)"
+                 class="form-control"></input>
+      </div>
+      <div class="input-group">
+        <span class="input-group-btn">
+          <button id="loginButton" type="button" @click="login()"
+                  disabled class="btn btn-primary btn-block">Enter
+          </button>
+        </span>
+      </div>
     </div>
   </div>
 </template>
@@ -79,17 +92,28 @@
 
 <style>
  #loginView {
-   display: inline-block;
    text-align: center;
  }
 
- label {
-   display: inline-block;
+ #menu {
+   background-color: gray;
+   height: 40px;
  }
 
- input {
-   border: 2px solid gray;
-   border-radius: 10%;
-   margin-left: 20px;
+ .titles {
+   font-weight: bold;
+ }
+
+ .menuItems {
+   font-size: x-large;
+   font-weight: bold;
+ }
+
+ label:hover {
+   color: white;
+ }
+
+ label:active {
+   color: red;
  }
 </style>

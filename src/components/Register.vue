@@ -1,29 +1,39 @@
 <template>
   <div id="registerView">
-    <h1>Register</h1>
-    <div class="input-addon">
-      <div class="">
-        <label for="">Name:</label>
-        <input type="text" placeholder="Name" v-model="newUser.name">
+    <h1 class="titles">Register</h1>
+    <div>
+      <div class="input-group">
+        <span class="input-group-addon">Name:</span>
+        <input type="text" placeholder="Name" v-model="newUser.name"
+               class="form-control">
       </div>
-      <div class="">
-        <label for="">Lastname:</label>
-        <input type="text" placeholder="Lastname" v-model="newUser.lastname">
+      <div class="input-group">
+        <span class="input-group-addon">Lastname:</span>
+        <input type="text" placeholder="Lastname" v-model="newUser.lastname"
+               class="form-control">
       </div>
-      <div class="">
-        <label for="">Email:</label>
-        <input type="email" placeholder="Email@example.com" v-model="newUser.email" v-on:change="isEmailAvailable(newUser.email)">
+      <div class="input-group">
+        <span class="input-group-addon">Email:</span>
+        <input type="email" placeholder="Email@example.com" v-model="newUser.email"
+               v-on:change="isEmailAvailable(newUser.email)" class="form-control">
       </div>
-      <div class="">
-        <label for="">Password:</label>
-        <input type="password" placeholder="Password" v-model="newUser.password">
+      <div class="input-group">
+        <span class="input-group-addon">Password:</span>
+        <input type="password" placeholder="Password" v-model="newUser.password"
+                class="form-control">
       </div>
-      <div class="">
-        <label for="">Confirm password:</label>
-        <input type="password" placeholder="Confirm Password" v-model="newUser.confirmPassword">
+      <div class="input-group">
+        <span class="input-group-addon">Confirm password:</span>
+        <input type="password" placeholder="Confirm Password" v-model="newUser.confirmPassword"
+               class="form-control">
       </div>
-      <div class="g-recaptcha" v-bind:data-sitekey='captchaInfo.captchaKey' data-callback="captchaResponse"></div>
-      <button type="button" @click="registerNewUser">Register</button>
+      <div id="captcha" class="g-recaptcha" v-bind:data-sitekey='captchaInfo.captchaKey' data-callback="captchaResponse"></div>
+      <div class="input-group">
+        <span class="input-group-btn">
+          <button id="registerButton" type="button" @click="registerNewUser" class="btn btn-primary btn-block"
+                   disabled>Register</button>
+        </span>
+      </div>
     </div>
   </div>
 </template>
@@ -68,6 +78,7 @@
        if(!this.captchaInfo.isCaptchaChecked) {
             toastr.warning('First check the captcha box first.');
        } else {
+           $('#registerButton').attr('disabled', false);
 
            if(!name || !lastname || email || !password){
              toastr.warning('Please make sure all fields are properly filled');
@@ -101,13 +112,12 @@
   #registerView {
     text-align: center;
   }
-  input {
-    border: 2px solid gray;
-    border-radius: 10%;
-    margin-left: 20px;
+
+  #captcha {
+    right: 25%;
   }
 
-  .centered {
-    left: 40%;
+  .titles {
+    font-weight: bold;
   }
 </style>

@@ -2,13 +2,14 @@
   <div id="postsView" class="">
     <div id="menu">
       <label class="menuItems">Posts</label> |
+      <label class="menuItems">New Post</label> |
       <label class="menuItems">MyPosts</label> |
       <label class="menuItems">Settings</label>
     </div>
     <div class="middle">
       <h1 class="titles">Bloggo!, made for you.</h1>
+      <h2>Recent posts</h2>
       <div id="postList" v-for="post in posts">
-        <h2>Recent posts</h2>
           <div class="row">
             <div class="col-xs-6">
               <p><strong>{{post.author}}</strong>{{post.creationDate}}</p>
@@ -78,12 +79,12 @@ export default {
     text-align: left;
   }
 
-  .menuItems {
-    font-size: x-large;
+  .titles {
     font-weight: bold;
   }
 
-  .titles {
+  .menuItems {
+    font-size: x-large;
     font-weight: bold;
   }
 

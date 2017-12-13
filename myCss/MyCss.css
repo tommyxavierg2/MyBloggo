@@ -1,0 +1,17 @@
+.middle {
+  left: 20%;
+  width: 80%;
+}
+
+.leftAlign {
+  text-align: left;
+}
+
+.titles {
+  font-weight: bold;
+}
+
+.menuItems {
+  font-size: x-large;
+  font-weight: bold;
+}

@@ -6,6 +6,7 @@ import Register from '@/components/Register'
 import MyPosts from '@/components/MyPosts'
 import Profile from '@/components/Profile'
 import Posts from '@/components/Posts'
+import NewPost from '@/components/NewPost'
 
 Vue.use(Router)
 
@@ -35,6 +36,11 @@ export default new Router({
       path: '/Posts',
       name: 'Posts',
       component: Posts
+    },
+    {
+      path: '/NewPost',
+      name: 'NewPost',
+      component: NewPost
     }
   ]
 })
