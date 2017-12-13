@@ -4,48 +4,46 @@
     <div>
         <div class="input-group">
           <label>Email:</label>
-          <input type="email" placeholder="Email" v-model='$data.loginUser.email' v-on:change="validateEmail($data.loginUser.email)"></input>
+          <input type="email" placeholder="Email" v-model='loginUser.email' v-on:change="validateEmail(loginUser.email)"></input>
         </div>
         <div class="input-group">
           <label>Password:</label>
-          <input type="password" placeholder="Password" v-model='$data.loginUser.password' v-on:change="validateUser($data.loginUser.email, $data.loginUser.password)"></input>
+          <input type="password" placeholder="Password" v-model='loginUser.password' v-on:change="validateUser(loginUser.email, loginUser.password)"></input>
         </div>
         <div>
-          <button v-if="$data.isUserValidated" type="button" @click="login()">Enter</button>
+          <button id="loginButton" type="button" @click="login()" disabled>Enter</button>
         </div>
     </div>
   </div>
 </template>
 
 <script>
- import axios from 'axios'
- axios.defaults.baseURL = "http://localhost:3000/";
- import toastr from 'toastr'
- toastr.options = {
-   timeOut: 2000,
-   positionClass: 'toast-top-right',
-   showMethod: "fadeIn",
-   hideMethod: "fadeOut"
- }
+  import axios from 'axios';
+  axios.defaults.baseURL = "http://localhost:3000/";
+  import toastr from 'toastr';
+  toastr.options = {
+    timeOut: 2000,
+    positionClass: 'toast-top-right',
+    showMethod: "fadeIn",
+    hideMethod: "fadeOut"
+  }
  export default {
-    data: function() {
+    data() {
       return {
-        loginUser: { email: '', password: '' },
-        isUserValidated: false,
+        loginUser: { email: '', password: ''},
         loggedUser: {}
       }
     },
 
-    created: function() {
-      this.$data.loggedUser = localStorage.getItem('userData');
-      if(this.$data.loggedUser) {
+    created() {
+      this.loggedUser = localStorage.getItem('userData');
+      if(this.loggedUser) {
         this.$router.push('Home');
       }
     },
 
-
     methods: {
-      validateEmail: function(loginEmail) {
+      validateEmail(loginEmail) {
         axios.get(`users?email=${loginEmail}`).then(res => {
           let isEmailAvailable = Object.keys(res.data).length;
           if(isEmailAvailable == 0) {
@@ -56,23 +54,23 @@
         }).catch(err => toastr.error(err));
       },
 
-      validateUser: function(loginEmail, loginPassword) {
+      validateUser(loginEmail, loginPassword) {
         axios.get(`users?email=${loginEmail}&password=${loginPassword}`)
         .then(res => {
-          let isUserCorrect = Object.keys(res.data).length;
-          if(isUserCorrect == 0) {
-            toastr.warning('This user is not registered please verify and try again');
-          } else {
-            this.$data.isUserValidated = true;
-            toastr.warning(`You've been validated ${loginEmail}, press the Enter button to log in`);
-          }
-        }).catch(err => {
-          toastr.warning(err);
-        });
+            let isUserCorrect = Object.keys(res.data).length;
+
+            if(isUserCorrect == 0) {
+                toastr.warning('This user is not registered please verify and try again');
+            } else {
+                $('#loginButton').attr('disabled', false);
+                toastr.warning(`You've been validated ${loginEmail}, press the Enter button to log in`);
+            }
+
+        }).catch(err => toastr.warning(err));
       },
 
-      login: function() {
-        localStorage.setItem('userData', JSON.stringify(this.$data.loginUser));
+      login() {
+        localStorage.setItem('userData', JSON.stringify(this.loginUser));
         this.$router.push('Home');
       }
     }

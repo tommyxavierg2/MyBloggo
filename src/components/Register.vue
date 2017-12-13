@@ -22,21 +22,32 @@
         <label for="">Confirm password:</label>
         <input type="password" placeholder="Confirm Password" v-model="newUser.confirmPassword">
       </div>
-      <div class="g-recaptcha" v-bind:data-sitekey='captchaKey' data-callback="captchaResponse"></div>
-      <button type="button" @click="registerNewUser">Register:</button>
+      <div class="g-recaptcha" v-bind:data-sitekey='captchaInfo.captchaKey' data-callback="captchaResponse"></div>
+      <button type="button" @click="registerNewUser">Register</button>
     </div>
   </div>
 </template>
 <script type="text/javascript">
-  window.captchaResponse = (response) => {
-    sessionStorage.setItem("recaptchaResponse", response);
+  import axios from 'axios';
+  axios.defaults.baseURL = "http://localhost:3000/";
+  import toastr from 'toastr';
+  toastr.options = {
+    timeOut: 2000,
+    positionClass: 'toast-top-right',
+    showMethod: "fadeIn",
+    hideMethod: "fadeOut"
   }
+
+  window.captchaResponse = (response) => {
+    sessionStorage.setItem('reCaptcha', response);
+  }
+
  export default {
-   data: function() {
+   name: 'Register',
+   data () {
       return {
         newUser: { name: '', lastname: '', email: '', password: '', confirmPassword: '' },
-        captchaKey: "6LfkxDwUAAAAAEPuCXV8_WI_5fLy48GiGToegZcC",
-        isCaptchaChecked: false
+        captchaInfo: { captchaKey: "6LfkxDwUAAAAAEPuCXV8_WI_5fLy48GiGToegZcC", isCaptchaChecked: false}
       }
    },
    methods: {
@@ -50,33 +61,40 @@
          }
        }).catch(err => toastr.error(err));
      },
+
      registerNewUser: function() {
-       console.log(this.newUser);
-       if(!this.newUser.name || !this.newUser.lastname || !this.newUser.email || !this.newUser.password ){
-         toastr.warning('Please make sure all fields are properly filled');
+       this.captchaInfo.isCaptchaChecked = sessionStorage.getItem('reCaptcha');
+
+       if(!this.captchaInfo.isCaptchaChecked) {
+            toastr.warning('First check the captcha box first.');
+       } else {
+
+           if(!name || !lastname || email || !password){
+             toastr.warning('Please make sure all fields are properly filled');
+           }
+           else if(password != confirmPassword) {
+             toastr.warning('Please make sure both passwords are equal.');
+           }
+           else if(password.length < 6) {
+             toastr.warning('Please make sure the password has more than 6 characters.');
+           }
+            axios.post('users', {
+               name: this.newUser.name,
+               lastname: this.newUser.lastname,
+               email: this.newUser.email,
+               password: this.newUser.password
+             })
+             .then(res => {
+               toastr.success('Thank you for joining us and welcome to the family! Now redirecting to the home page.');
+               localStorage.setItem('userData', JSON.stringify(this.newUser));
+               sessionStorage.removeItem('reCaptcha');
+               this.$router.replace('Home');
+             })
+             .catch(err => toastr.warning(err));
+
+          }
        }
-       else if(this.newUser.password != this.newUser.confirmPassword) {
-         toastr.warning('Please make sure both passwords are equal.');
-       }
-       else if(this.newUser.password.length < 6) {
-         toastr.warning('Please make sure the password has more than 6 characters.');
-       }
-        axios.post('users', {
-           name: this.newUser.name,
-           lastname: this.newUser.lastname,
-           email: this.newUser.email,
-           password: this.newUser.password
-         })
-         .then(res => {
-           toastr.success('Thank you for joining us and welcome to the family! Now redirecting to the home page.');
-          /*localStorage.setItem('userData', JSON.stringify(newUser));
-           this.$router.replace('Home'); */
-         })
-         .catch(err => {
-         alert(err);
-       });
-     }
-   }
+    }
  }
 </script>
 <style media="screen">

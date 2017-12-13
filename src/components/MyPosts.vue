@@ -1,23 +1,18 @@
 <template>
   <div id="homeView">
-    <div class="">
-      /// Menu       /// Menu      /// Menu      /// Menu      /// Menu
-
+    <div id="menu">
+      <label class="menuItems">Posts</label> |
+      <label class="menuItems">MyPosts</label> |
+      <label class="menuItems">Settings</label>
     </div>
-    <div>Bloggo..</div>
+    <h1>Your posts</h1>
     <div>
-        <ol>
-          <li>
-            <h3>title?</h3>
-            <div class="">
-              <img src="" alt="">
-              <p>date?</p>
-              <textarea>comment body?</textarea> <br>
-              <label>likes?</label>
-              <label>edited?</label>
-            </div>
-          </li>
-        </ol>
+      <label>Title:</label>
+      <input placeholder="Title"></input>
+      <label>Content:</label>
+      <textarea placeholder="Title"></textarea>
+      <label for="">Allow comments</label>
+      <input type="checkbox"></input>
     </div>
   </div>
 </template>
@@ -50,13 +45,5 @@ var userData
 <style media="screen">
   #homeView {
     text-align: center;
-  }
-
-  ol {
-    border: 1px solid black;
-  }
-
-  li {
-    border: 1px solid black;
   }
 </style>
