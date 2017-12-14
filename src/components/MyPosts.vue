@@ -1,9 +1,10 @@
 <template>
-  <div id="homeView">
+  <div id="myPostsView">
     <div id="menu">
-      <label class="menuItems">Posts</label> |
-      <label class="menuItems">MyPosts</label> |
-      <label class="menuItems">Settings</label>
+      <router-link class="menuItems" to="posts">Posts</router-link> |
+      <router-link class="menuItems" to="newpost">New Post</router-link> |
+      <router-link class="menuItems" to="myposts">MyPosts</router-link> |
+      <router-link class="menuItems" to="settings">Settings</router-link>
     </div>
     <h1>Posts</h1>
     <div class="row">
@@ -53,46 +54,4 @@ var userData
 </script>
 
 <style media="screen">
-  #homeView {
-    text-align: center;
-    align-items: center;
-    padding: 5px;
-  }
-
-  #menu {
-    background-color: gray;
-    height: 40px;
-  }
-
-  #postList {
-    width: 600px;
-    border: 2px solid gray;
-  }
-
-  #editedButton {
-    border: none;
-    background-color: transparent;
-    outline: none;
-  }
-
-  .menuItems {
-    font-size: x-large;
-    font-weight: bold;
-  }
-
-  .leftAlign {
-    text-align: left;
-  }
-
-  .titles {
-    font-weight: bold;
-  }
-
-  label:hover {
-    color: white;
-  }
-
-  label:active {
-    color: red;
-  }
 </style>

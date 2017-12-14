@@ -1,10 +1,7 @@
 <template>
   <div id="loginView">
     <div id="menu">
-      <label class="menuItems">Posts</label> |
-      <label class="menuItems">New Post</label> |
-      <label class="menuItems">MyPosts</label> |
-      <label class="menuItems">Settings</label>
+      <router-link class="menuItems" to="posts">Posts</router-link>
     </div>
     <h1 class="titles">Welcome to bloggo</h1>
     <div>
@@ -51,7 +48,7 @@
     created() {
       this.loggedUser = localStorage.getItem('userData');
       if(this.loggedUser) {
-        this.$router.push('Home');
+        this.$router.push('home');
       }
     },
 
@@ -84,36 +81,11 @@
 
       login() {
         localStorage.setItem('userData', JSON.stringify(this.loginUser));
-        this.$router.push('Home');
+        this.$router.push('myposts');
       }
     }
  }
 </script>
 
-<style>
- #loginView {
-   text-align: center;
- }
-
- #menu {
-   background-color: gray;
-   height: 40px;
- }
-
- .titles {
-   font-weight: bold;
- }
-
- .menuItems {
-   font-size: x-large;
-   font-weight: bold;
- }
-
- label:hover {
-   color: white;
- }
-
- label:active {
-   color: red;
- }
+<style lang="css" src="">
 </style>

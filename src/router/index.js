@@ -7,40 +7,46 @@ import MyPosts from '@/components/MyPosts'
 import Profile from '@/components/Profile'
 import Posts from '@/components/Posts'
 import NewPost from '@/components/NewPost'
+import Settings from '@/components/Settings'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
-      path: '/Login',
-      name: 'Login',
+      path: '/login',
+      name: 'login',
       component: Login
     },
     {
-      path: '/Register',
-      name: 'Register',
+      path: '/register',
+      name: 'register',
       component: Register
     },
     {
-      path: '/MyPosts',
-      name: 'MyPosts',
+      path: '/myposts',
+      name: 'myposts',
       component: MyPosts
     },
     {
-      path: '/Profile',
-      name: 'Profile',
+      path: '/profile',
+      name: 'profile',
       component: Profile
     },
     {
-      path: '/Posts',
-      name: 'Posts',
+      path: '/posts',
+      name: 'posts',
       component: Posts
     },
     {
-      path: '/NewPost',
-      name: 'NewPost',
+      path: '/newpost',
+      name: 'newpost',
       component: NewPost
+    },
+    {
+      path: '/settings',
+      name: 'settings',
+      component: Settings
     }
   ]
 })
