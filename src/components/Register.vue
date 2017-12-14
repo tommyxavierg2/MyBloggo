@@ -1,5 +1,8 @@
 <template>
   <div id="registerView">
+    <div id="menu">
+      <label class="menuItems">Posts</label>
+    </div>
     <h1 class="titles">Register</h1>
     <div>
       <div class="input-group">
@@ -99,7 +102,7 @@
                toastr.success('Thank you for joining us and welcome to the family! Now redirecting to the home page.');
                localStorage.setItem('userData', JSON.stringify(this.newUser));
                sessionStorage.removeItem('reCaptcha');
-               this.$router.replace('Home');
+               this.$router.replace('Posts');
              })
              .catch(err => toastr.warning(err));
 
@@ -117,7 +120,25 @@
     right: 25%;
   }
 
+  #menu {
+    background-color: gray;
+    height: 40px;
+  }
+
   .titles {
     font-weight: bold;
+  }
+
+  .menuItems {
+    font-size: x-large;
+    font-weight: bold;
+  }
+
+  label:hover {
+    color: white;
+  }
+
+  label:active {
+    color: red;
   }
 </style>

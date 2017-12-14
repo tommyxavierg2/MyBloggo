@@ -1,10 +1,9 @@
 <template>
   <div id="loginView">
     <div id="menu">
-      <label class="menuItems">Posts</label> |
-      <label class="menuItems">New Post</label> |
-      <label class="menuItems">MyPosts</label> |
-      <label class="menuItems">Settings</label>
+      <label class="menuItems">
+        <router-link :to="{ name: 'Posts'}">Posts</router-link>
+      </label>
     </div>
     <h1 class="titles">Welcome to bloggo</h1>
     <div>
@@ -84,7 +83,7 @@
 
       login() {
         localStorage.setItem('userData', JSON.stringify(this.loginUser));
-        this.$router.push('Home');
+        this.$router.push('Posts');
       }
     }
  }
