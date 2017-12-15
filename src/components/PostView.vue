@@ -1,15 +1,15 @@
 <template>
   <div id="postView">
     <div id="menu">
-      <router-link class="menuItems" to="posts" :to="{name: 'posts', params: {user: user}}">Posts</router-link>
+      <router-link class="menuItems" :to="{path: '/', params: {user: user}}">Posts</router-link>
       <router-link v-if="user" class="menuItems" :to="{name: 'newpost', params: {user: user}}">| New Post |</router-link>
       <router-link v-if="user" class="menuItems" :to="{name: 'profile', params: {user: user}}">Profile</router-link>
       <router-link v-if="user" class="menuItems" :to="{name: 'settings', params: {user: user}}">|Settings</router-link>
     </div>
     <div>
-      <div>
-        <img class="user-avatar" :src="post.avatar" alt="">
-      </div>
+      <router-link class="user-name-router" :to="{name: 'postview', params: {post: post}}">
+        <img class="user-avatar" :src="post.avatar">
+      </router-link> <br>
       <div>
         <label>{{post.userName}}</label>
         <label>{{post.createdAt}}</label>
@@ -24,7 +24,7 @@
       <button type="button">Comments {{post.comments}}</button>
     </div>
     <h4 v-if="comments">Comments</h4>
-    <div v-for="comment in comments" class="comments-display">
+    <div v-for="(comment, index) in comments" class="comments-display">
       <div class="row">
         <div class="col-xs-4">
           <img :src="comment.userAvatar" class="comment-avatar-img">
@@ -34,6 +34,7 @@
           <span class="input-group-addon">{{comment.date}}</span>
           <textarea v-model="comment.comment" class="form-control"></textarea>
         </div>
+        <i v-if="userComment" class="fa fa-trash" @click="deleteComment(index)"></i>
       </div>
     </div>
     <h3 v-if="!user">In order to place a comment you first need to be logged in</h3>
@@ -48,9 +49,9 @@
       <h4>New Comment</h4>
       <div class="input-group">
         <span class="input-group-addon">Content</span>
-        <textarea class="form-control" v-model="newComment.comment"></textarea>
+        <textarea class="form-control" v-model="newComment.comment"  @keyup.enter="addComment"></textarea>
       </div>
-      <div v-if="newComment" class="input-group">
+      <div v-if="newComment.comment" class="input-group">
         <span class="input-group-btn">
           <button type="button" class="btn btn-primary btn-block" @click="addComment()">Comment</button>
         </span>
@@ -68,6 +69,17 @@ export default {
       comments: {},
       newComment: {},
       post: null
+    }
+  },
+
+  computed: {
+    userComment() {
+      if(this.user) {
+        if(this.user.id == this.post.userId)
+        return true;
+        else
+        return false
+      }
     }
   },
 
@@ -97,7 +109,7 @@ export default {
         userId: this.user.id,
         userName: this.user.name,
         userAvatar: this.user.avatar,
-        date: date.substr(8, 16)
+        date: date.substr(8, 13)
       })
       .then(res => {
         this.updatePostComments();
@@ -120,13 +132,25 @@ export default {
 
     updatePostComments() {
       this.post.comments++;
-      axios.put(`posts?id=${this.post.id}`, this.post)
+      axios.put(`posts/${this.post.id}`, this.post)
       .then()
       .catch(err => toastr.warning(err))
     },
 
+    deleteComment(index){
+      let currentCommentId = this.comments[index].id;
+      this.comments.splice(currentCommentId, 1);
+      axios.delete(`comments/${currentCommentId}`)
+      .then(res => {
+        this.post.comments--;
+        this.getComments();
+        toastr.success('Comment deleted');
+      })
+      .catch(err => toastr.warning(err))
+    },
+
     goToLogin() {
-      this.$router.push({name: 'login', params: {post: post} });
+      this.$router.push({name: 'login', params: {post: this.post} });
     }
   }
 }

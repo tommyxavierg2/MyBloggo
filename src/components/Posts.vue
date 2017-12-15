@@ -1,7 +1,7 @@
 <template>
   <div id="postsView" class="">
     <div id="menu">
-      <router-link class="menuItems" to="posts">Posts</router-link>
+      <router-link class="menuItems" to="/">Posts</router-link>
       <router-link v-if="user" class="menuItems" :to="{name: 'newpost', params: {user: user}}">| New Post |</router-link>
       <router-link v-if="user" class="menuItems" :to="{name: 'profile', params: {user: user}}">Profile</router-link>
       <router-link v-if="user" class="menuItems" :to="{name: 'settings', params: {user: user}}">|Settings</router-link>
@@ -9,13 +9,13 @@
     <div class="middle">
       <h1 class="titles">Bloggo!, made for you.</h1>
       <h2>Posts</h2>
-      <div id="postList" v-for="(post, index) in posts" class="post-list">
+      <div v-for="(post, index) in posts" class="post-list">
           <div class="row post-list">
             <div class="col-xs-6">
-              <router-link class="user-name-router" :to="{name: 'postview', params: {post: post}}">
+              <router-link class="user-name-router" :to="{name: 'profile', params: {postUserId: post.userId, viewer: user}}">
                 <img class="user-avatar" :src="post.avatar">
               </router-link> <br>
-              <router-link class="user-name-router" :to="{name: 'postview', params: {post: post}}">
+              <router-link class="user-name-router" :to="{name: 'profile', params: {postUserId: post.userId, viewer: user}}">
                 <span>{{post.userName}}</span>
               </router-link>
             </div>
@@ -46,9 +46,7 @@ export default {
 
   created() {
     this.user = JSON.parse(localStorage.getItem('userData'));
-    axios.get('posts')
-      .then(res => this.posts = res.data)
-      .catch(err => toastr.warning(err));
+    this.getPosts();
   },
 
   methods: {
@@ -56,6 +54,12 @@ export default {
       this.posts[index].likes++;
       axios.put(`posts/${post.id}`, this.posts[index])
       .then(res => toastr.success('You liked the post'))
+    },
+
+    getPosts() {
+      axios.get('posts')
+        .then(res => this.posts = res.data)
+        .catch(err => toastr.warning(err));
     },
 
     settings() {
@@ -66,20 +70,4 @@ export default {
 </script>
 
 <style lang="css">
-  img {
-    width: 150px;
-    height: 100px;
-    padding: 5px;
-    border: 1px solid black;
-  }
-
-  .user-name-router {
-    color: black;
-  }
-
-  .post-list {
-    border: 1px solid gray;
-    background-color: white;
-    border-radius: 15%;
-  }
 </style>

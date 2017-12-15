@@ -1,7 +1,7 @@
 <template>
   <div id="registerView">
     <div id="menu">
-      <router-link class="menuItems" to="posts">Posts</router-link>
+      <router-link class="menuItems" to="/">Posts</router-link>
     </div>
     <h1 class="titles">Register</h1>
     <div>
@@ -90,7 +90,7 @@
                 toastr.success('Thank you for joining us and welcome to the family! Now redirecting to the home page.');
                 localStorage.setItem('userData', JSON.stringify(this.newUser));
                 sessionStorage.removeItem('reCaptcha');
-                this.$router.replace('posts');
+                this.$router.replace('/');
               })
               .catch(err => toastr.warning(err));
            }

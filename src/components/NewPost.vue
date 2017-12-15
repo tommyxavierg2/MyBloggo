@@ -1,9 +1,9 @@
 <template>
   <div id="newPostsView">
     <div id="menu">
-      <router-link class="menuItems" :to="{name: 'posts', params: {user: user}}">Posts</router-link>
+      <router-link class="menuItems" :to="{path: '/', params: {user: user}}">Posts</router-link>
       <router-link v-if="user" class="menuItems" :to="{name: 'newpost', params: {user: user}}">| New Post |</router-link>
-      <router-link v-if="user" class="menuItems" :to="{name: 'profile', params: {user: user}}">MyPosts</router-link>
+      <router-link v-if="user" class="menuItems" :to="{name: 'profile', params: {user: user}}">Profile</router-link>
       <router-link v-if="user" class="menuItems" :to="{name: 'settings', params: {user: user}}">| Settings</router-link>
     </div>
     <h1>Create Post</h1>

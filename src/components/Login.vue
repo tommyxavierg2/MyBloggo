@@ -1,7 +1,7 @@
 <template>
   <div id="loginView">
     <div id="menu">
-      <router-link class="menuItems" to="posts">Posts</router-link>
+      <router-link class="menuItems" to="/">Posts</router-link>
     </div>
     <h1 class="titles">Welcome to bloggo</h1>
     <div>
@@ -39,7 +39,7 @@
     created() {
       this.loggedUser = localStorage.getItem('userData');
       if(this.loggedUser) {
-        this.$router.push('posts');
+        this.$router.push('/');
       }
     },
 
@@ -86,7 +86,7 @@
       goToPosts(data) {
         this.loginUser = data;
         localStorage.setItem('userData', JSON.stringify(data));
-        this.$router.push('posts');
+        this.$router.push('/');
       },
 
       goToPostView(data, post){

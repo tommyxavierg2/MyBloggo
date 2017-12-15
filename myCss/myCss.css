@@ -21,8 +21,32 @@
   margin: 5px;
 }
 
+.user-profile {
+  padding: 5px;
+  margin: 5px;
+  width: 200px;
+  height: 100px;
+}
+
+.user-avatar {
+  width: 150px;
+  height: 100px;
+  padding: 5px;
+  border: 1px solid black;
+}
+
 .user-name-router {
-  
+  color: black;
+}
+
+.post-list {
+  border: 1px solid gray;
+  background-color: white;
+  border-radius: 15%;
+}
+
+.hidden {
+  display: none;
 }
 
 #menu {
