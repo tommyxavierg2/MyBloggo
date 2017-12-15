@@ -1,7 +1,7 @@
 <template>
   <div id="registerView">
     <div id="menu">
-      <label class="menuItems">Posts</label>
+      <router-link class="menuItems" to="posts">Posts</router-link>
     </div>
     <h1 class="titles">Register</h1>
     <div>
@@ -33,33 +33,22 @@
       <div id="captcha" class="g-recaptcha" v-bind:data-sitekey='captchaInfo.captchaKey' data-callback="captchaResponse"></div>
       <div class="input-group">
         <span class="input-group-btn">
-          <button id="registerButton" type="button" @click="registerNewUser" class="btn btn-primary btn-block"
-                   disabled>Register</button>
+          <button type="button" @click="registerNewUser" class="btn btn-primary btn-block">Register</button>
         </span>
       </div>
     </div>
   </div>
 </template>
 <script type="text/javascript">
-  import axios from 'axios';
-  axios.defaults.baseURL = "http://localhost:3000/";
-  import toastr from 'toastr';
-  toastr.options = {
-    timeOut: 2000,
-    positionClass: 'toast-top-right',
-    showMethod: "fadeIn",
-    hideMethod: "fadeOut"
-  }
-
   window.captchaResponse = (response) => {
     sessionStorage.setItem('reCaptcha', response);
-  }
+  };
 
  export default {
    name: 'Register',
    data () {
       return {
-        newUser: { name: '', lastname: '', email: '', password: '', confirmPassword: '' },
+        newUser: { },
         captchaInfo: { captchaKey: "6LfkxDwUAAAAAEPuCXV8_WI_5fLy48GiGToegZcC", isCaptchaChecked: false}
       }
    },
@@ -76,69 +65,38 @@
      },
 
      registerNewUser: function() {
-       this.captchaInfo.isCaptchaChecked = sessionStorage.getItem('reCaptcha');
+           this.captchaInfo.isCaptchaChecked = sessionStorage.getItem('reCaptcha');
 
-       if(!this.captchaInfo.isCaptchaChecked) {
-            toastr.warning('First check the captcha box first.');
-       } else {
-           $('#registerButton').attr('disabled', false);
-
-           if(!name || !lastname || email || !password){
+           if (!this.captchaInfo.isCaptchaChecked) {
+                toastr.warning('First check the captcha box first.');
+           }
+           else if(!this.newUser.name || !this.newUser.lastname || !this.newUser.email || !this.newUser.password) {
              toastr.warning('Please make sure all fields are properly filled');
            }
-           else if(password != confirmPassword) {
+           else if(this.newUser.password != this.newUser.confirmPassword) {
              toastr.warning('Please make sure both passwords are equal.');
            }
-           else if(password.length < 6) {
+           else if(this.newUser.password.length < 6) {
              toastr.warning('Please make sure the password has more than 6 characters.');
+           } else {
+             axios.post('users', {
+                name: this.newUser.name,
+                lastname: this.newUser.lastname,
+                email: this.newUser.email,
+                password: this.newUser.password,
+                avatar: 'https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d'
+              })
+              .then(res => {
+                toastr.success('Thank you for joining us and welcome to the family! Now redirecting to the home page.');
+                localStorage.setItem('userData', JSON.stringify(this.newUser));
+                sessionStorage.removeItem('reCaptcha');
+                this.$router.replace('posts');
+              })
+              .catch(err => toastr.warning(err));
            }
-            axios.post('users', {
-               name: this.newUser.name,
-               lastname: this.newUser.lastname,
-               email: this.newUser.email,
-               password: this.newUser.password
-             })
-             .then(res => {
-               toastr.success('Thank you for joining us and welcome to the family! Now redirecting to the home page.');
-               localStorage.setItem('userData', JSON.stringify(this.newUser));
-               sessionStorage.removeItem('reCaptcha');
-               this.$router.replace('Posts');
-             })
-             .catch(err => toastr.warning(err));
-
-          }
        }
     }
  }
 </script>
 <style media="screen">
-  #registerView {
-    text-align: center;
-  }
-
-  #captcha {
-    right: 25%;
-  }
-
-  #menu {
-    background-color: gray;
-    height: 40px;
-  }
-
-  .titles {
-    font-weight: bold;
-  }
-
-  .menuItems {
-    font-size: x-large;
-    font-weight: bold;
-  }
-
-  label:hover {
-    color: white;
-  }
-
-  label:active {
-    color: red;
-  }
 </style>

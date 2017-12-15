@@ -1,25 +1,29 @@
 <template>
   <div id="postsView" class="">
     <div id="menu">
-      <label class="menuItems">Posts</label> |
-      <label class="menuItems">New Post</label> |
-      <label class="menuItems">MyPosts</label> |
-      <label class="menuItems">Settings</label>
+      <router-link class="menuItems" to="posts">Posts</router-link>
+      <router-link v-if="user" class="menuItems" :to="{name: 'newpost', params: {user: user}}">| New Post |</router-link>
+      <router-link v-if="user" class="menuItems" :to="{name: 'profile', params: {user: user}}">Profile</router-link>
+      <router-link v-if="user" class="menuItems" :to="{name: 'settings', params: {user: user}}">|Settings</router-link>
     </div>
     <div class="middle">
       <h1 class="titles">Bloggo!, made for you.</h1>
-      <h2>Recent posts</h2>
-      <div id="postList" v-for="post in posts">
-          <div class="row">
+      <h2>Posts</h2>
+      <div id="postList" v-for="(post, index) in posts" class="post-list">
+          <div class="row post-list">
             <div class="col-xs-6">
-              <p><strong>{{post.author}}</strong>{{post.creationDate}}</p>
-              <img src="https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/%20H200i.jpg?alt=media&token=b2ad9168-0dad-4f1a-a83c-6ddce34cdeff" alt=""> <br>
+              <img class="user-avatar" :src="post.avatar" alt=""> <br>
+              <router-link class="user-name-router" :to="{name: 'postview', params: {post: post}}">{{post.userName}}</router-link>
             </div>
-            <div class="col-xs-6 leftAlign">
+            <router-link class="user-name-router" :to="{name: 'postview', params: {post: post}}">Date: {{post.createdAt}}</router-link>
+
+            <div>
               <h4 class="titles">{{post.title}}</h4>
-              <button type="button">{{post.likes}}</button>
-              <button type="button">{{post.comments}}</button>
-              <button id="editedButton">{{post.edited}}</button>
+              <span>{{post.content.substr(0, 200)}}</span>
+            </div>
+            <div class="col-xs-6">
+              <button type="button" v-on:click="addLike(index, post)">Likes {{post.likes}}</button>
+              <router-link class="user-name-router" :to="{name: 'postview', params: {post: post}}">Comments {{post.comments}}</router-link>
             </div>
          </div>
       </div>
@@ -30,70 +34,47 @@
 export default {
   data() {
     return {
-        posts: [
-                { title: 'Testing', author: 'Test Tester', creationDate: '10/12/17', content: 'Testing a test', comments: 0, likes: 0, edited: false },
-                { title: 'Testing', author: 'Test Tester', creationDate: '10/12/17', content: 'Testing a test', comments: 0, likes: 0, edited: false }
-              ]
+        posts: {},
+        user: {}
+       }
+  },
+
+  created() {
+    this.user = JSON.parse(localStorage.getItem('userData'));
+    axios.get('posts')
+      .then(res => this.posts = res.data)
+      .catch(err => toastr.warning(err));
+  },
+
+  methods: {
+    addLike(index, post) {
+      this.posts[index].likes++;
+      axios.put(`posts/${post.id}`, this.posts[index])
+      .then(res => toastr.success('You liked the post'))
+    },
+
+    settings() {
+
     }
   }
 }
 </script>
 
 <style lang="css">
-  #postsView {
-    text-align: center;
-    align-items: center;
-    padding: 5px;
-  }
-
-  #editedButton {
-    border: none;
-    background-color: transparent;
-    outline: none;
-  }
-
-  #postList {
-    width: 600px;
-    border-top: 2px solid gray;
-    border-left: 2px solid gray;
-    border-right: 2px solid gray;
-  }
-
-  #menu {
-    background-color: gray;
-    height: 40px;
-  }
-
   img {
-    width: 300px;
-    height: 150px;
+    width: 150px;
+    height: 100px;
     padding: 5px;
+    border: 1px solid black;
   }
 
-  .middle {
-    left: 20%;
-    width: 80%;
+  .user-name-router {
+    color: black;
   }
 
-  .leftAlign {
-    text-align: left;
+  .post-list {
+    border: 1px solid gray;
+    background-color: white;
+    border-radius: 15%;
   }
-
-  .titles {
-    font-weight: bold;
-  }
-
-  .menuItems {
-    font-size: x-large;
-    font-weight: bold;
-  }
-
-  label:hover {
-    color: white;
-  }
-
-  label:active {
-    color: red;
-  }
-
 </style>

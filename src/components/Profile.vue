@@ -1,45 +1,59 @@
 <template>
-  <div class="">
-    <h1>MyProfile</h1>
-    <div class="">
-      <h1>Profile image</h1>
-      <img src="" alt="">
+  <div id="myPostsView">
+    <div id="menu">
+      <router-link class="menuItems" to="posts">Posts</router-link>
+      <router-link v-if="user" class="menuItems" :to="{name: 'newpost', params: {user: user}}">| New Post |</router-link>
+      <router-link v-if="user" class="menuItems" :to="{name: 'profile', params: {user: user}}">Profile</router-link>
+      <router-link v-if="user" class="menuItems" :to="{name: 'settings', params: {user: user}}">|Settings</router-link>
     </div>
+    <h1>Profile</h1>
     <div class="">
-      <h1>User Information</h1>
-      <div class="input-group">
-        <label>Username:</label>
-        <label></label>
-      </div>
-      <div class="input-group">
-        <label>Password:</label>
-        <input type="password" placeholder="Password" v-model='password'></input>
-      </div>
-      <div>
-        <button type="button" @click="test">Enter</button>
+      <h3>User information</h3>
+      <div class="">
+
       </div>
     </div>
-    <div class="">
-      <h1>User posts</h1>
+    <div class="row">
+      <h3>Post list</h3>
+      <div class="col-xs-6">
+        <div id="postList">
+              <div>
+                <h4 class="titles">Title</h4>
+                <p>CreationDate</p>
+              </div>
+              <div>
+                <span>Post body</span>
+              </div>
+              <div>
+                <button type="button">Likes</button>
+                <button type="button">Comments</button>
+                <button id="editedButton">Edited</button>
+              </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
-<script>
-  var userData = {
-    name: '',
-    email: '',
-    avatar: '',
-    type: '' //Public ? Private
-  }
+<script>import axios from 'axios'
 
+var userData
   export default {
-    data() {
-      return userData
-    }
+    data(){
+      return {
+        user: {}
+      }
+    },
 
+    created: function() {
+      this.user = localStorage.getItem('userData');
+      if(!this.userData) {
+        toastr.warning('In order to perform any action you first need to log In');
+        this.$router.replace('login');
+      }
+    }
   }
 </script>
 
-<style lang="css">
+<style media="screen">
 </style>

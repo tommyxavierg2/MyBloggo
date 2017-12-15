@@ -1,29 +1,29 @@
-<template lang="html">
+<template>
   <div id="newPostsView">
     <div id="menu">
-      <label class="menuItems">Posts</label> |
-      <label class="menuItems">New Post</label> |
-      <label class="menuItems">MyPosts</label> |
-      <label class="menuItems">Settings</label>
+      <router-link class="menuItems" to="posts">Posts</router-link>
+      <router-link v-if="user" class="menuItems" :to="{name: 'newpost', params: {user: user}}">| New Post |</router-link>
+      <router-link v-if="user" class="menuItems" :to="{name: 'profile', params: {user: user}}">MyPosts</router-link> 
+      <router-link v-if="user" class="menuItems" :to="{name: 'settings', params: {user: user}}">| Settings</router-link>
     </div>
     <h1>Create Post</h1>
     <div class="input-group">
       <span class="input-group-addon">Title:</span>
-      <input placeholder="Title" class="form-control"></input>
+      <input placeholder="Title" v-model="newPost.title" class="form-control"></input>
     </div>
-    <div>
-      <span>Content:</span>
-      <textarea></textarea>
+    <div class="input-group">
+      <span class="input-group-addon">Content:</span>
+      <textarea v-model="newPost.content" rows="4" cols="40" class="form-control"></textarea>
     </div>
     <div class="input-group">
       <span class="input-group-addon">
-        <input type="checkbox"></input>
+        <input type="checkbox" v-model="newPost.commentsAllowed"></input>
       </span>
       <input type="text" class="form-control" value="Allow comments?" readonly>
     </div>
     <div class="input-group">
       <span class="input-group-btn">
-        <button type="button" class="btn btn-primary btn-block">Create Post</button>
+        <button type="button" class="btn btn-primary btn-block" @click="createPost">Create Post</button>
       </span>
     </div>
   </div>
@@ -31,32 +31,55 @@
 
 <script>
 export default {
+  name: 'newPostsView',
+  data() {
+    return {
+      newPost: { title: '', content: '', commentsAllowed: true, likes: 0, comments: 0, avatar: ''},
+      user: {},
+      config: {
+        events: {
+          'froalaEditor.initialized': function () {
+           console.log('initialized')
+         }
+        }
+      },
+      model: 'Edit your content here!'
+    }
+  },
+
+  created() {
+    this.user = this.$route.params.user;
+    if(!this.user) {
+      toastr.warning('In order to perform any action you first need to log In');
+      this.$router.replace('login');
+    }
+  },
+
+  methods: {
+    createPost() {
+     let date = new Date().toString();
+     axios.post('posts', {
+       title: this.newPost.title,
+       content: this.newPost.content,
+       commentsAllowed: this.newPost.commentsAllowed,
+       likes: this.newPost.likes,
+       comments: this.newPost.comments,
+       createdAt: date.substr(8, 24),
+       userName: this.user.name,
+       userId: this.user.id,
+       avatar: "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d"
+     })
+     .then(res => {
+       toastr.success('Sucessfully posted');
+       this.newPost.title = '';
+       this.newPost.content = '';
+       this.newPost.commentsAllowed = '';
+     })
+     .catch(err => toastr.error(err));
+    }
+  }
 }
 </script>
 
 <style lang="css">
-  #newPostsView {
-    text-align: center;
-    align-items: center;
-    padding: 5px;
-  }
-
-  #menu {
-    background-color: gray;
-    height: 40px;
-  }
-
-  .menuItems {
-    font-size: x-large;
-    font-weight: bold;
-  }
-
-  label:hover {
-    color: white;
-  }
-
-  label:active {
-    color: red;
-  }
-
 </style>

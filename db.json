@@ -5,14 +5,71 @@
       "lastname": "test",
       "email": "test@test.com",
       "password": "qweasd",
-      "id": 1
+      "id": 1,
+      "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d"
     },
     {
       "name": "test1",
       "lastname": "testing1",
       "email": "test1@test.com",
       "password": "qweasd",
+      "id": 2,
+      "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d"
+    }
+  ],
+  "posts": [
+    {
+      "title": "Test",
+      "content": "Testing a test Testing a test in a test for a test Testing a test in a test for a test Testing a test in a test for a test Testing a test in a test for a test",
+      "commentsAllowed": false,
+      "likes": 10,
+      "comments": 3,
+      "createdAt": "14 2017",
+      "userName": "test",
+      "userId": 1,
+      "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
+      "id": 7
+    },
+    {
+      "title": "Test 1",
+      "content": "Testing a test in a test for a test Testing a test in a test for a test Testing a test in a test for a test Testing a test in a test for a test Testing a test in",
+      "commentsAllowed": true,
+      "likes": 0,
+      "comments": 0,
+      "createdAt": "14 2017",
+      "userName": "test",
+      "userId": 1,
+      "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
+      "id": 8
+    }
+  ],
+  "comments": [
+    {
+      "comment": "Testing a test Testing a test in a test for a test Testing a test in a test for a test Testing a test in a test for a test Testing a test in a test for a test\n",
+      "postId": 7,
+      "userId": 1,
+      "userName": "test",
+      "userAvatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
+      "date": "14 2017 18:32:",
+      "id": 1
+    },
+    {
+      "comment": "Testing a test Testing a test in a test for a test Testing a test in a test for a test Testing a test in a test for a test Testing a test in a test for a test",
+      "postId": 7,
+      "userId": 1,
+      "userName": "test",
+      "userAvatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
+      "date": "14 2017 18:47:",
       "id": 2
+    },
+    {
+      "comment": "Testing no repeat XD",
+      "postId": 7,
+      "userId": 1,
+      "userName": "test",
+      "userAvatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
+      "date": "14 2017 18:48:",
+      "id": 3
     }
   ]
 }

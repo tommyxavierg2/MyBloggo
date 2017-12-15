@@ -1,9 +1,7 @@
 <template>
   <div id="loginView">
     <div id="menu">
-      <label class="menuItems">
-        <router-link :to="{ name: 'Posts'}">Posts</router-link>
-      </label>
+      <router-link class="menuItems" to="posts">Posts</router-link>
     </div>
     <h1 class="titles">Welcome to bloggo</h1>
     <div>
@@ -30,19 +28,10 @@
 </template>
 
 <script>
-  import axios from 'axios';
-  axios.defaults.baseURL = "http://localhost:3000/";
-  import toastr from 'toastr';
-  toastr.options = {
-    timeOut: 2000,
-    positionClass: 'toast-top-right',
-    showMethod: "fadeIn",
-    hideMethod: "fadeOut"
-  }
  export default {
     data() {
       return {
-        loginUser: { email: '', password: ''},
+        loginUser: {},
         loggedUser: {}
       }
     },
@@ -50,7 +39,7 @@
     created() {
       this.loggedUser = localStorage.getItem('userData');
       if(this.loggedUser) {
-        this.$router.push('Home');
+        this.$router.push('posts');
       }
     },
 
@@ -75,44 +64,38 @@
                 toastr.warning('This user is not registered please verify and try again');
             } else {
                 $('#loginButton').attr('disabled', false);
-                toastr.warning(`You've been validated ${loginEmail}, press the Enter button to log in`);
+                toastr.success(`You've been validated ${loginEmail}, press the Enter button to log in`);
             }
 
         }).catch(err => toastr.warning(err));
       },
 
       login() {
-        localStorage.setItem('userData', JSON.stringify(this.loginUser));
-        this.$router.push('Posts');
+        axios.get(`users?email=${this.loginUser.email}&password=${this.loginUser.password}`)
+        .then(res => {
+          let postId = this.$route.params.postId;
+          if(postId){
+            goToPostView(res.data[0], postId);
+          } else {
+            goToPosts(res.data[0]);
+          }
+        })
+        .catch(err => toastr.warning(err));
+      },
+
+      goToPosts(data) {
+        this.loginUser = data;
+        localStorage.setItem('userData', JSON.stringify(data));
+        this.$router.push('posts');
+      },
+
+      goToPostView(data, postId){
+        localStorage.setItem('userData', JSON.stringify(data));
+        this.$router.push('postView');
       }
     }
  }
 </script>
 
-<style>
- #loginView {
-   text-align: center;
- }
-
- #menu {
-   background-color: gray;
-   height: 40px;
- }
-
- .titles {
-   font-weight: bold;
- }
-
- .menuItems {
-   font-size: x-large;
-   font-weight: bold;
- }
-
- label:hover {
-   color: white;
- }
-
- label:active {
-   color: red;
- }
+<style lang="css" src="">
 </style>
