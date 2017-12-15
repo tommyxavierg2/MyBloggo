@@ -1,9 +1,9 @@
 <template>
   <div id="newPostsView">
     <div id="menu">
-      <router-link class="menuItems" to="posts">Posts</router-link>
+      <router-link class="menuItems" :to="{name: 'posts', params: {user: user}}">Posts</router-link>
       <router-link v-if="user" class="menuItems" :to="{name: 'newpost', params: {user: user}}">| New Post |</router-link>
-      <router-link v-if="user" class="menuItems" :to="{name: 'profile', params: {user: user}}">MyPosts</router-link> 
+      <router-link v-if="user" class="menuItems" :to="{name: 'profile', params: {user: user}}">MyPosts</router-link>
       <router-link v-if="user" class="menuItems" :to="{name: 'settings', params: {user: user}}">| Settings</router-link>
     </div>
     <h1>Create Post</h1>
@@ -64,7 +64,7 @@ export default {
        commentsAllowed: this.newPost.commentsAllowed,
        likes: this.newPost.likes,
        comments: this.newPost.comments,
-       createdAt: date.substr(8, 24),
+       createdAt: date.substr(8, 23),
        userName: this.user.name,
        userId: this.user.id,
        avatar: "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d"

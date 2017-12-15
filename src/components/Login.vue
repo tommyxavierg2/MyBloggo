@@ -73,11 +73,11 @@
       login() {
         axios.get(`users?email=${this.loginUser.email}&password=${this.loginUser.password}`)
         .then(res => {
-          let postId = this.$route.params.postId;
-          if(postId){
-            goToPostView(res.data[0], postId);
+          let post = this.$route.params.post;
+          if(post){
+            this.goToPostView(res.data[0], post);
           } else {
-            goToPosts(res.data[0]);
+            this.goToPosts(res.data[0]);
           }
         })
         .catch(err => toastr.warning(err));
@@ -89,9 +89,9 @@
         this.$router.push('posts');
       },
 
-      goToPostView(data, postId){
+      goToPostView(data, post){
         localStorage.setItem('userData', JSON.stringify(data));
-        this.$router.push('postView');
+        this.$router.push({name: 'postview', params: {post: post}});
       }
     }
  }

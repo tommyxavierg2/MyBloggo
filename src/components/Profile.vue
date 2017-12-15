@@ -1,5 +1,5 @@
 <template>
-  <div id="myPostsView">
+  <div id="profileView">
     <div id="menu">
       <router-link class="menuItems" to="posts">Posts</router-link>
       <router-link v-if="user" class="menuItems" :to="{name: 'newpost', params: {user: user}}">| New Post |</router-link>
@@ -35,9 +35,7 @@
   </div>
 </template>
 
-<script>import axios from 'axios'
-
-var userData
+<script>
   export default {
     data(){
       return {
@@ -46,11 +44,14 @@ var userData
     },
 
     created: function() {
-      this.user = localStorage.getItem('userData');
-      if(!this.userData) {
+      this.user = this.$route.params.user;
+      if(!this.user) {
         toastr.warning('In order to perform any action you first need to log In');
         this.$router.replace('login');
       }
+    },
+
+    methods: {
     }
   }
 </script>

@@ -12,11 +12,16 @@
       <div id="postList" v-for="(post, index) in posts" class="post-list">
           <div class="row post-list">
             <div class="col-xs-6">
-              <img class="user-avatar" :src="post.avatar" alt=""> <br>
-              <router-link class="user-name-router" :to="{name: 'postview', params: {post: post}}">{{post.userName}}</router-link>
+              <router-link class="user-name-router" :to="{name: 'postview', params: {post: post}}">
+                <img class="user-avatar" :src="post.avatar">
+              </router-link> <br>
+              <router-link class="user-name-router" :to="{name: 'postview', params: {post: post}}">
+                <span>{{post.userName}}</span>
+              </router-link>
             </div>
-            <router-link class="user-name-router" :to="{name: 'postview', params: {post: post}}">Date: {{post.createdAt}}</router-link>
-
+            <div class="">
+              <router-link class="user-name-router" :to="{name: 'postview', params: {post: post}}">Date: {{post.createdAt}}</router-link>
+            </div>
             <div>
               <h4 class="titles">{{post.title}}</h4>
               <span>{{post.content.substr(0, 200)}}</span>

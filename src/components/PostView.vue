@@ -1,27 +1,27 @@
 <template>
   <div id="postView">
     <div id="menu">
-      <router-link class="menuItems" to="posts">Posts</router-link>
+      <router-link class="menuItems" to="posts" :to="{name: 'posts', params: {user: user}}">Posts</router-link>
       <router-link v-if="user" class="menuItems" :to="{name: 'newpost', params: {user: user}}">| New Post |</router-link>
       <router-link v-if="user" class="menuItems" :to="{name: 'profile', params: {user: user}}">Profile</router-link>
       <router-link v-if="user" class="menuItems" :to="{name: 'settings', params: {user: user}}">|Settings</router-link>
     </div>
-    <div class="row">
-      <div class="col-xs-4">
+    <div>
+      <div>
         <img class="user-avatar" :src="post.avatar" alt="">
       </div>
-      <div class="col-xs-8">
-        <label>{{post.name}}</label>
-        <label>{{post.createdAt}}</label>
-        <h4 class="titles">{{post.title}}</h4>
-      </div>
       <div>
-        <button type="button" v-on:click="addLike()">Likes {{post.likes}}</button>
-        <button type="button">Comments {{post.comments}}</button>
+        <label>{{post.userName}}</label>
+        <label>{{post.createdAt}}</label>
       </div>
     </div>
+    <h4 class="titles">{{post.title}}</h4>
     <div class="post-view-content">
       <span>{{post.content}}</span>
+    </div>
+    <div>
+      <button type="button" v-on:click="addLike()">Likes {{post.likes}}</button>
+      <button type="button">Comments {{post.comments}}</button>
     </div>
     <h4 v-if="comments">Comments</h4>
     <div v-for="comment in comments" class="comments-display">
@@ -67,18 +67,18 @@ export default {
       post: {},
       comments: {},
       newComment: {},
-      postId: null
+      post: null
     }
   },
 
   created() {
     this.user = JSON.parse(localStorage.getItem('userData'));
-    this.postId = this.$route.params.postId;
-    if(!this.postId) {
+    this.post = this.$route.params.post;
+    if(this.post) {
       this.getPost();
       this.getComments();
     } else {
-      
+
     }
   },
 
@@ -91,24 +91,25 @@ export default {
 
     addComment() {
       let date = new Date().toString();
-      this.post.comments++;
       axios.post('comments', {
         comment: this.newComment.comment,
         postId: this.post.id,
         userId: this.user.id,
         userName: this.user.name,
         userAvatar: this.user.avatar,
-        date: date.substr(8, 24)
+        date: date.substr(8, 16)
       })
       .then(res => {
-        toastr.success(`You've posted`);
+        this.updatePostComments();
         this.getComments();
+        this.newComment.comment = '';
+        toastr.success(`You've posted`);
       })
       .catch(err => toastr.warning(err));
     },
 
     getComments() {
-      axios.get(`comments?postId=${this.post.id}`)
+      axios.get(`comments?postId=${this.post.id}&_limit=25`)
       .then(res => this.comments = res.data)
         .catch(err => toastr.warning(err))
     },
@@ -117,7 +118,7 @@ export default {
       this.post = this.$route.params.post;
     },
 
-    updatePost() {
+    updatePostComments() {
       this.post.comments++;
       axios.put(`posts?id=${this.post.id}`, this.post)
       .then()
@@ -125,7 +126,7 @@ export default {
     },
 
     goToLogin() {
-      this.$router.push({name: 'login', params: {postId: this.post.id}});
+      this.$router.push({name: 'login', params: {post: post} });
     }
   }
 }

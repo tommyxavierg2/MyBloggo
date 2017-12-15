@@ -19,7 +19,7 @@
   ],
   "posts": [
     {
-      "title": "Test",
+      "title": "Test title for a post",
       "content": "Testing a test Testing a test in a test for a test Testing a test in a test for a test Testing a test in a test for a test Testing a test in a test for a test",
       "commentsAllowed": false,
       "likes": 10,
@@ -31,7 +31,7 @@
       "id": 7
     },
     {
-      "title": "Test 1",
+      "title": "Test 1 title for a post",
       "content": "Testing a test in a test for a test Testing a test in a test for a test Testing a test in a test for a test Testing a test in a test for a test Testing a test in",
       "commentsAllowed": true,
       "likes": 0,
@@ -70,6 +70,15 @@
       "userAvatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
       "date": "14 2017 18:48:",
       "id": 3
+    },
+    {
+      "comment": "Testing no repeat XD",
+      "postId": 7,
+      "userId": 1,
+      "userName": "test",
+      "userAvatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
+      "date": "15 2017 01:42:50",
+      "id": 4
     }
   ]
 }
