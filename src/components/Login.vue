@@ -2,6 +2,7 @@
   <div id="loginView">
     <div id="navBar">
       <router-link class="navBarItems" to="/">Posts</router-link>
+      <button type="button" class="btn btn-primary icons-right-float" @click="goToRegister">Register</button>
     </div>
     <h1 class="titles">Welcome to bloggo</h1>
     <div>
@@ -37,7 +38,7 @@
     },
 
     created() {
-      this.loggedUser = localStorage.getItem('userData');
+      this.loggedUser = JSON.parse(localStorage.getItem('userData'));
       if(this.loggedUser) {
         this.$router.push('/');
       }
@@ -81,6 +82,10 @@
           }
         })
         .catch(err => toastr.warning(err));
+      },
+
+      goToRegister() {
+        this.$router.replace('register');
       },
 
       goToPosts(data) {

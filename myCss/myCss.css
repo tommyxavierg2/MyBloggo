@@ -41,6 +41,12 @@
   background-color: white;
 }
 
+.deleted-posts-list {
+  border: 1px solid gray;
+  background-color: white;
+  color: red;
+}
+
 .post-view-content {
   background-color: white;
   border: 2px solid gray;
@@ -65,9 +71,12 @@
   float: left;
 }
 
+.transparent-button {
+  background: transparent;
+}
+
 #navBar {
   background-color: #D0D3D4;
-  width: 100%;
   height: 50px;
   padding: 5px;
   margin: 5px;

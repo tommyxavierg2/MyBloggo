@@ -1,10 +1,12 @@
 <template>
   <div id="postView">
     <div id="navBar">
-      <router-link class="navBarItems" :to="{path: '/', params: {user: user}}">Posts</router-link>
+      <router-link class="navBarItems" to="/">Posts</router-link>
       <router-link v-if="user" class="navBarItems" :to="{name: 'newpost', params: {user: user}}">| New Post |</router-link>
       <router-link v-if="user" class="navBarItems" :to="{name: 'profile', params: {user: user}}">Profile</router-link>
-      <router-link v-if="user" class="navBarItems" :to="{name: 'settings', params: {user: user}}">|Settings</router-link>
+      <button v-if="!user" type="button" class="btn btn-primary icons-right-float" @click="goToLogin">Login</button>
+      <button v-if="!user" type="button" class="btn btn-primary icons-right-float" @click="goToRegister">Register</button>
+      <button v-if="user" type="button" class="btn btn-primary icons-right-float">Logout</button>
     </div>
     <div>
       <router-link class="user-name-router icons-left-float" :to="{path: '/', params: {post: user}}">
@@ -25,7 +27,7 @@
     </div>
     <div>
       <button type="button" @click="addLike()" :disabled="!isUserLogged">Likes {{post.likes}}</button>
-      <button type="button">Comments {{post.comments}}</button>
+      <span>Comments {{post.comments}}</span>
     </div>
     <div v-if="user && post.commentsAllowed">
       <h4>New Comment</h4>
@@ -50,8 +52,7 @@
           </div>
           <span class="input-group-addon">{{comment.date}}</span>
           <div class="col-xs-8 input-group">
-            <textarea v-model="comment.comment" class="form-control" @keyup.enter="editPostComments(index)" v-bind:readonly="isCommentEditable"
-                      rows="2" cols="80"></textarea>
+            <textarea v-model="comment.comment" class="form-control" @keyup.enter="editPostComments(index)" v-bind:readonly="isCommentEditable"></textarea>
           </div>
         </div>
         <div v-if="optionsButtonsActive && user.id == comment.userId">
@@ -92,15 +93,18 @@ export default {
 
   created() {
     this.user = JSON.parse(localStorage.getItem('userData'));
-
-    if(this.user) {
-      this.isUserLogged = true;
-    } else {
-      this.user = 0;
-    }
-
     this.getPost()
-    this.getComments();
+
+    if(this.post) {
+        this.getComments();
+    }
+    else if(this.user){
+      this.isUserLogged = true;
+    }
+    else {
+      toastr.warning(`There's no post to show, please make sure to select a post first`);
+      this.$router.replace('/');
+    }
   },
 
   methods: {
@@ -175,7 +179,12 @@ export default {
 
     goToLogin() {
       this.$router.push({name: 'login', params: {post: this.post} });
-    }
+    },
+
+    goToRegister() {
+      this.$router.replace('register');
+    },
+
   }
 }
 </script>

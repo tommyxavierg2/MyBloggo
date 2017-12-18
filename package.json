@@ -1,5 +1,5 @@
 {
-  "name": "y",
+  "name": "MyBloggo",
   "version": "1.0.0",
   "description": "A blog",
   "author": "Tommy Gomez",
@@ -13,6 +13,9 @@
   "dependencies": {
     "axios": "^0.17.1",
     "bootstrap": "^4.0.0-beta.2",
+    "froala-editor": "^2.7.3",
+    "react-mentions": "^1.2.1",
+    "tinymce-vue-2": "0.0.5",
     "toastr": "^2.1.4",
     "vue": "^2.5.2",
     "vue-froala-wysiwyg": "^2.7.3",

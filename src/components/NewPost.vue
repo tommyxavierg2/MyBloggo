@@ -1,10 +1,10 @@
 <template>
   <div id="newPostsView">
     <div id="navBar">
-      <router-link class="navBarItems" :to="{path: '/', params: {user: user}}">Posts</router-link>
+      <router-link class="navBarItems" to="/">Posts</router-link>
       <router-link v-if="user" class="navBarItems" :to="{name: 'newpost', params: {user: user}}">| New Post |</router-link>
       <router-link v-if="user" class="navBarItems" :to="{name: 'profile', params: {user: user}}">Profile</router-link>
-      <router-link v-if="user" class="navBarItems" :to="{name: 'settings', params: {user: user}}">| Settings</router-link>
+      <button v-if="user" type="button" class="btn btn-primary icons-right-float" @click="logout">Logout</button>
     </div>
     <h1>Create Post</h1>
     <div class="input-group">
@@ -15,6 +15,8 @@
       <span class="input-group-addon">Content:</span>
       <textarea v-model="newPost.content" rows="4" cols="40" class="form-control"></textarea>
     </div>
+    <tiny-mce id="description" v-model="description"></tiny-mce>
+
     <div class="input-group">
       <span class="input-group-addon">
         <input type="checkbox" v-model="newPost.commentsAllowed"></input>
@@ -30,6 +32,7 @@
 </template>
 
 <script>
+
 export default {
   name: 'newPostsView',
   data() {
@@ -76,7 +79,14 @@ export default {
        this.newPost.commentsAllowed = '';
      })
      .catch(err => toastr.error(err));
-    }
+   },
+
+   logout() {
+     localStorage.removeItem('userData');
+     this.user = 0;
+     this.$router.replace('/');
+     toastr.success(`You've been logged out`);
+   },
   }
 }
 </script>

@@ -4,12 +4,17 @@
       <router-link class="navBarItems" to="/">Posts</router-link>
       <router-link v-if="user" class="navBarItems" :to="{name: 'newpost', params: {user: user}}">| New Post |</router-link>
       <router-link v-if="user" class="navBarItems" :to="{name: 'profile', params: {user: user}}">Profile</router-link>
-      <router-link v-if="user" class="navBarItems" :to="{name: 'settings', params: {user: user}}">|Settings</router-link>
+      <button v-if="!user" type="button" class="btn btn-primary icons-right-float" @click="goToLogin">Login</button>
+      <button v-if="!user" type="button" class="btn btn-primary icons-right-float" @click="goToRegister">Register</button>
+      <button v-if="user" type="button" class="btn btn-primary icons-right-float" @click="logout">Logout</button>
     </div>
     <div class="middle">
       <h1 class="titles">Bloggo!, made for you.</h1>
       <h2>Posts</h2>
       <div v-for="(post, index) in posts" class="post-list">
+        <div class="icons-left-float">
+          <span>{{index+1}}</span>
+        </div>
           <div class="row post-list">
             <div class="col-xs-6">
               <router-link class="user-name-router" :to="{name: 'profile', params: {postUserId: post.userId, viewer: user}}">
@@ -64,21 +69,28 @@ export default {
     },
 
     getPosts() {
-      axios.get('posts')
+      axios.get('posts?_limit=25')
         .then(res => this.posts = res.data.reverse())
         .catch(err => toastr.error(err));
     },
 
     deletePost(index){
-      let currentPostId = this.posts[index].id;
-      this.posts.splice(currentPostId, 1);
-      axios.delete(`posts/${currentPostId}`)
-      .then(res => {
-        this.getPosts();
-        toastr.success('Post deleted');
-      })
-      .catch(err => toastr.error(err))
-    },
+      let currentPost = this.posts[index];
+
+      axios.post('deleted_posts', currentPost)
+        .then(res => {
+            this.posts.splice(currentPost.id, 1);
+
+            axios.delete(`posts/${currentPost.id}`)
+             .then(res => {
+                this.getPosts();
+                toastr.success('Post deleted');
+             })
+            .catch(err => toastr.error(err))
+
+          })
+          .catch(err => toastr.error(err))
+      },
 
     getUserData() {
       this.user = JSON.parse(localStorage.getItem('userData'));
@@ -89,8 +101,19 @@ export default {
       }
     },
 
-    settings() {
+    logout() {
+      localStorage.removeItem('userData');
+      this.user = 0;
+      toastr.success(`You've been logged out`);
+      this.$router.replace('/');
+    },
 
+    goToRegister() {
+      this.$router.replace('register');
+    },
+
+    goToLogin() {
+      this.$router.replace('login');
     }
   }
 }
