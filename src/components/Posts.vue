@@ -1,13 +1,21 @@
 <template>
-  <div id="postsView">
-    <div id="navBar">
-      <router-link class="navBarItems" to="/">Posts</router-link>
-      <router-link v-if="user" class="navBarItems" :to="{name: 'newpost', params: {user: user}}">| New Post |</router-link>
-      <router-link v-if="user" class="navBarItems" :to="{name: 'profile', params: {user: user}}">Profile</router-link>
-      <button v-if="!user" type="button" class="btn btn-primary icons-right-float" @click="goToLogin">Login</button>
-      <button v-if="!user" type="button" class="btn btn-primary icons-right-float" @click="goToRegister">Register</button>
-      <button v-if="user" type="button" class="btn btn-primary icons-right-float" @click="logout">Logout</button>
-    </div>
+  <div>
+    <ul id="navBar" class="list-inline">
+      <li><router-link class="navBarItems" to="/">Posts</router-link></li>
+      <li><router-link v-if="user" class="navBarItems" :to="{name: 'newpost', params: {user: user}}">| New Post |</router-link></li>
+      <li><router-link v-if="user" class="navBarItems" :to="{name: 'profile', params: {user: user}}">Profile</router-link></li>
+      <li>
+        <div class="input-group icons-right-float" id="searchBox">
+            <input type="text" class="form-control" placeholder="Search">
+            <span class="input-group-addon">
+              <i class="fa fa-search"></i>
+            </span>
+        </div>
+     </li>
+     <li><button v-if="!user" type="button" class="btn btn-primary icons-right-float" @click="goToLogin">Login</button></li>
+     <li><button v-if="!user" type="button" class="btn btn-primary icons-right-float" @click="goToRegister">Register</button></li>
+     <li><button v-if="user" type="button" class="btn btn-primary icons-right-float" @click="logout">Logout</button></li>
+    </ul>
     <div class="middle">
       <h1 class="titles">Bloggo!, made for you.</h1>
       <h2>Posts</h2>
@@ -37,7 +45,7 @@
               <span readonly="!isUserLogged">{{post.content.substr(0, 200)}}</span>
             </div>
             <div class="col-xs-6">
-              <button type="button" v-on:click="addLike(index, post)" :disabled="!isUserLogged">Likes {{post.likes}}</button>
+              <button type="button" v-on:click="addLike(index, post)" :disabled="!isUserLogged" v-bind:class="{ active: isPostLiked, 'like' : !isPostLiked}">Likes {{post.likes}}</button>
               <router-link class="user-name-router" :to="{name: 'postview', params: {post: post}}">Comments {{post.comments}}</router-link>
             </div>
          </div>
@@ -52,7 +60,8 @@ export default {
         posts: [],
         user: {},
         isUserLogged: false,
-        isUserPost: false
+        isUserPost: false,
+        isPostLiked: false
        }
   },
 
@@ -63,9 +72,13 @@ export default {
 
   methods: {
     addLike(index, post) {
+      if(this)
       this.posts[index].likes++;
       axios.put(`posts/${post.id}`, this.posts[index])
-      .then(res => toastr.success('You liked the post'))
+      .then(res => {
+        toastr.success('You liked the post');
+        this.isPostLiked = !this.isPostLiked;
+      })
     },
 
     getPosts() {

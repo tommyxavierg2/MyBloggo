@@ -1,11 +1,19 @@
 <template>
-  <div id="profileView">
-    <div id="navBar">
-      <router-link class="navBarItems" to="/">Posts</router-link>
-      <router-link v-if="user" class="navBarItems" :to="{name: 'newpost', params: {user: user}}">| New Post |</router-link>
-      <router-link v-if="user" class="navBarItems" :to="{name: 'profile', params: {user: user}}">Profile</router-link>
-      <button v-if="user" type="button" class="btn btn-primary icons-right-float" @click="logout">Logout</button>
-    </div>
+  <div>
+    <ul id="navBar" class="list-inline">
+      <li><router-link class="navBarItems" to="/">Posts</router-link></li>
+      <li><router-link v-if="user" class="navBarItems" :to="{name: 'newpost', params: {user: user}}">| New Post |</router-link></li>
+      <li><router-link v-if="user" class="navBarItems" :to="{name: 'profile', params: {user: user}}">Profile</router-link></li>
+      <li>
+        <div class="input-group icons-right-float" id="searchBox">
+            <input type="text" class="form-control" placeholder="Search">
+            <span class="input-group-addon">
+              <i class="fa fa-search"></i>
+            </span>
+        </div>
+     </li>
+     <li><button v-if="user" type="button" class="btn btn-primary icons-right-float" @click="logout">Logout</button></li>
+    </ul>
     <h1>Profile</h1>
     <div class="">
       <h3>User information</h3>
@@ -29,13 +37,13 @@
       <h3>Posts</h3>
       <div>
         <ul class="nav nav-tabs nav-justified">
-           <li class="active"><a data-toggle="tab" href="#published">Published</a></li>
-           <li><a data-toggle="tab" href="#drafts">Drafts</a></li>
-           <li><a data-toggle="tab" href="#deleted">Deleted</a></li>
+           <li class="active"><a class="tabs" data-toggle="tab" href="#published">Published</a></li>
+           <li><a class="tabs" data-toggle="tab" href="#drafts">Drafts</a></li>
+           <li><a class="tabs" data-toggle="tab" href="#deleted">Deleted</a></li>
         </ul>
       </div>
       <div class="tab-content">
-        <div id="published" class="tab-pane fade in active">
+        <div id="published" class="tab-pane fade">
           <div id="postList" class="post-list" v-for="(post, index) in posts">
             <div>
               <h4 class="titles">{{post.title}}</h4>

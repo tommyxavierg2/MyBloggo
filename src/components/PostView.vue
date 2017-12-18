@@ -1,13 +1,13 @@
 <template>
   <div id="postView">
-    <div id="navBar">
-      <router-link class="navBarItems" to="/">Posts</router-link>
-      <router-link v-if="user" class="navBarItems" :to="{name: 'newpost', params: {user: user}}">| New Post |</router-link>
-      <router-link v-if="user" class="navBarItems" :to="{name: 'profile', params: {user: user}}">Profile</router-link>
-      <button v-if="!user" type="button" class="btn btn-primary icons-right-float" @click="goToLogin">Login</button>
-      <button v-if="!user" type="button" class="btn btn-primary icons-right-float" @click="goToRegister">Register</button>
-      <button v-if="user" type="button" class="btn btn-primary icons-right-float">Logout</button>
-    </div>
+    <ul id="navBar" class="list-inline">
+      <li><router-link class="navBarItems" to="/">Posts</router-link></li>
+      <li><router-link v-if="user" class="navBarItems" :to="{name: 'newpost', params: {user: user}}">| New Post |</router-link></li>
+      <li><router-link v-if="user" class="navBarItems" :to="{name: 'profile', params: {user: user}}">Profile</router-link></li>
+      <li><button v-if="!user" type="button" class="btn btn-primary icons-right-float" @click="goToLogin">Login</button></li>
+      <li><button v-if="!user" type="button" class="btn btn-primary icons-right-float" @click="goToRegister">Register</button></li>
+      <li><button v-if="user" type="button" class="btn btn-primary icons-right-float" @click="logout">Logout</button></li>
+    </ul>
     <div>
       <router-link class="user-name-router icons-left-float" :to="{path: '/', params: {post: user}}">
         <i class="fa fa-arrow-circle-o-left">Return</i>
@@ -95,11 +95,12 @@ export default {
     this.user = JSON.parse(localStorage.getItem('userData'));
     this.getPost()
 
-    if(this.post) {
+    if(this.post && this.user) {
+        this.isUserLogged = true;
         this.getComments();
     }
-    else if(this.user){
-      this.isUserLogged = true;
+    else if(this.post) {
+      this.getComments();
     }
     else {
       toastr.warning(`There's no post to show, please make sure to select a post first`);
@@ -184,6 +185,13 @@ export default {
     goToRegister() {
       this.$router.replace('register');
     },
+
+    logout() {
+      localStorage.removeItem('userData');
+      this.user = 0;
+      toastr.success(`You've been logged out`);
+      this.$router.replace('/');
+    }
 
   }
 }
