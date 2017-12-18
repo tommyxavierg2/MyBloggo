@@ -1,10 +1,10 @@
 <template>
   <div id="profileView">
-    <div id="menu">
-      <router-link class="menuItems" :to="{path: '/', params: {user: user}}">Posts</router-link>
-      <router-link v-if="user" class="menuItems" :to="{name: 'newpost', params: {user: user}}">| New Post |</router-link>
-      <router-link v-if="user" class="menuItems" :to="{name: 'profile', params: {user: user}}">Profile</router-link>
-      <router-link v-if="user" class="menuItems" :to="{name: 'settings', params: {user: user}}">|Settings</router-link>
+    <div id="navBar">
+      <router-link class="navBarItems" :to="{path: '/', params: {user: user}}">Posts</router-link>
+      <router-link v-if="user" class="navBarItems" :to="{name: 'newpost', params: {user: user}}">| New Post |</router-link>
+      <router-link v-if="user" class="navBarItems" :to="{name: 'profile', params: {user: user}}">Profile</router-link>
+      <router-link v-if="user" class="navBarItems" :to="{name: 'settings', params: {user: user}}">|Settings</router-link>
     </div>
     <h1>Profile</h1>
     <div class="">
@@ -26,7 +26,7 @@
       </div>
     </div>
     <div class="row">
-      <h3>Post list</h3>
+      <h3>Posts</h3>
         <div id="postList" class="post-list" v-for="(post, index) in posts">
           <div>
             <h4 class="titles">{{post.title}}</h4>
@@ -51,7 +51,7 @@
       return {
         user: {},
         viewer: {},
-        posts: {}
+        posts: {},
       }
     },
 
@@ -61,24 +61,26 @@
 
       if(!this.user && this.viewer) {
           this.user = this.$route.params.postUserId;
-          this.getUserProfile();
-          this.getPosts();
+          this.getUserProfile(this.user);
+          this.getPosts(this.user);
       } else if(!this.user && !this.viewer) {
           toastr.warning('In order to perform any action you first need to log In');
           this.$router.replace('login');
+      } else {
+        this.getPosts(this.user.id);
       }
     },
 
     methods: {
-      getUserProfile() {
-        axios.get(`users?id=${this.user}`)
+      getUserProfile(userId) {
+        axios.get(`users?id=${userId}`)
         .then(res => {
           this.user = res.data[0];
         })
       },
 
-      getPosts() {
-        axios.get(`posts?userId=${this.user}`)
+      getPosts(userData) {
+        axios.get(`posts?userId=${userData}`)
           .then(res => this.posts = res.data)
           .catch(err => toastr.warning(err));
       },

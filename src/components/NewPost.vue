@@ -1,10 +1,10 @@
 <template>
   <div id="newPostsView">
-    <div id="menu">
-      <router-link class="menuItems" :to="{path: '/', params: {user: user}}">Posts</router-link>
-      <router-link v-if="user" class="menuItems" :to="{name: 'newpost', params: {user: user}}">| New Post |</router-link>
-      <router-link v-if="user" class="menuItems" :to="{name: 'profile', params: {user: user}}">Profile</router-link>
-      <router-link v-if="user" class="menuItems" :to="{name: 'settings', params: {user: user}}">| Settings</router-link>
+    <div id="navBar">
+      <router-link class="navBarItems" :to="{path: '/', params: {user: user}}">Posts</router-link>
+      <router-link v-if="user" class="navBarItems" :to="{name: 'newpost', params: {user: user}}">| New Post |</router-link>
+      <router-link v-if="user" class="navBarItems" :to="{name: 'profile', params: {user: user}}">Profile</router-link>
+      <router-link v-if="user" class="navBarItems" :to="{name: 'settings', params: {user: user}}">| Settings</router-link>
     </div>
     <h1>Create Post</h1>
     <div class="input-group">
@@ -65,7 +65,7 @@ export default {
        likes: this.newPost.likes,
        comments: this.newPost.comments,
        createdAt: date.substr(8, 23),
-       userName: this.user.name,
+       userName: this.user.name + ' ' + this.user.lastname,
        userId: this.user.id,
        avatar: "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d"
      })

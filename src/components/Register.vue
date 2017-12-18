@@ -1,7 +1,7 @@
 <template>
   <div id="registerView">
-    <div id="menu">
-      <router-link class="menuItems" to="/">Posts</router-link>
+    <div id="navBar">
+      <router-link class="navBarItems" to="/">Posts</router-link>
     </div>
     <h1 class="titles">Register</h1>
     <div>

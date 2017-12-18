@@ -1,59 +1,75 @@
 <template>
   <div id="postView">
-    <div id="menu">
-      <router-link class="menuItems" :to="{path: '/', params: {user: user}}">Posts</router-link>
-      <router-link v-if="user" class="menuItems" :to="{name: 'newpost', params: {user: user}}">| New Post |</router-link>
-      <router-link v-if="user" class="menuItems" :to="{name: 'profile', params: {user: user}}">Profile</router-link>
-      <router-link v-if="user" class="menuItems" :to="{name: 'settings', params: {user: user}}">|Settings</router-link>
+    <div id="navBar">
+      <router-link class="navBarItems" :to="{path: '/', params: {user: user}}">Posts</router-link>
+      <router-link v-if="user" class="navBarItems" :to="{name: 'newpost', params: {user: user}}">| New Post |</router-link>
+      <router-link v-if="user" class="navBarItems" :to="{name: 'profile', params: {user: user}}">Profile</router-link>
+      <router-link v-if="user" class="navBarItems" :to="{name: 'settings', params: {user: user}}">|Settings</router-link>
     </div>
     <div>
-      <router-link class="user-name-router" :to="{name: 'postview', params: {post: post}}">
+      <router-link class="user-name-router icons-left-float" :to="{path: '/', params: {post: user}}">
+        <i class="fa fa-arrow-circle-o-left">Return</i>
+      </router-link>
+      <router-link class="user-name-router" :to="{name: 'profile', params: {postUserId: post.userId, viewer: user}}">
         <img class="user-avatar" :src="post.avatar">
       </router-link> <br>
       <div>
-        <label>{{post.userName}}</label>
-        <label>{{post.createdAt}}</label>
+        <router-link class="user-name-router" :to="{name: 'profile', params: {postUserId: post.userId, viewer: user}}">{{post.userName}}</router-link>
+        <span class="titles"></span>
       </div>
     </div>
     <h4 class="titles">{{post.title}}</h4>
+    <span>Created at: {{post.createdAt}}</span>
     <div class="post-view-content">
-      <span>{{post.content}}</span>
+      <span readonly="isUserLogged">{{post.content}}</span>
     </div>
     <div>
-      <button type="button" v-on:click="addLike()">Likes {{post.likes}}</button>
+      <button type="button" @click="addLike()" :disabled="!isUserLogged">Likes {{post.likes}}</button>
       <button type="button">Comments {{post.comments}}</button>
     </div>
-    <h4 v-if="comments">Comments</h4>
-    <div v-for="(comment, index) in comments" class="comments-display">
-      <div class="row">
-        <div class="col-xs-4">
-          <img :src="comment.userAvatar" class="comment-avatar-img">
-          <span>{{comment.userName}}</span>
-        </div>
-        <div class="col-xs-8 input-group">
-          <span class="input-group-addon">{{comment.date}}</span>
-          <textarea v-model="comment.comment" class="form-control"></textarea>
-        </div>
-        <i v-if="userComment" class="fa fa-trash" @click="deleteComment(index)"></i>
-      </div>
-    </div>
-    <h3 v-if="!user">In order to place a comment you first need to be logged in</h3>
-    <div v-if="!user">
-      <div class="input-group">
-        <span class="input-group-btn">
-          <button type="button" class="btn btn-primary btn-block" @click="goToLogin">Login</button>
-        </span>
-      </div>
-    </div>
-    <div v-if="user">
+    <div v-if="user && post.commentsAllowed">
       <h4>New Comment</h4>
       <div class="input-group">
         <span class="input-group-addon">Content</span>
-        <textarea class="form-control" v-model="newComment.comment"  @keyup.enter="addComment"></textarea>
+        <textarea class="form-control" v-model="newComment.comment"  @keyup.enter="addComment" v-bind:readonly="!isUserLogged"></textarea>
       </div>
-      <div v-if="newComment.comment" class="input-group">
+      <div v-if="newComment.comment">
+        <button type="button" class="btn btn-danger" @click="newComment.comment = ''">Cancel</button>
+        <button type="button" class="btn btn-primary" @click="addComment">Place comment</button>
+      </div>
+    </div>
+    <div>
+      <h4>Comments
+        <i class="fa fa-level-down icons-right-float" @click="comments.reverse()">Reverse</i>
+      </h4>
+      <div v-for="(comment, index) in comments" class="comments-display">
+        <div class="row" @mouseover="optionsButtonsActive = !optionsButtonsActive">
+          <div class="col-xs-4">
+            <img :src="comment.userAvatar" class="comment-avatar-img">
+            <span>{{comment.userName}}</span>
+          </div>
+          <span class="input-group-addon">{{comment.date}}</span>
+          <div class="col-xs-8 input-group">
+            <textarea v-model="comment.comment" class="form-control" @keyup.enter="editPostComments(index)" v-bind:readonly="isCommentEditable"
+                      rows="2" cols="80"></textarea>
+          </div>
+        </div>
+        <div v-if="optionsButtonsActive && user.id == comment.userId">
+          <button type="button" @click="isCommentEditable = !isCommentEditable">
+            <i class="fa fa-pencil"></i>
+          </button>
+          <button v-if="!isCommentEditable" type="button" class="btn-danger" @click="isCommentEditable = !isCommentEditable">Cancel</button>
+          <button type="button" @click="deleteComment(index)" class="icons-right-float">
+            <i class="fa fa-times"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div v-if="!user">
+      <h3 v-if="!user">In order to place a comment you first need to be logged in</h3>
+      <div class="input-group">
         <span class="input-group-btn">
-          <button type="button" class="btn btn-primary btn-block" @click="addComment()">Comment</button>
+          <button type="button" class="btn btn-primary btn-block" @click="goToLogin">Login</button>
         </span>
       </div>
     </div>
@@ -66,32 +82,25 @@ export default {
     return {
       user: {},
       post: {},
-      comments: {},
+      comments: [],
       newComment: {},
-      post: null
-    }
-  },
-
-  computed: {
-    userComment() {
-      if(this.user) {
-        if(this.user.id == this.post.userId)
-        return true;
-        else
-        return false
-      }
+      isUserLogged: false,
+      optionsButtonsActive: false,
+      isCommentEditable: true
     }
   },
 
   created() {
     this.user = JSON.parse(localStorage.getItem('userData'));
-    this.post = this.$route.params.post;
-    if(this.post) {
-      this.getPost();
-      this.getComments();
-    } else {
 
+    if(this.user) {
+      this.isUserLogged = true;
+    } else {
+      this.user = 0;
     }
+
+    this.getPost()
+    this.getComments();
   },
 
   methods: {
@@ -112,41 +121,56 @@ export default {
         date: date.substr(8, 13)
       })
       .then(res => {
+        this.post.comments++;
         this.updatePostComments();
         this.getComments();
         this.newComment.comment = '';
-        toastr.success(`You've posted`);
+        toastr.success(`Your comment has been posted`);
       })
-      .catch(err => toastr.warning(err));
-    },
-
-    getComments() {
-      axios.get(`comments?postId=${this.post.id}&_limit=25`)
-      .then(res => this.comments = res.data)
-        .catch(err => toastr.warning(err))
+      .catch(err => toastr.error(err));
     },
 
     getPost() {
       this.post = this.$route.params.post;
     },
 
+    getComments() {
+      axios.get(`comments?postId=${this.post.id}&_limit=25`)
+      .then(res => this.comments = res.data)
+        .catch(err => toastr.error(err))
+    },
+
     updatePostComments() {
-      this.post.comments++;
       axios.put(`posts/${this.post.id}`, this.post)
       .then()
-      .catch(err => toastr.warning(err))
+      .catch(err => toastr.error(err))
+    },
+
+    editPostComments(index) {
+      let currentComment = this.comments[index];
+
+      axios.put(`comments/${currentComment.id}`, currentComment)
+      .then(res => {
+        toastr.success('Comment edited');
+        this.isCommentEditable = !this.isCommentEditable;
+      })
+      .catch(err => toastr.error(err))
     },
 
     deleteComment(index){
-      let currentCommentId = this.comments[index].id;
-      this.comments.splice(currentCommentId, 1);
-      axios.delete(`comments/${currentCommentId}`)
+      let currentComment = this.comments[index];
+      this.comments.splice(currentComment.id, 1);
+
+      axios.delete(`comments/${currentComment.id}`)
       .then(res => {
         this.post.comments--;
         this.getComments();
+        axios.put(`posts/${currentComment.postId}`, this.post)
+          .then()
+          .catch(err => toastr.error(err))
         toastr.success('Comment deleted');
       })
-      .catch(err => toastr.warning(err))
+      .catch(err => toastr.error(err))
     },
 
     goToLogin() {
@@ -157,19 +181,4 @@ export default {
 </script>
 
 <style lang="css">
- .post-view-content {
-   background-color: white;
-   border: 2px solid gray;
-   border-radius: 10%;
- }
-
- .comment-avatar-img {
-   width: 100px;
-   height: 50px;
- }
-
- .comments-display {
-   border: 1px solid gray;
-   background: white;
- }
 </style>

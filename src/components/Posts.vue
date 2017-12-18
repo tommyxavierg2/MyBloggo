@@ -1,10 +1,10 @@
 <template>
-  <div id="postsView" class="">
-    <div id="menu">
-      <router-link class="menuItems" to="/">Posts</router-link>
-      <router-link v-if="user" class="menuItems" :to="{name: 'newpost', params: {user: user}}">| New Post |</router-link>
-      <router-link v-if="user" class="menuItems" :to="{name: 'profile', params: {user: user}}">Profile</router-link>
-      <router-link v-if="user" class="menuItems" :to="{name: 'settings', params: {user: user}}">|Settings</router-link>
+  <div id="postsView">
+    <div id="navBar">
+      <router-link class="navBarItems" to="/">Posts</router-link>
+      <router-link v-if="user" class="navBarItems" :to="{name: 'newpost', params: {user: user}}">| New Post |</router-link>
+      <router-link v-if="user" class="navBarItems" :to="{name: 'profile', params: {user: user}}">Profile</router-link>
+      <router-link v-if="user" class="navBarItems" :to="{name: 'settings', params: {user: user}}">|Settings</router-link>
     </div>
     <div class="middle">
       <h1 class="titles">Bloggo!, made for you.</h1>
@@ -16,18 +16,23 @@
                 <img class="user-avatar" :src="post.avatar">
               </router-link> <br>
               <router-link class="user-name-router" :to="{name: 'profile', params: {postUserId: post.userId, viewer: user}}">
-                <span>{{post.userName}}</span>
+                <span class="titles">{{post.userName}}</span>
               </router-link>
             </div>
-            <div class="">
-              <router-link class="user-name-router" :to="{name: 'postview', params: {post: post}}">Date: {{post.createdAt}}</router-link>
+            <div>
+              <router-link class="user-name-router" :to="{name: 'postview', params: {post: post}}">Created at: {{post.createdAt}}</router-link>
+              <i v-if="user.id == post.userId" class="fa fa-times icons-right-float" @click="deletePost(index)"></i>
             </div>
             <div>
-              <h4 class="titles">{{post.title}}</h4>
-              <span>{{post.content.substr(0, 200)}}</span>
+              <h4>
+                <router-link class="user-name-router titles" :to="{name: 'postview', params: {post: post}}">{{post.title}}</router-link>
+              </h4>
+            </div>
+            <div>
+              <span readonly="!isUserLogged">{{post.content.substr(0, 200)}}</span>
             </div>
             <div class="col-xs-6">
-              <button type="button" v-on:click="addLike(index, post)">Likes {{post.likes}}</button>
+              <button type="button" v-on:click="addLike(index, post)" :disabled="!isUserLogged">Likes {{post.likes}}</button>
               <router-link class="user-name-router" :to="{name: 'postview', params: {post: post}}">Comments {{post.comments}}</router-link>
             </div>
          </div>
@@ -39,14 +44,16 @@
 export default {
   data() {
     return {
-        posts: {},
-        user: {}
+        posts: [],
+        user: {},
+        isUserLogged: false,
+        isUserPost: false
        }
   },
 
   created() {
-    this.user = JSON.parse(localStorage.getItem('userData'));
     this.getPosts();
+    this.getUserData();
   },
 
   methods: {
@@ -58,8 +65,28 @@ export default {
 
     getPosts() {
       axios.get('posts')
-        .then(res => this.posts = res.data)
-        .catch(err => toastr.warning(err));
+        .then(res => this.posts = res.data.reverse())
+        .catch(err => toastr.error(err));
+    },
+
+    deletePost(index){
+      let currentPostId = this.posts[index].id;
+      this.posts.splice(currentPostId, 1);
+      axios.delete(`posts/${currentPostId}`)
+      .then(res => {
+        this.getPosts();
+        toastr.success('Post deleted');
+      })
+      .catch(err => toastr.error(err))
+    },
+
+    getUserData() {
+      this.user = JSON.parse(localStorage.getItem('userData'));
+      if(!this.user) {
+        this.user = 0;
+      } else {
+        this.isUserLogged = true;
+      }
     },
 
     settings() {

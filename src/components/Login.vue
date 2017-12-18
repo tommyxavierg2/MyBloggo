@@ -1,7 +1,7 @@
 <template>
   <div id="loginView">
-    <div id="menu">
-      <router-link class="menuItems" to="/">Posts</router-link>
+    <div id="navBar">
+      <router-link class="navBarItems" to="/">Posts</router-link>
     </div>
     <h1 class="titles">Welcome to bloggo</h1>
     <div>

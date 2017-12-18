@@ -3,17 +3,14 @@
   width: 80%;
 }
 
-.leftAlign {
-  text-align: left;
-}
-
 .titles {
   font-weight: bold;
 }
 
-.menuItems {
+.navBarItems {
   font-size: x-large;
   font-weight: bold;
+  color: #138D75;
 }
 
 .user-avatar {
@@ -42,14 +39,36 @@
 .post-list {
   border: 1px solid gray;
   background-color: white;
-  border-radius: 15%;
 }
 
-.hidden {
-  display: none;
+.post-view-content {
+  background-color: white;
+  border: 2px solid gray;
 }
 
-#menu {
-  background-color: gray;
+.comment-avatar-img {
+  width: 150px;
+  height: 100px;
+  border: 1px solid black;
+}
+
+.comments-display {
+  border: 1px solid gray;
+  background: white;
+}
+
+.icons-right-float {
+  float: right;
+}
+
+.icons-left-float {
+  float: left;
+}
+
+#navBar {
+  background-color: #D0D3D4;
   width: 100%;
+  height: 50px;
+  padding: 5px;
+  margin: 5px;
 }

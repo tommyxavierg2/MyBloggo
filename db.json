@@ -2,7 +2,7 @@
   "users": [
     {
       "name": "Test",
-      "lastname": "test",
+      "lastname": "Testing",
       "email": "test@test.com",
       "password": "qweasd",
       "id": 1,
@@ -10,7 +10,7 @@
     },
     {
       "name": "Test 1",
-      "lastname": "testing1",
+      "lastname": "Testing",
       "email": "test1@test.com",
       "password": "qweasd",
       "id": 2,
@@ -19,66 +19,51 @@
   ],
   "posts": [
     {
+      "title": "Test 1 title for a post 1",
+      "content": "Testing a test in a test for a test Testing a test in a test for a test Testing a test in a test for a test Testing a test in a test for a test Testing a test in",
+      "commentsAllowed": true,
+      "likes": 2,
+      "comments": 1,
+      "createdAt": "14 2017",
+      "userName": "Test Testing",
+      "userId": 2,
+      "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
+      "id": 8
+    },
+    {
       "title": "Test title for a post",
       "content": "Testing a test Testing a test in a test for a test Testing a test in a test for a test Testing a test in a test for a test Testing a test in a test for a test",
       "commentsAllowed": false,
-      "likes": 11,
-      "comments": 5,
+      "likes": 2,
+      "comments": 0,
       "createdAt": "14 2017",
-      "userName": "test",
+      "userName": "Test Testing",
       "userId": 1,
       "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
-      "id": 7
+      "id": 9
     },
     {
-      "title": "Test 1 title for a post",
-      "content": "Testing a test in a test for a test Testing a test in a test for a test Testing a test in a test for a test Testing a test in a test for a test Testing a test in",
+      "title": "Test 2",
+      "content": "Testing a test testing for a tester",
       "commentsAllowed": true,
       "likes": 0,
       "comments": 0,
-      "createdAt": "14 2017",
-      "userName": "test",
+      "createdAt": "18 2017 10:47:16 GMT-04",
+      "userName": "Test test",
       "userId": 1,
       "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
-      "id": 8
+      "id": 11
     }
   ],
   "comments": [
     {
-      "comment": "Testing no repeat XDTesting no repeat XDTesting no repeat XDTesting no repeat XDTesting no repeat XD",
-      "postId": 7,
-      "userId": 1,
-      "userName": "test",
+      "comment": "Testing a test in a test for a test Testing a test in a test for a test Testing a test in a test for a tester\n",
+      "postId": 8,
+      "userId": 2,
+      "userName": "Test 1",
       "userAvatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
-      "date": "15 2017 10:58",
-      "id": 9
-    },
-    {
-      "comment": "Testing no repeat XDTesting no repeat XDTesting no repeat XDTesting no repeat XDTesting no repeat XD",
-      "postId": 7,
-      "userId": 1,
-      "userName": "test",
-      "userAvatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
-      "date": "15 2017 10:58",
-      "id": 10
-    },
-    {
-      "comment": "Testing no repeat XDTesting no repeat XDTesting no repeat XDTesting no repeat XDTesting no repeat XD",
-      "postId": 7,
-      "userId": 1,
-      "userName": "test",
-      "userAvatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
-      "date": "15 2017 11:02",
-      "id": 11
-    },
-    {
-      "comment": "Testing no repeat XDTesting no repeat XDTesting no repeat XDTesting no repeat XDTesting no repeat XD",
-      "postId": 7,
-      "userId": 1,
-      "userName": "test",
-      "userAvatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
-      "date": "15 2017 11:02",
-      "id": 12
+      "date": "17 2017 15:12",
+      "id": 1
     }
   ]
 }
