@@ -84,11 +84,12 @@
                 lastname: this.newUser.lastname,
                 email: this.newUser.email,
                 password: this.newUser.password,
-                avatar: 'https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d'
+                avatar: 'https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d',
+                likedPostId: []
               })
               .then(res => {
                 toastr.success('Thank you for joining us and welcome to the family! Now redirecting to the home page.');
-                localStorage.setItem('userData', JSON.stringify(this.newUser));
+                localStorage.setItem('userData', JSON.stringify(res.data));
                 sessionStorage.removeItem('reCaptcha');
                 this.$router.replace('/');
               })

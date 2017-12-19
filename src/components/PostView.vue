@@ -8,7 +8,7 @@
       <li><button v-if="!user" type="button" class="btn btn-primary icons-right-float" @click="goToRegister">Register</button></li>
       <li><button v-if="user" type="button" class="btn btn-primary icons-right-float" @click="logout">Logout</button></li>
     </ul>
-    <div>
+    <div class="post-view">
       <router-link class="user-name-router icons-left-float" :to="{path: '/', params: {post: user}}">
         <i class="fa fa-arrow-circle-o-left">Return</i>
       </router-link>
@@ -16,18 +16,46 @@
         <img class="user-avatar" :src="post.avatar">
       </router-link> <br>
       <div>
-        <router-link class="user-name-router" :to="{name: 'profile', params: {postUserId: post.userId, viewer: user}}">{{post.userName}}</router-link>
+        <router-link class="user-name-router titles" :to="{name: 'profile', params: {postUserId: post.userId, viewer: user}}">{{post.userName}}</router-link>
         <span class="titles"></span>
       </div>
     </div>
-    <h4 class="titles">{{post.title}}</h4>
-    <span>Created at: {{post.createdAt}}</span>
-    <div class="post-view-content">
-      <span readonly="isUserLogged">{{post.content}}</span>
+    <div class="post-view">
+      <button v-if="user" type="button" class="icons-right-float" @click="isPostContentEditable = !isPostContentEditable">
+        Edit <i class="fa fa-pencil"></i>
+      </button>
+      <h4 class="titles">{{post.title}}</h4>
+      <span>Created at: {{post.createdAt}}</span>
+      <div class="post-view-content">
+        <span readonly="isUserLogged">{{post.content}}</span>
+      </div>
+      <div>
+        <button type="button" @click="addLike()" :disabled="!isUserLogged" class="transparent-button">Likes {{post.likes}}</button>
+        <span>Comments {{post.comments}} </span>
+        <span v-if="post.edited">Edited</span>
+      </div>
     </div>
-    <div>
-      <button type="button" @click="addLike()" :disabled="!isUserLogged">Likes {{post.likes}}</button>
-      <span>Comments {{post.comments}}</span>
+    <div v-if="isPostContentEditable">
+      <h4>Post edition</h4>
+      <div class="input-group">
+        <span class="input-group-addon">Title:</span>
+        <input placeholder="Title" v-model="post.title" class="form-control" autofocus></input>
+      </div>
+      <div class="input-group">
+        <span class="input-group-addon">Content:</span>
+        <textarea v-model="post.content" rows="4" cols="40" class="form-control"></textarea>
+      </div>
+      <div class="input-group">
+        <span class="input-group-addon">
+          <input type="checkbox" v-model="post.commentsAllowed"></input>
+        </span>
+        <input type="text" class="form-control" value="Allow comments?" readonly>
+      </div>
+      <div class="input-group">
+        <span class="input-group-btn">
+          <button type="button" class="btn btn-primary btn-block">Save</button>
+        </span>
+      </div>
     </div>
     <div v-if="user && post.commentsAllowed">
       <h4>New Comment</h4>
@@ -44,7 +72,7 @@
       <h4>Comments
         <i class="fa fa-level-down icons-right-float" @click="comments.reverse()">Reverse</i>
       </h4>
-      <div v-for="(comment, index) in comments" class="comments-display">
+      <div v-if="comments" v-for="(comment, index) in comments" class="comments-display">
         <div class="row" @mouseover="optionsButtonsActive = !optionsButtonsActive">
           <div class="col-xs-4">
             <img :src="comment.userAvatar" class="comment-avatar-img">
@@ -55,7 +83,7 @@
             <textarea v-model="comment.comment" class="form-control" @keyup.enter="editPostComments(index)" v-bind:readonly="isCommentEditable"></textarea>
           </div>
         </div>
-        <div v-if="optionsButtonsActive && user.id == comment.userId">
+        <div v-if="user && user.id == comment.userId && optionsButtonsActive">
           <button type="button" @click="isCommentEditable = !isCommentEditable">
             <i class="fa fa-pencil"></i>
           </button>
@@ -87,7 +115,9 @@ export default {
       newComment: {},
       isUserLogged: false,
       optionsButtonsActive: false,
-      isCommentEditable: true
+      isCommentEditable: true,
+      isPostEditable: false,
+      isPostContentEditable: false
     }
   },
 
@@ -187,12 +217,13 @@ export default {
     },
 
     logout() {
-      localStorage.removeItem('userData');
-      this.user = 0;
-      toastr.success(`You've been logged out`);
-      this.$router.replace('/');
+      if(confirm('Are you sure about logging out?') == true) {
+          localStorage.removeItem('userData');
+          this.user = 0;
+          toastr.success(`You've been logged out`);
+          this.$router.replace('/');
+      }
     }
-
   }
 }
 </script>

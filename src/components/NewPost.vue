@@ -68,23 +68,27 @@ export default {
        createdAt: date.substr(8, 23),
        userName: this.user.name + ' ' + this.user.lastname,
        userId: this.user.id,
-       avatar: "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d"
+       avatar: "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
+       edited: false
      })
      .then(res => {
-       toastr.success('Sucessfully posted');
        this.newPost.title = '';
        this.newPost.content = '';
        this.newPost.commentsAllowed = '';
+       toastr.success('Sucessfully posted');
+       this.$router.replace('/');
      })
      .catch(err => toastr.error(err));
    },
 
    logout() {
-     localStorage.removeItem('userData');
-     this.user = 0;
-     this.$router.replace('/');
-     toastr.success(`You've been logged out`);
-   },
+     if(confirm('Are you sure about logging out?') == true) {
+         localStorage.removeItem('userData');
+         this.user = 0;
+         toastr.success(`You've been logged out`);
+         this.$router.replace('/');
+     }
+   }
   }
 }
 </script>

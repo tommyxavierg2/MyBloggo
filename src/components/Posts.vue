@@ -45,7 +45,7 @@
               <span readonly="!isUserLogged">{{post.content.substr(0, 200)}}</span>
             </div>
             <div class="col-xs-6">
-              <button type="button" v-on:click="addLike(index, post)" :disabled="!isUserLogged" v-bind:class="{ active: isPostLiked, 'like' : !isPostLiked}">Likes {{post.likes}}</button>
+              <button type="button" @click="addLike(index, post, user.likedPostId)" :disabled="!isUserLogged">Likes {{post.likes}}</button>
               <router-link class="user-name-router" :to="{name: 'postview', params: {post: post}}">Comments {{post.comments}}</router-link>
             </div>
          </div>
@@ -61,7 +61,7 @@ export default {
         user: {},
         isUserLogged: false,
         isUserPost: false,
-        isPostLiked: false
+        postValidation: null
        }
   },
 
@@ -71,14 +71,37 @@ export default {
   },
 
   methods: {
-    addLike(index, post) {
-      if(this)
-      this.posts[index].likes++;
-      axios.put(`posts/${post.id}`, this.posts[index])
-      .then(res => {
-        toastr.success('You liked the post');
-        this.isPostLiked = !this.isPostLiked;
-      })
+    addLike(index, post, userLikedPosts) {
+
+      this.postValidation = userLikedPosts.some(userPost => post.id == userPost);
+
+      if(!this.postValidation) {
+          this.posts[index].likes++;
+
+          axios.put(`posts/${post.id}`, this.posts[index])
+          .then(res => {
+              this.user.likedPostId.push(post.id);
+              toastr.success('You liked the post');
+
+              axios.put(`users/${this.user.id}`, this.user)
+                .then().catch(err => toastr.error(err));
+          })
+          .catch(err => toastr.error(err));
+      }
+      else {
+        this.posts[index].likes--;
+
+        axios.put(`posts/${post.id}`, this.posts[index])
+          .then(res => {
+              let likedPostIndex = this.user.likedPostId.indexOf(post.id);
+              this.user.likedPostId.splice(likedPostIndex, 1);
+
+              axios.put(`users/${this.user.id}`, this.user)
+                .then(res => toastr.success('Post disliked'))
+                .catch(err => toastr.error(err));
+          })
+          .catch(err => toastr.error(err));
+     }
     },
 
     getPosts() {
@@ -88,21 +111,23 @@ export default {
     },
 
     deletePost(index){
-      let currentPost = this.posts[index];
+      if(confirm('Are you sure about deleting this post?') == true) {
 
-      axios.post('deleted_posts', currentPost)
-        .then(res => {
-            this.posts.splice(currentPost.id, 1);
+          let currentPost = this.posts[index];
 
-            axios.delete(`posts/${currentPost.id}`)
-             .then(res => {
-                this.getPosts();
-                toastr.success('Post deleted');
-             })
-            .catch(err => toastr.error(err))
+          axios.post('deleted_posts', currentPost)
+            .then(res => {
+                this.posts.splice(currentPost.id, 1);
 
-          })
-          .catch(err => toastr.error(err))
+                axios.delete(`posts/${currentPost.id}`)
+                 .then(res => {
+                    this.getPosts();
+                    toastr.success('Post deleted');
+                 })
+                .catch(err => toastr.error(err))
+
+            }).catch(err => toastr.error(err))
+        }
       },
 
     getUserData() {
@@ -115,10 +140,12 @@ export default {
     },
 
     logout() {
-      localStorage.removeItem('userData');
-      this.user = 0;
-      toastr.success(`You've been logged out`);
-      this.$router.replace('/');
+      if(confirm('Are you sure about logging out?') == true) {
+          localStorage.removeItem('userData');
+          this.user = 0;
+          toastr.success(`You've been logged out`);
+          this.$router.replace('/');
+      }
     },
 
     goToRegister() {

@@ -15,13 +15,16 @@
      <li><button v-if="user" type="button" class="btn btn-primary icons-right-float" @click="logout">Logout</button></li>
     </ul>
     <h1>Profile</h1>
-    <div class="">
+    <button v-if="!viewer" type="button" class="icons-right-float" @click="isProfileEditable = !isProfileEditable">
+      Edit <i class="fa fa-pencil"></i>
+    </button>
+    <div v-if="user">
       <h3>User information</h3>
       <div>
-        <div class="">
+        <div class="post-view">
           <img :src="user.avatar" class="user-profile">
         </div>
-        <div class="">
+        <div class="post-view">
           <div>
             <label>Name:</label>
             <span>{{user.name}} {{user.lastname}}</span>
@@ -31,13 +34,31 @@
             <span>{{user.email}}</span>
           </div>
         </div>
+        <div v-if="isProfileEditable" class="post-view">
+          <div class="input-group">
+            <span class="input-group-addon">Name:</span>
+             <input type="text" class="form-control" v-model="user.name">
+          </div>
+          <div class="input-group">
+            <span class="input-group-addon">Lastname:</span>
+             <input type="text" class="form-control" v-model="user.lastname">
+          </div>
+          <div class="input-group">
+            <span class="input-group-addon">Email:</span>
+             <input type="text" class="form-control" v-model="user.email">
+          </div>
+          <div class="d-flex justify-content-center">
+             <button type="text" class="btn btn-danger" @click="cancelEdition">Cancel</button>
+             <button type="text" class="btn btn-primary" @click="updateProfile(user)">Save</button>
+          </div>
+        </div>
       </div>
     </div>
     <div>
       <h3>Posts</h3>
       <div>
         <ul class="nav nav-tabs nav-justified">
-           <li class="active"><a class="tabs" data-toggle="tab" href="#published">Published</a></li>
+           <li><a class="tabs" data-toggle="tab" href="#published">Published</a></li>
            <li><a class="tabs" data-toggle="tab" href="#drafts">Drafts</a></li>
            <li><a class="tabs" data-toggle="tab" href="#deleted">Deleted</a></li>
         </ul>
@@ -64,7 +85,7 @@
         </div>
         <div id="deleted" class="tab-pane fade deleted-posts-list" v-for="(post, index) in deleted_posts">
           <h3 v-if="!deleted_posts">No post has been deleted yet</h3>
-          <div class="">
+          <div v-if="!viewer">
             <i class="fa fa-undo icons-right-float">Undo</i>
           </div>
           <div>
@@ -91,8 +112,10 @@
       return {
         user: {},
         viewer: {},
+        originalUserData: {},
         posts: [],
-        deleted_posts: []
+        deleted_posts: [],
+        isProfileEditable: false,
       }
     },
 
@@ -104,6 +127,7 @@
         this.getUserProfile(this.user.id);
         this.getPosts(this.user.id);
         this.getDeletedPosts(this.user.id);
+        this.originalUserData = { name: this.user.name.slice(), lastname: this.user.lastname.slice(), email: this.user.email.slice() };
       }
       else if(!this.user && this.viewer) {
           this.user = this.$route.params.postUserId;
@@ -116,6 +140,7 @@
         if(this.user) {
           this.getPosts(this.user.id);
           this.getDeletedPosts(this.user.id);
+          this.originalUserData = { name: this.user.name.slice(), lastname: this.user.lastname.slice(), email: this.user.email.slice() };
         }
         else {
           toastr.warning('In order to perform any action you first need to log In');
@@ -144,6 +169,26 @@
         .catch(err => toastr.error(err))
       },
 
+      updateProfile(userData) {
+        if(confirm('Do you want to apply these changes?') == true) {
+          axios.put(`users?id=${userData.id}`, userData)
+           .then(res => {
+             toastr.success('Profile updated');
+             this.isProfileEditable = !this.isProfileEditable;
+           })
+           .catch(err => toastr.error(err));
+        } else {
+          this.cancelEdition();
+        }
+      },
+
+      cancelEdition() {
+        this.user.name = this.originalUserData.name;
+        this.user.lastname = this.originalUserData.lastname;
+        this.user.email = this.originalUserData.email;
+        this.isProfileEditable = !this.isProfileEditable;
+      },
+
       undoPostDeletion() {
        /* let date = new Date().toString();
          axios.post('posts', {
@@ -167,9 +212,12 @@
       },
 
       logout() {
-        localStorage.removeItem('userData');
-        toastr.success(`You've been logged out`);
-        this.$router.replace('/');
+        if(confirm('Are you sure about logging out?') == true) {
+            localStorage.removeItem('userData');
+            this.user = 0;
+            toastr.success(`You've been logged out`);
+            this.$router.replace('/');
+        }
       }
     }
   }
