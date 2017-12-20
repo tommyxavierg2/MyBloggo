@@ -73,7 +73,7 @@
           </div>
         </div>
 
-        <div id="drafts" class="tab-pane fade" v-for="(post, index) in deleted_posts">
+        <div id="drafts" class="tab-pane fade" v-for="(post, index) in drafted_posts">
           <span class="icons-left-float">{{index+1}}</span>
           <h3 v-if="!drafted_posts">No post has been drafted yet</h3>
           <h4 class="titles">{{post.title}}</h4>
@@ -147,6 +147,7 @@
         this.getUserProfile(this.user.id);
         this.getPosts(this.user.id);
         this.getDeletedPosts(this.user.id);
+        this.getDraftedPosts(this.user.id);
         this.originalUserData = {
           name: this.user.name.slice(),
           lastname: this.user.lastname.slice(),
@@ -161,12 +162,14 @@
           this.getUserProfile(this.user);
           this.getPosts(this.user);
           this.getDeletedPosts(this.user);
+          this.getDraftedPosts(this.user.id);
       }
       else if (!this.user) {
         this.user = JSON.parse(localStorage.getItem('userData'));
         if(this.user) {
           this.getPosts(this.user.id);
           this.getDeletedPosts(this.user.id);
+          this.getDraftedPosts(this.user.id);
           this.originalUserData = {
             name: this.user.name.slice(),
             lastname: this.user.lastname.slice(),
@@ -201,6 +204,14 @@
         axios.get(`deleted_posts?userId=${userId}&_limit=25`)
         .then(res => this.deleted_posts = res.data.reverse())
         .catch(err => toastr.error(err))
+      },
+
+      getDraftedPosts(userId) {
+        axios.get(`drafted_posts?userId=${userId}`)
+        .then(res => {
+          this.drafted_posts = res.data;
+        })
+        .catch(err => toastr.error(err));
       },
 
       updateProfile(userData) {
