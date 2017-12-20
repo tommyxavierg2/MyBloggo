@@ -1,44 +1,53 @@
 <template>
   <div id="registerView">
-    <div id="navBar">
-      <router-link class="navBarItems" to="/">Posts</router-link>
-    </div>
+
+    <ul id="navBar" class="list-inline align-left">
+      <li><router-link class="navBarItems" to="/">Bloggo</router-link></li>
+    </ul>
+
     <h1 class="titles">Register</h1>
-    <div>
+
+    <form @submit.prevent="registerNewUser">
+
       <div class="input-group">
         <span class="input-group-addon">Name:</span>
-        <input type="text" placeholder="Name" v-model="newUser.name"
-               class="form-control">
+        <input type="text" placeholder="Name" v-model.trim="newUser.name" class="form-control" required>
       </div>
+
       <div class="input-group">
         <span class="input-group-addon">Lastname:</span>
-        <input type="text" placeholder="Lastname" v-model="newUser.lastname"
-               class="form-control">
+        <input type="text" placeholder="Lastname" v-model.trim="newUser.lastname" class="form-control" required>
       </div>
+
       <div class="input-group">
         <span class="input-group-addon">Email:</span>
-        <input type="email" placeholder="Email@example.com" v-model="newUser.email"
-               v-on:change="isEmailAvailable(newUser.email)" class="form-control">
+        <input type="email" placeholder="Email@example.com" v-model.trim="newUser.email" v-on:change="isEmailAvailable(newUser.email)"
+               class="form-control" required>
       </div>
+
       <div class="input-group">
         <span class="input-group-addon">Password:</span>
-        <input type="password" placeholder="Password" v-model="newUser.password"
-                class="form-control">
+        <input type="password" placeholder="Password" v-model.trim="newUser.password" class="form-control" required>
       </div>
+
       <div class="input-group">
         <span class="input-group-addon">Confirm password:</span>
-        <input type="password" placeholder="Confirm Password" v-model="newUser.confirmPassword"
-               class="form-control">
+        <input type="password" placeholder="Confirm Password" v-model.trim="newUser.confirmPassword" class="form-control" required>
       </div>
+
       <div id="captcha" class="g-recaptcha" v-bind:data-sitekey='captchaInfo.captchaKey' data-callback="captchaResponse"></div>
+
       <div class="input-group">
         <span class="input-group-btn">
-          <button type="button" @click="registerNewUser" class="btn btn-primary btn-block">Register</button>
+          <button type="submit" class="btn btn-primary btn-block">Register</button>
         </span>
       </div>
-    </div>
+
+    </form>
+
   </div>
 </template>
+
 <script type="text/javascript">
   window.captchaResponse = (response) => {
     sessionStorage.setItem('reCaptcha', response);
@@ -48,8 +57,19 @@
    name: 'Register',
    data () {
       return {
-        newUser: { },
-        captchaInfo: { captchaKey: "6LfkxDwUAAAAAEPuCXV8_WI_5fLy48GiGToegZcC", isCaptchaChecked: false}
+        newUser: {
+          name: "",
+          lastname: "",
+          email: "",
+          password: "",
+          id: null,
+          avatar: "",
+          likedPostId: []
+        },
+        captchaInfo: {
+          captchaKey: "6LfkxDwUAAAAAEPuCXV8_WI_5fLy48GiGToegZcC",
+          isCaptchaChecked: ''
+        }
       }
    },
    methods: {
@@ -79,19 +99,12 @@
            else if(this.newUser.password.length < 6) {
              toastr.warning('Please make sure the password has more than 6 characters.');
            } else {
-             axios.post('users', {
-                name: this.newUser.name,
-                lastname: this.newUser.lastname,
-                email: this.newUser.email,
-                password: this.newUser.password,
-                avatar: 'https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d',
-                likedPostId: []
-              })
+             axios.post('users', this.newUser)
               .then(res => {
-                toastr.success('Thank you for joining us and welcome to the family! Now redirecting to the home page.');
-                localStorage.setItem('userData', JSON.stringify(res.data));
-                sessionStorage.removeItem('reCaptcha');
-                this.$router.replace('/');
+                 toastr.success('Thank you for joining us and welcome to the family! Now redirecting to the home page.');
+                 localStorage.setItem('userData', JSON.stringify(res.data));
+                 sessionStorage.removeItem('reCaptcha');
+                 this.$router.replace('/');
               })
               .catch(err => toastr.warning(err));
            }

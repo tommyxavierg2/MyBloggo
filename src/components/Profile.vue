@@ -1,7 +1,8 @@
 <template>
-  <div>
-    <ul id="navBar" class="list-inline">
-      <li><router-link class="navBarItems" to="/">Posts</router-link></li>
+  <div id="profileView">
+
+    <ul id="navBar" class="list-inline align-left">
+      <li><router-link class="navBarItems" to="/">Bloggo</router-link></li>
       <li><router-link v-if="user" class="navBarItems" :to="{name: 'newpost', params: {user: user}}">| New Post |</router-link></li>
       <li><router-link v-if="user" class="navBarItems" :to="{name: 'profile', params: {user: user}}">Profile</router-link></li>
       <li>
@@ -11,98 +12,93 @@
               <i class="fa fa-search"></i>
             </span>
         </div>
-     </li>
-     <li><button v-if="user" type="button" class="btn btn-primary icons-right-float" @click="logout">Logout</button></li>
+      </li>
+      <li><button v-if="user" type="button" class="btn btn-primary icons-right-float" @click="logout">Logout</button></li>
     </ul>
+
     <h1>Profile</h1>
+
     <button v-if="!viewer" type="button" class="icons-right-float" @click="isProfileEditable = !isProfileEditable">
-      Edit <i class="fa fa-pencil"></i>
-    </button>
+      Edit <i class="fa fa-pencil"></i></button>
+
     <div v-if="user">
       <h3>User information</h3>
-      <div>
+
         <div class="post-view">
-          <img :src="user.avatar" class="user-profile">
+          <img :src="user.avatar" class="user-profile"> <br>
+          <label>Name:</label>
+          <span>{{user.name}} {{user.lastname}}</span> <br>
+          <label>Email:</label>
+          <span>{{user.email}}</span>
         </div>
-        <div class="post-view">
-          <div>
-            <label>Name:</label>
-            <span>{{user.name}} {{user.lastname}}</span>
-          </div>
-          <div>
-            <label>Email:</label>
-            <span>{{user.email}}</span>
-          </div>
-        </div>
-        <div v-if="isProfileEditable" class="post-view">
+
+        <form v-if="isProfileEditable" class="post-view" @submit.prevent="updateProfile(user)">
           <div class="input-group">
             <span class="input-group-addon">Name:</span>
-             <input type="text" class="form-control" v-model="user.name">
+             <input type="text" class="form-control" v-model.trim="user.name" required>
           </div>
           <div class="input-group">
             <span class="input-group-addon">Lastname:</span>
-             <input type="text" class="form-control" v-model="user.lastname">
+             <input type="text" class="form-control" v-model.trim="user.lastname" required>
           </div>
           <div class="input-group">
             <span class="input-group-addon">Email:</span>
-             <input type="text" class="form-control" v-model="user.email">
+             <input type="email" class="form-control" v-model.trim="user.email" required>
           </div>
           <div class="d-flex justify-content-center">
              <button type="text" class="btn btn-danger" @click="cancelEdition">Cancel</button>
-             <button type="text" class="btn btn-primary" @click="updateProfile(user)">Save</button>
+             <button type="submit" class="btn btn-primary">Save</button>
           </div>
-        </div>
-      </div>
+        </form>
+
     </div>
-    <div>
+
       <h3>Posts</h3>
-      <div>
-        <ul class="nav nav-tabs nav-justified">
-           <li><a class="tabs" data-toggle="tab" href="#published">Published</a></li>
-           <li><a class="tabs" data-toggle="tab" href="#drafts">Drafts</a></li>
-           <li><a class="tabs" data-toggle="tab" href="#deleted">Deleted</a></li>
-        </ul>
-      </div>
+      <ul class="nav nav-tabs nav-justified">
+         <li><a class="tabs" data-toggle="tab" href="#published">Published</a></li>
+         <li><a class="tabs" data-toggle="tab" href="#drafts">Drafts</a></li>
+         <li><a class="tabs" data-toggle="tab" href="#deleted">Deleted</a></li>
+      </ul>
+
       <div class="tab-content">
         <div id="published" class="tab-pane fade">
           <div id="postList" class="post-list" v-for="(post, index) in posts">
-            <div>
-              <h4 class="titles">{{post.title}}</h4>
-              <p>{{post.createdAt}}</p>
-            </div>
-            <div>
-              <span>{{post.content}}</span>
-            </div>
-            <div>
-              <button type="button">{{post.likes}} Likes</button>
-              <button type="button">{{post.comments}} Comments</button>
-              <button id="editedButton">Edited</button>
-            </div>
-          </div>
-        </div>
-        <div id="drafts" class="tab-pane fade">
-          <h3>No post has been drafted yet</h3>
-        </div>
-        <div id="deleted" class="tab-pane fade deleted-posts-list" v-for="(post, index) in deleted_posts">
-          <h3 v-if="!deleted_posts">No post has been deleted yet</h3>
-          <div v-if="!viewer">
-            <i class="fa fa-undo icons-right-float">Undo</i>
-          </div>
-          <div>
+            <span class="icons-left-float">{{index+1}}</span>
             <h4 class="titles">{{post.title}}</h4>
-            <p>{{post.createdAt}}</p>
-          </div>
-          <div>
-            <span>{{post.content}}</span>
-          </div>
-          <div>
+            <p>{{post.creationDate}}</p>
+            <span>{{post.content}}</span> <br>
             <button type="button" disabled>{{post.likes}} Likes</button>
             <button type="button" disabled>{{post.comments}} Comments</button>
-            <button id="editedButton" disabled>Edited</button>
+            <span v-if="post.edited">(Edited)</span>
           </div>
         </div>
+
+        <div id="drafts" class="tab-pane fade" v-for="(post, index) in deleted_posts">
+          <span class="icons-left-float">{{index+1}}</span>
+          <h3 v-if="!drafted_posts">No post has been drafted yet</h3>
+          <h4 class="titles">{{post.title}}</h4>
+          <p>{{post.creationDate}}</p>
+          <span>{{post.content}}</span> <br>
+          <button type="button" disabled>{{post.likes}} Likes</button>
+          <button type="button" disabled>{{post.comments}} Comments</button>
+          <span v-if="post.edited">(Edited)</span>
+        </div>
+
+        <div id="deleted" class="tab-pane fade deleted-posts-list" v-for="(post, index) in deleted_posts">
+          <span class="icons-left-float">{{index+1}}</span>
+           <h3 v-if="!deleted_posts">No post has been deleted yet</h3>
+           <div v-if="!viewer">
+             <i class="fa fa-undo icons-right-float">Undo</i>
+          </div>
+            <h4 class="titles">{{post.title}}</h4>
+            <p>{{post.creationDate}}</p>
+            <span>{{post.content}}</span> <br>
+            <button type="button" disabled>{{post.likes}} Likes</button>
+            <button type="button" disabled>{{post.comments}} Comments</button>
+            <span v-if="post.edited">(Edited)</span>
+        </div>
       </div>
-    </div>
+
   </div>
 </template>
 
@@ -110,11 +106,35 @@
   export default {
     data(){
       return {
-        user: {},
-        viewer: {},
-        originalUserData: {},
+        user: {
+          name: "",
+          lastname: "",
+          email: "",
+          password: "",
+          id: null,
+          avatar: "",
+          likedPostId: []
+        },
+        viewer: {
+          name: "",
+          lastname: "",
+          email: "",
+          password: "",
+          id: null,
+          avatar: "",
+          likedPostId: []
+        },
+        originalUserData: {
+          name: "",
+          lastname: "",
+          email: "",
+          password: "",
+          avatar: "",
+          likedPostId: []
+        },
         posts: [],
         deleted_posts: [],
+        drafted_posts: [],
         isProfileEditable: false,
       }
     },
@@ -127,7 +147,14 @@
         this.getUserProfile(this.user.id);
         this.getPosts(this.user.id);
         this.getDeletedPosts(this.user.id);
-        this.originalUserData = { name: this.user.name.slice(), lastname: this.user.lastname.slice(), email: this.user.email.slice() };
+        this.originalUserData = {
+          name: this.user.name.slice(),
+          lastname: this.user.lastname.slice(),
+          email: this.user.email.slice(),
+          password: this.user.password.slice(),
+          avatar: this.user.avatar.slice(),
+          likedPostId: [this.user.likedPostId]
+        };
       }
       else if(!this.user && this.viewer) {
           this.user = this.$route.params.postUserId;
@@ -140,7 +167,14 @@
         if(this.user) {
           this.getPosts(this.user.id);
           this.getDeletedPosts(this.user.id);
-          this.originalUserData = { name: this.user.name.slice(), lastname: this.user.lastname.slice(), email: this.user.email.slice() };
+          this.originalUserData = {
+            name: this.user.name.slice(),
+            lastname: this.user.lastname.slice(),
+            email: this.user.email.slice(),
+            password: this.user.password.slice(),
+            avatar: this.user.avatar.slice(),
+            likedPostId: [this.user.likedPostId]
+          };
         }
         else {
           toastr.warning('In order to perform any action you first need to log In');
@@ -159,25 +193,30 @@
 
       getPosts(userId) {
         axios.get(`posts?userId=${userId}&_limit=25`)
-          .then(res => this.posts = res.data)
+          .then(res => this.posts = res.data.reverse())
           .catch(err => toastr.warning(err));
       },
 
       getDeletedPosts(userId) {
         axios.get(`deleted_posts?userId=${userId}&_limit=25`)
-        .then(res => this.deleted_posts = res.data)
+        .then(res => this.deleted_posts = res.data.reverse())
         .catch(err => toastr.error(err))
       },
 
       updateProfile(userData) {
-        if(confirm('Do you want to apply these changes?') == true) {
+
+        if(!this.user.name || !this.user.lastname || !this.user.email) {
+          toastr.warning('Please make sure all fields are properly filled');
+        }
+        else if(confirm('Do you want to apply these changes?') == true) {
           axios.put(`users?id=${userData.id}`, userData)
            .then(res => {
              toastr.success('Profile updated');
              this.isProfileEditable = !this.isProfileEditable;
            })
            .catch(err => toastr.error(err));
-        } else {
+        }
+        else {
           this.cancelEdition();
         }
       },
@@ -197,7 +236,7 @@
            commentsAllowed: this.newPost.commentsAllowed,
            likes: this.newPost.likes,
            comments: this.newPost.comments,
-           createdAt: date.substr(8, 23),
+           creationDate: date.substr(8, 23),
            userName: this.user.name + ' ' + this.user.lastname,
            userId: this.user.id,
            avatar: "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d"

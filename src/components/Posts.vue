@@ -1,11 +1,12 @@
 <template>
-  <div>
-    <ul id="navBar" class="list-inline">
-      <li><router-link class="navBarItems" to="/">Posts</router-link></li>
+  <div id="postsView">
+
+    <ul id="navBar" class="list-inline align-left">
+      <li><router-link class="navBarItems" to="/">Bloggo</router-link></li>
       <li><router-link v-if="user" class="navBarItems" :to="{name: 'newpost', params: {user: user}}">| New Post |</router-link></li>
       <li><router-link v-if="user" class="navBarItems" :to="{name: 'profile', params: {user: user}}">Profile</router-link></li>
       <li>
-        <div class="input-group icons-right-float" id="searchBox">
+        <div class="input-group" id="searchBox">
             <input type="text" class="form-control" placeholder="Search">
             <span class="input-group-addon">
               <i class="fa fa-search"></i>
@@ -16,13 +17,13 @@
      <li><button v-if="!user" type="button" class="btn btn-primary icons-right-float" @click="goToRegister">Register</button></li>
      <li><button v-if="user" type="button" class="btn btn-primary icons-right-float" @click="logout">Logout</button></li>
     </ul>
-    <div class="middle">
-      <h1 class="titles">Bloggo!, made for you.</h1>
-      <h2>Posts</h2>
+
+      <h2 class="titles">Posts</h2>
+
       <div v-for="(post, index) in posts" class="post-list">
-        <div class="icons-left-float">
-          <span>{{index+1}}</span>
-        </div>
+
+          <span class="icons-left-float">{{index+1}}</span>
+
           <div class="row post-list">
             <div class="col-xs-6">
               <router-link class="user-name-router" :to="{name: 'profile', params: {postUserId: post.userId, viewer: user}}">
@@ -33,32 +34,39 @@
               </router-link>
             </div>
             <div>
-              <router-link class="user-name-router" :to="{name: 'postview', params: {post: post}}">Created at: {{post.createdAt}}</router-link>
+              <router-link class="user-name-router" :to="{name: 'postview', params: {post: post}}">Posted on: {{post.creationDate}}</router-link>
               <i v-if="user.id == post.userId" class="fa fa-times icons-right-float" @click="deletePost(index)"></i>
             </div>
             <div>
-              <h4>
-                <router-link class="user-name-router titles" :to="{name: 'postview', params: {post: post}}">{{post.title}}</router-link>
-              </h4>
+              <router-link class="user-name-router titles" :to="{name: 'postview', params: {post: post}}">{{post.title}}</router-link>
             </div>
-            <div>
               <span readonly="!isUserLogged">{{post.content.substr(0, 200)}}</span>
-            </div>
             <div class="col-xs-6">
               <button type="button" @click="addLike(index, post, user.likedPostId)" :disabled="!isUserLogged">Likes {{post.likes}}</button>
               <router-link class="user-name-router" :to="{name: 'postview', params: {post: post}}">Comments {{post.comments}}</router-link>
             </div>
          </div>
+
       </div>
-    </div>
+
   </div>
+
 </template>
+
 <script>
 export default {
   data() {
     return {
+        user: {
+          name: "",
+          lastname: "",
+          email: "",
+          password: "",
+          id: null,
+          avatar: "",
+          likedPostId: []
+        },
         posts: [],
-        user: {},
         isUserLogged: false,
         isUserPost: false,
         postValidation: null
@@ -128,7 +136,7 @@ export default {
 
             }).catch(err => toastr.error(err))
         }
-      },
+    },
 
     getUserData() {
       this.user = JSON.parse(localStorage.getItem('userData'));

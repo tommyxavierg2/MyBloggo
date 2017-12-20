@@ -1,49 +1,44 @@
 <template>
   <div id="postView">
-    <ul id="navBar" class="list-inline">
-      <li><router-link class="navBarItems" to="/">Posts</router-link></li>
+
+    <ul id="navBar" class="list-inline align-left">
+      <li><router-link class="navBarItems" to="/">Bloggo</router-link></li>
       <li><router-link v-if="user" class="navBarItems" :to="{name: 'newpost', params: {user: user}}">| New Post |</router-link></li>
       <li><router-link v-if="user" class="navBarItems" :to="{name: 'profile', params: {user: user}}">Profile</router-link></li>
       <li><button v-if="!user" type="button" class="btn btn-primary icons-right-float" @click="goToLogin">Login</button></li>
       <li><button v-if="!user" type="button" class="btn btn-primary icons-right-float" @click="goToRegister">Register</button></li>
       <li><button v-if="user" type="button" class="btn btn-primary icons-right-float" @click="logout">Logout</button></li>
     </ul>
+
     <div class="post-view">
       <router-link class="user-name-router icons-left-float" :to="{path: '/', params: {post: user}}">
-        <i class="fa fa-arrow-circle-o-left">Return</i>
-      </router-link>
+        <i class="fa fa-arrow-circle-o-left">Return</i></router-link>
       <router-link class="user-name-router" :to="{name: 'profile', params: {postUserId: post.userId, viewer: user}}">
-        <img class="user-avatar" :src="post.avatar">
-      </router-link> <br>
-      <div>
+        <img class="user-avatar" :src="post.avatar"></router-link> <br>
         <router-link class="user-name-router titles" :to="{name: 'profile', params: {postUserId: post.userId, viewer: user}}">{{post.userName}}</router-link>
         <span class="titles"></span>
-      </div>
-    </div>
-    <div class="post-view">
       <button v-if="user" type="button" class="icons-right-float" @click="isPostContentEditable = !isPostContentEditable">
-        Edit <i class="fa fa-pencil"></i>
-      </button>
+        Edit <i class="fa fa-pencil"></i></button>
       <h4 class="titles">{{post.title}}</h4>
-      <span>Created at: {{post.createdAt}}</span>
+      <span>Created at: {{post.creationDate}}</span>
       <div class="post-view-content">
         <span readonly="isUserLogged">{{post.content}}</span>
       </div>
-      <div>
         <button type="button" @click="addLike()" :disabled="!isUserLogged" class="transparent-button">Likes {{post.likes}}</button>
         <span>Comments {{post.comments}} </span>
-        <span v-if="post.edited">Edited</span>
-      </div>
+        <span v-if="post.edited">(Edited)</span>
     </div>
-    <div v-if="isPostContentEditable">
+
+    <form v-if="isPostContentEditable" @submit.prevent="editPost(post)">
       <h4>Post edition</h4>
+
       <div class="input-group">
         <span class="input-group-addon">Title:</span>
-        <input placeholder="Title" v-model="post.title" class="form-control" autofocus></input>
+        <input placeholder="Title" v-model.trim="post.title" class="form-control" autofocus required></input>
       </div>
       <div class="input-group">
         <span class="input-group-addon">Content:</span>
-        <textarea v-model="post.content" rows="4" cols="40" class="form-control"></textarea>
+        <textarea v-model.trim="post.content" rows="4" cols="40" class="form-control" required></textarea>
       </div>
       <div class="input-group">
         <span class="input-group-addon">
@@ -53,10 +48,13 @@
       </div>
       <div class="input-group">
         <span class="input-group-btn">
-          <button type="button" class="btn btn-primary btn-block">Save</button>
+          <button type="button" class="btn btn-primary">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save</button>
         </span>
       </div>
-    </div>
+
+    </form>
+
     <div v-if="user && post.commentsAllowed">
       <h4>New Comment</h4>
       <div class="input-group">
@@ -68,32 +66,39 @@
         <button type="button" class="btn btn-primary" @click="addComment">Place comment</button>
       </div>
     </div>
-    <div>
-      <h4>Comments
-        <i class="fa fa-level-down icons-right-float" @click="comments.reverse()">Reverse</i>
-      </h4>
-      <div v-if="comments" v-for="(comment, index) in comments" class="comments-display">
-        <div class="row" @mouseover="optionsButtonsActive = !optionsButtonsActive">
-          <div class="col-xs-4">
-            <img :src="comment.userAvatar" class="comment-avatar-img">
-            <span>{{comment.userName}}</span>
-          </div>
-          <span class="input-group-addon">{{comment.date}}</span>
-          <div class="col-xs-8 input-group">
-            <textarea v-model="comment.comment" class="form-control" @keyup.enter="editPostComments(index)" v-bind:readonly="isCommentEditable"></textarea>
-          </div>
+
+    <h4>Comments<i class="fa fa-level-down icons-right-float" @click="comments.reverse()">Reverse</i></h4>
+
+    <div v-if="comments" v-for="(comment, index) in comments" class="comments-display">
+
+      <div class="row post-list">
+        <div class="col-xs-4">
+          <span class="icons-left-float">{{index+1}}</span>
+          <img :src="comment.userAvatar" class="comment-avatar-img">
+          <span>{{comment.userName}}</span>
         </div>
-        <div v-if="user && user.id == comment.userId && optionsButtonsActive">
-          <button type="button" @click="isCommentEditable = !isCommentEditable">
-            <i class="fa fa-pencil"></i>
-          </button>
-          <button v-if="!isCommentEditable" type="button" class="btn-danger" @click="isCommentEditable = !isCommentEditable">Cancel</button>
+        <div class="col-xs-8">
+          <button v-if="user && user.id == comment.userId && optionsButtonsActive" type="button" @click="isCommentEditable = !isCommentEditable">
+            <i class="fa fa-pencil"></i></button>
+
           <button type="button" @click="deleteComment(index)" class="icons-right-float">
-            <i class="fa fa-times"></i>
-          </button>
+            <i class="fa fa-times"></i></button>
+          <span>{{comment.date}}</span>
+          <textarea v-model="comment.comment" @mouseover="optionsButtonsActive = !optionsButtonsActive" readonly class="form-control"></textarea> <br>
+
+          <div v-if="!isCommentEditable">
+            <div class="input-group">
+              <span class="input-group-addon">Comment:</span>
+              <input placeholder="Comment" v-model.trim="comment.comment" class="form-control" autofocus></input>
+            </div> <br>
+              <button type="button" class="btn-danger" @click="isCommentEditable = !isCommentEditable">Cancel</button>
+              <button type="button" class="btn-primary" @click="editPostComments(index)">Save</button>
+          </div> <br>
         </div>
-      </div>
-    </div>
+     </div>
+
+  </div>
+
     <div v-if="!user">
       <h3 v-if="!user">In order to place a comment you first need to be logged in</h3>
       <div class="input-group">
@@ -102,6 +107,7 @@
         </span>
       </div>
     </div>
+
   </div>
 </template>
 
@@ -109,10 +115,45 @@
 export default {
   data() {
     return {
-      user: {},
-      post: {},
+      user: {
+        name: "",
+        lastname: "",
+        email: "",
+        password: "",
+        id: null,
+        avatar: "",
+        likedPostId: []
+      },
+      post: {
+        avatar: "",
+        comments: null,
+        commentsAllowed: false,
+        content: "",
+        creationDate: "",
+        edited: false,
+        id: null,
+        likes: null,
+        title: "",
+        userId: null,
+        userName: ""
+      },
+      originalPost: {
+        comments: null,
+        commentsAllowed: false,
+        content: "",
+        edited: false,
+        title: "",
+      },
+      newComment: {
+        comment: "",
+        postId: null,
+        userId: null,
+        userName: "",
+        userAvatar: "",
+        date: "",
+        id: null
+      },
       comments: [],
-      newComment: {},
       isUserLogged: false,
       optionsButtonsActive: false,
       isCommentEditable: true,
@@ -167,6 +208,13 @@ export default {
 
     getPost() {
       this.post = this.$route.params.post;
+      this.originalPost = {
+        commentsAllowed: this.post.commentsAllowed,
+        content: this.post.content.slice(),
+        creationDate: this.post.creationDate.slice(),
+        edited: this.post.edited,
+        title: this.post.title.slice(),
+      }
     },
 
     getComments() {
@@ -179,6 +227,12 @@ export default {
       axios.put(`posts/${this.post.id}`, this.post)
       .then()
       .catch(err => toastr.error(err))
+    },
+
+    editPost(postData) {
+      axios.put(`posts/${postData.id}`, this.post)
+      .then(res => toastr.success('Post updated'))
+      .catch(err => toastr.error(err));
     },
 
     editPostComments(index) {
