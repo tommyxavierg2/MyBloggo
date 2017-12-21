@@ -7,7 +7,9 @@
       "password": "qweasd",
       "id": 1,
       "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
-      "likedPostId": []
+      "likedPostId": [
+        14
+      ]
     },
     {
       "name": "Test 1",
@@ -30,340 +32,342 @@
   ],
   "posts": [
     {
-      "title": "Testing a second test",
-      "content": "Testing a test for test",
+      "title": "Testing new structure published",
+      "content": "Testing",
       "commentsAllowed": true,
       "likes": 0,
       "comments": 0,
-      "creationDate": "19 2017 15:32:38 GMT-04",
-      "userName": "Test 2 Testing",
-      "userId": 3,
+      "creationDate": "20 2017 23:26:15",
+      "publicationDate": "20 2017 23:26:15",
+      "userName": "Test Testing",
+      "userId": 1,
       "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
       "edited": false,
+      "state": {
+        "published": false,
+        "drafted": false,
+        "deleted": true
+      },
       "id": 1
     },
     {
-      "title": "Test 1 title for a post 1",
-      "content": "Testing a test in a test for a test Testing a test in a test for a test Testing a test in a test for a test Testing a test in a test for a test Testing a test in",
+      "title": "Testing new structure 1 published",
+      "content": "Testing",
       "commentsAllowed": true,
-      "likes": 0,
-      "comments": 2,
-      "creationDate": "14 2017",
-      "userName": "Test 1 Testing",
-      "userId": 2,
-      "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
-      "id": 2,
-      "edited": false
-    },
-    {
-      "title": "Test 1 title for a post 2",
-      "content": "Testing a test testing for a tester",
-      "commentsAllowed": true,
-      "likes": 0,
+      "likes": 1,
       "comments": 0,
-      "creationDate": "18 2017 10:47:16",
-      "userName": "Test 1 Testing",
-      "userId": 2,
-      "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
-      "id": 3,
-      "edited": true
-    },
-    {
-      "title": "Testing a new post with a new user",
-      "content": "Testing a new post with a new user for a test in the testing process of testing",
-      "commentsAllowed": true,
-      "likes": 0,
-      "comments": 1,
-      "creationDate": "19 2017 15:30:45",
-      "userName": "Test 2 Testing",
+      "creationDate": "20 2017 23:26:15",
+      "publicationDate": "20 2017 23:26:15",
+      "userName": "Test Testing",
       "userId": 1,
       "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
       "edited": false,
+      "state": {
+        "published": false,
+        "drafted": false,
+        "deleted": true
+      },
+      "id": 2
+    },
+    {
+      "title": "Testing new structure 2 published",
+      "content": "Testing",
+      "commentsAllowed": true,
+      "likes": 0,
+      "comments": 0,
+      "creationDate": "20 2017 23:26:15",
+      "publicationDate": "20 2017 23:26:15",
+      "userName": "Test Testing",
+      "userId": 1,
+      "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
+      "edited": false,
+      "state": {
+        "published": false,
+        "drafted": false,
+        "deleted": true
+      },
+      "id": 3
+    },
+    {
+      "title": "Testing new structure drafted",
+      "content": "Testing",
+      "commentsAllowed": true,
+      "likes": 0,
+      "comments": 0,
+      "creationDate": "20 2017 23:26:15",
+      "publicationDate": "20 2017 23:26:15",
+      "userName": "Test Testing",
+      "userId": 1,
+      "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
+      "edited": false,
+      "state": {
+        "published": false,
+        "drafted": true,
+        "deleted": false
+      },
       "id": 4
     },
     {
-      "title": "Testing a second test",
-      "content": "Testing a test for test",
+      "title": "Testing new structure drafted",
+      "content": "Testing",
       "commentsAllowed": true,
       "likes": 0,
-      "comments": 1,
-      "creationDate": "19 2017 15:32:38 GMT-04",
-      "userName": "Test 2 Testing",
+      "comments": 0,
+      "creationDate": "20 2017 23:26:15",
+      "userName": "Test Testing",
       "userId": 1,
       "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
       "edited": false,
+      "state": {
+        "published": false,
+        "drafted": false,
+        "deleted": true
+      },
       "id": 5
     },
     {
-      "title": "Test 1 title for a post 1",
-      "content": "Testing a test in a test for a test Testing a test in a test for a test Testing a test in a test for a test Testing a test in a test for a test Testing a test in",
-      "commentsAllowed": true,
-      "likes": 0,
-      "comments": 2,
-      "creationDate": "14 2017",
-      "userName": "Test 1 Testing",
-      "userId": 1,
-      "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
-      "id": 6,
-      "edited": false
-    },
-    {
-      "title": "Test 1 title for a post 2",
-      "content": "Testing a test testing for a tester",
+      "title": "Testing new structure drafted 1",
+      "content": "Testing",
       "commentsAllowed": true,
       "likes": 0,
       "comments": 0,
-      "creationDate": "18 2017 10:47:16 GMT-04",
-      "userName": "Test 1 Testing",
-      "userId": 1,
-      "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
-      "id": 7,
-      "edited": true
-    },
-    {
-      "title": "Testing a new post with a new user",
-      "content": "Testing a new post with a new user for a test in the testing process of testing",
-      "commentsAllowed": true,
-      "likes": 0,
-      "comments": 0,
-      "creationDate": "19 2017 15:30:45 GMT-04",
-      "userName": "Test 2 Testing",
+      "creationDate": "20 2017 23:26:15",
+      "publicationDate": "21 2017 16:27:12",
+      "userName": "Test Testing",
       "userId": 1,
       "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
       "edited": false,
+      "state": {
+        "published": true,
+        "drafted": false,
+        "deleted": false
+      },
+      "id": 6
+    },
+    {
+      "title": "Testing new structure deleted",
+      "content": "Testing",
+      "commentsAllowed": true,
+      "likes": 0,
+      "comments": 0,
+      "creationDate": "20 2017 23:26:15",
+      "userName": "Test Testing",
+      "userId": 1,
+      "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
+      "edited": false,
+      "state": {
+        "published": false,
+        "drafted": false,
+        "deleted": true
+      },
+      "id": 7
+    },
+    {
+      "title": "Testing new structure deleted",
+      "content": "Testing",
+      "commentsAllowed": true,
+      "likes": 0,
+      "comments": 0,
+      "creationDate": "20 2017 23:26:15",
+      "publicationDate": "20 2017 23:26:15",
+      "userName": "Test Testing",
+      "userId": 1,
+      "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
+      "edited": false,
+      "state": {
+        "published": false,
+        "drafted": false,
+        "deleted": true
+      },
       "id": 8
     },
     {
-      "title": "Testing a second test",
-      "content": "Testing a test for test",
+      "title": "Testing new structure deleted",
+      "content": "Testing",
       "commentsAllowed": true,
       "likes": 0,
-      "comments": 1,
-      "creationDate": "19 2017 15:32:38 GMT-04",
-      "userName": "Test 2 Testing",
-      "userId": 3,
+      "comments": 0,
+      "creationDate": "20 2017 23:26:15",
+      "publicationDate": "20 2017 23:26:15",
+      "userName": "Test Testing",
+      "userId": 1,
       "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
       "edited": false,
+      "state": {
+        "published": false,
+        "drafted": false,
+        "deleted": true
+      },
       "id": 9
     },
     {
-      "title": "Test 1 title for a post 1",
-      "content": "Testing a test in a test for a test Testing a test in a test for a test Testing a test in a test for a test Testing a test in a test for a test Testing a test in",
-      "commentsAllowed": true,
-      "likes": 0,
-      "comments": 2,
-      "creationDate": "14 2017",
-      "userName": "Test 1 Testing",
-      "userId": 2,
       "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "Once upon a time... XD",
+      "creationDate": "Thu Dec 21 2017 10:41:03 GMT-0400 (AST)",
+      "publicationDate": "20 2017 23:26:15",
+      "edited": false,
       "id": 10,
-      "edited": false
+      "likes": 0,
+      "title": "Testing post edition",
+      "userId": 1,
+      "userName": "Test Testing",
+      "state": {
+        "published": false,
+        "drafted": false,
+        "deleted": true
+      }
     },
     {
-      "title": "Test 1 title for a post 2",
-      "content": "Testing a test testing for a tester",
-      "commentsAllowed": true,
-      "likes": 0,
-      "comments": 0,
-      "creationDate": "18 2017 10:47:16 GMT-04",
-      "userName": "Test 1 Testing",
-      "userId": 2,
       "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "Testing posting a previously deleted post",
+      "creationDate": "Thu Dec 21 2017 10:43:46",
+      "edited": false,
       "id": 11,
-      "edited": true
+      "likes": 0,
+      "title": "Testing posting deleted posts",
+      "userId": 1,
+      "userName": "Test Testing",
+      "state": {
+        "published": true,
+        "drafted": false,
+        "deleted": false
+      },
+      "publicationDate": "21 2017 16:10:44"
     },
     {
-      "title": "Testing a new post with a new user",
-      "content": "Testing a new post with a new user for a test in the testing process of testing",
-      "commentsAllowed": true,
-      "likes": 0,
+      "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
       "comments": 0,
-      "creationDate": "19 2017 15:30:45 GMT-04",
-      "userName": "Test 2 Testing",
-      "userId": 3,
-      "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
+      "commentsAllowed": true,
+      "content": "Testing drafted posts posting",
+      "creationDate": "",
       "edited": false,
-      "id": 12
+      "id": 12,
+      "likes": 0,
+      "title": "Testing drafted posts edition",
+      "userId": 1,
+      "userName": "Test Testing",
+      "state": {
+        "published": true,
+        "drafted": false,
+        "deleted": false
+      },
+      "publicationDate": "21 2017 15:59:56"
     },
     {
-      "title": "Testing a second test",
-      "content": "Testing a test for test",
+      "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
+      "comments": 0,
       "commentsAllowed": true,
+      "content": "zxczxczxczxc",
+      "creationDate": "",
+      "edited": false,
+      "id": 13,
       "likes": 0,
+      "title": "xzcczxczxczxc",
+      "userId": 1,
+      "userName": "Test Testing",
+      "state": {
+        "published": false,
+        "drafted": false,
+        "deleted": true
+      }
+    },
+    {
+      "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
       "comments": 1,
-      "creationDate": "19 2017 15:32:38 GMT-04",
-      "userName": "Test 2 Testing",
-      "userId": 3,
-      "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
-      "edited": false,
-      "id": 13
-    },
-    {
-      "title": "Test 1 title for a post 1",
-      "content": "Testing a test in a test for a test Testing a test in a test for a test Testing a test in a test for a test Testing a test in a test for a test Testing a test in",
       "commentsAllowed": true,
-      "likes": 0,
-      "comments": 2,
-      "creationDate": "14 2017",
-      "userName": "Test 1 Testing",
-      "userId": 2,
-      "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
+      "content": "Once upon a time that happened",
+      "creationDate": "21 2017 11:47:53",
+      "edited": false,
       "id": 14,
-      "edited": false
+      "likes": 1,
+      "title": "Testing edition 1",
+      "userId": 1,
+      "userName": "Test Testing",
+      "state": {
+        "published": true,
+        "drafted": false,
+        "deleted": false
+      }
     },
     {
-      "title": "Test 1 title for a post 2",
-      "content": "Testing a test testing for a tester",
-      "commentsAllowed": true,
-      "likes": 0,
-      "comments": 0,
-      "creationDate": "18 2017 10:47:16 GMT-04",
-      "userName": "Test 1 Testing",
-      "userId": 2,
       "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "sadasds",
+      "creationDate": "21 2017 12:32:56",
+      "publicationDate": "",
+      "edited": false,
       "id": 15,
-      "edited": true
+      "likes": 0,
+      "title": "asdsad",
+      "userId": 1,
+      "userName": "Test Testing",
+      "state": {
+        "published": false,
+        "drafted": false,
+        "deleted": true
+      }
     },
     {
-      "title": "Testing a new post with a new user",
-      "content": "Testing a new post with a new user for a test in the testing process of testing",
+      "title": "Testing new structure 2 published",
+      "content": "Testing",
       "commentsAllowed": true,
       "likes": 0,
       "comments": 0,
-      "creationDate": "19 2017 15:30:45 GMT-04",
-      "userName": "Test 2 Testing",
-      "userId": 3,
-      "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
-      "edited": false,
-      "id": 16
-    },
-    {
-      "title": "Testing a second test",
-      "content": "Testing a test for test",
-      "commentsAllowed": true,
-      "likes": 0,
-      "comments": 1,
-      "creationDate": "19 2017 15:32:38 GMT-04",
-      "userName": "Test 2 Testing",
-      "userId": 3,
-      "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
-      "edited": false,
-      "id": 17
-    },
-    {
-      "title": "Test 1 title for a post 1",
-      "content": "Testing a test in a test for a test Testing a test in a test for a test Testing a test in a test for a test Testing a test in a test for a test Testing a test in",
-      "commentsAllowed": true,
-      "likes": 0,
-      "comments": 2,
-      "creationDate": "14 2017",
-      "userName": "Test 1 Testing",
-      "userId": 2,
-      "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
-      "id": 18,
-      "edited": false
-    },
-    {
-      "title": "Test 1 title for a post 2",
-      "content": "Testing a test testing for a tester",
-      "commentsAllowed": true,
-      "likes": 0,
-      "comments": 0,
-      "creationDate": "18 2017 10:47:16 GMT-04",
-      "userName": "Test 1 Testing",
-      "userId": 2,
-      "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
-      "id": 19,
-      "edited": true
-    },
-    {
-      "title": "rgdbcvaesrdhtfjy",
-      "content": "gkjhkfdsaADFGHJKL;",
-      "commentsAllowed": true,
-      "creationDate": "20 2017 16:04:36",
+      "creationDate": "20 2017 23:26:15",
+      "publicationDate": "20 2017 23:26:15",
       "userName": "Test Testing",
       "userId": 1,
       "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
       "edited": false,
-      "id": 20
-    }
-  ],
-  "deleted_posts": [
-    {
-      "title": "Test 1 title for a post 2",
-      "content": "Testing a test testing for a tester",
-      "commentsAllowed": true,
-      "likes": 0,
-      "comments": 0,
-      "creationDate": "18 2017 10:47:16 GMT-04",
-      "userName": "Test 1 Testing",
-      "userId": 2,
-      "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
-      "id": 15,
-      "edited": true
-    },
-    {
-      "title": "Testing a new post with a new user",
-      "content": "Testing a new post with a new user for a test in the testing process of testing",
-      "commentsAllowed": true,
-      "likes": 0,
-      "comments": 0,
-      "creationDate": "19 2017 15:30:45 GMT-04",
-      "userName": "Test 2 Testing",
-      "userId": 3,
-      "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
-      "edited": false,
+      "state": {
+        "published": false,
+        "drafted": false,
+        "deleted": true
+      },
       "id": 16
     },
     {
-      "title": "Testing a second test",
-      "content": "Testing a test for test",
-      "commentsAllowed": true,
-      "likes": 0,
-      "comments": 1,
-      "creationDate": "19 2017 15:32:38 GMT-04",
-      "userName": "Test 2 Testing",
-      "userId": 3,
-      "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
-      "edited": false,
-      "id": 17
-    },
-    {
-      "title": "Test 1 title for a post 1",
-      "content": "Testing a test in a test for a test Testing a test in a test for a test Testing a test in a test for a test Testing a test in a test for a test Testing a test in",
-      "commentsAllowed": true,
-      "likes": 0,
-      "comments": 2,
-      "creationDate": "14 2017",
-      "userName": "Test 1 Testing",
-      "userId": 2,
-      "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
-      "id": 18,
-      "edited": false
-    },
-    {
-      "title": "Test 1 title for a post 2",
-      "content": "Testing a test testing for a tester",
+      "title": "Testing new structure 2 published",
+      "content": "Testing",
       "commentsAllowed": true,
       "likes": 0,
       "comments": 0,
-      "creationDate": "18 2017 10:47:16 GMT-04",
-      "userName": "Test 1 Testing",
-      "userId": 2,
-      "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
-      "id": 19,
-      "edited": true
-    },
-    {
-      "title": "asaasdasdasdsa",
-      "content": "dasdasdsadasd",
-      "commentsAllowed": true,
-      "creationDate": "20 2017 16:04:17",
+      "creationDate": "20 2017 23:26:15",
+      "publicationDate": "20 2017 23:26:15",
       "userName": "Test Testing",
       "userId": 1,
       "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
       "edited": false,
-      "id": 20
+      "state": {
+        "published": false,
+        "drafted": false,
+        "deleted": true
+      },
+      "id": 17
+    },
+    {
+      "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "dsadasdasdasdasd",
+      "creationDate": "21 2017 16:14:22",
+      "publicationDate": "21 2017 16:14:22",
+      "edited": false,
+      "id": 18,
+      "likes": 0,
+      "title": "asdasdasdasdasd",
+      "userId": 1,
+      "userName": "Test Testing",
+      "state": {
+        "published": false,
+        "drafted": false,
+        "deleted": true
+      }
     }
   ],
   "comments": [
@@ -404,15 +408,6 @@
       "id": 4
     },
     {
-      "comment": "Editing this post comment",
-      "postId": 15,
-      "userId": 1,
-      "userName": "Test",
-      "userAvatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
-      "date": "19 2017 18:18",
-      "id": 5
-    },
-    {
       "comment": "Testing a test in a test for a test Testing a test in a test for a test Testing a test in a test for a tester\n",
       "postId": 8,
       "userId": 2,
@@ -431,63 +426,13 @@
       "id": 7
     },
     {
-      "comment": "ted5",
-      "postId": 15,
-      "userId": 1,
-      "userName": "Test",
-      "userAvatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
-      "date": "19 2017 18:18",
-      "id": 8
-    },
-    {
-      "comment": "sadadasdasdasdasd",
+      "comment": "Testing this post comment",
       "postId": 14,
       "userId": 1,
       "userName": "Test",
       "userAvatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
-      "date": "20 2017 15:05",
-      "id": 9
-    }
-  ],
-  "drafted_posts": [
-    {
-      "avatar": "",
-      "comments": null,
-      "commentsAllowed": true,
-      "content": "sadasdsad",
-      "creationDate": "",
-      "edited": false,
-      "id": 1,
-      "likes": null,
-      "title": "asdasdsad",
-      "userId": null,
-      "userName": ""
-    },
-    {
-      "avatar": "",
-      "comments": null,
-      "commentsAllowed": true,
-      "content": "steps 1321321",
-      "creationDate": "",
-      "edited": false,
-      "id": 2,
-      "likes": null,
-      "title": "Cocinando",
-      "userId": null,
-      "userName": ""
-    },
-    {
-      "avatar": "",
-      "comments": null,
-      "commentsAllowed": true,
-      "content": "asdasdasas",
-      "creationDate": "",
-      "edited": false,
-      "id": 3,
-      "likes": null,
-      "title": "Probando",
-      "userId": null,
-      "userName": ""
+      "date": "21 2017 11:52",
+      "id": 8
     }
   ]
 }

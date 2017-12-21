@@ -37,6 +37,14 @@
   color: black;
 }
 
+.deleted-router {
+  color: red;
+}
+
+.drafted-router {
+  color: white;
+}
+
 .post-list {
   border: 1px solid gray;
   background-color: white;
@@ -46,6 +54,12 @@
   border: 1px solid gray;
   background-color: white;
   color: red;
+}
+
+.drafted_posts-list {
+  color: white;
+  border: 1px solid white;
+  background-color: gray;
 }
 
 .post-view {
@@ -108,6 +122,10 @@
 .coverage {
   margin: 5px;
   padding: 5px;
+}
+
+.inline-display {
+  display: block;
 }
 
 #navBar {

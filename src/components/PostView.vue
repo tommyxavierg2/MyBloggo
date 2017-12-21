@@ -48,8 +48,10 @@
       </div>
       <div class="input-group">
         <span class="input-group-btn">
-          <button type="button" class="btn btn-primary">Cancel</button>
-          <button type="submit" class="btn btn-primary">Save</button>
+          <button type="button" class="btn btn-warning" @click="deletePost(post)">Delete</button>
+          <button type="button" class="btn btn-danger" @click="cancelPostEdition">Cancel</button>
+          <button v-if="post.state.published" type="submit" class="btn btn-primary">Update</button>
+          <button v-if="post.state.drafted || post.state.deleted" type="button" class="btn btn-success" @click="createPost(post)">Post</button>
         </span>
       </div>
 
@@ -67,9 +69,9 @@
       </div>
     </div>
 
-    <h4>Comments<i class="fa fa-level-down icons-right-float" @click="comments.reverse()">Reverse</i></h4>
+    <h4 v-if="comments">Comments <i class="fa fa-level-down icons-right-float" @click="comments.reverse()">Reverse</i></h4>
 
-    <div v-if="comments" v-for="(comment, index) in comments" class="comments-display">
+    <div v-for="(comment, index) in comments" class="comments-display">
 
       <div class="row post-list">
         <div class="col-xs-4">
@@ -91,8 +93,8 @@
               <span class="input-group-addon">Comment:</span>
               <input placeholder="Comment" v-model.trim="comment.comment" class="form-control" autofocus></input>
             </div> <br>
-              <button type="button" class="btn-danger" @click="isCommentEditable = !isCommentEditable">Cancel</button>
-              <button type="button" class="btn-primary" @click="editPostComments(index)">Save</button>
+              <button type="button" class="btn btn-danger" @click="isCommentEditable = !isCommentEditable">Cancel</button>
+              <button type="button" class="btn btn-primary" @click="editPostComments(index)">Save</button>
           </div> <br>
         </div>
      </div>
@@ -126,16 +128,22 @@ export default {
       },
       post: {
         avatar: "",
-        comments: null,
-        commentsAllowed: false,
+        comments: 0,
+        commentsAllowed: true,
         content: "",
         creationDate: "",
+        publicationDate: "",
         edited: false,
         id: null,
-        likes: null,
+        likes: 0,
         title: "",
         userId: null,
-        userName: ""
+        userName: "",
+        state: {
+          published: true,
+          drafted: false,
+          deleted: false
+        }
       },
       originalPost: {
         comments: null,
@@ -194,7 +202,7 @@ export default {
         userId: this.user.id,
         userName: this.user.name,
         userAvatar: this.user.avatar,
-        date: date.substr(8, 13)
+        date: date.substr(8, 16)
       })
       .then(res => {
         this.post.comments++;
@@ -211,7 +219,6 @@ export default {
       this.originalPost = {
         commentsAllowed: this.post.commentsAllowed,
         content: this.post.content.slice(),
-        creationDate: this.post.creationDate.slice(),
         edited: this.post.edited,
         title: this.post.title.slice(),
       }
@@ -229,37 +236,94 @@ export default {
       .catch(err => toastr.error(err))
     },
 
+    createPost(postData) {
+      if(confirm('Are you sure about this?')) {
+        let date = new Date().toString();
+        postData.publicationDate = date.substr(8,16);
+        postData.userName = this.user.name + ' ' + this.user.lastname;
+        postData.state.deleted = false;
+        postData.state.drafted = false;
+        postData.state.published = true;
+
+        axios.put(`posts/${postData.id}`, postData)
+        .then(res => {
+          toastr.success('Sucessfully posted');
+          this.$router.replace('/');
+        })
+        .catch(err => toastr.error(err));
+      }
+   },
+
     editPost(postData) {
-      axios.put(`posts/${postData.id}`, this.post)
-      .then(res => toastr.success('Post updated'))
-      .catch(err => toastr.error(err));
+      if(confirm('Are you sure you want to apply these changes?') == true) {
+
+        axios.put(`posts/${postData.id}`, this.post)
+        .then(res => {
+          toastr.success('Post updated');
+          this.isPostContentEditable = !this.isPostContentEditable;
+          this.$router.replace('/');
+        })
+        .catch(err => toastr.error(err));
+      } else {
+        this.cancelPostEdition();
+      }
+    },
+
+    cancelPostEdition() {
+        this.post.commentsAllowed = this.originalPost.commentsAllowed,
+        this.post.title = this.originalPost.title;
+        this.post.content = this.originalPost.content;
+        this.post.edited = this.post.edited;
+        this.isPostContentEditable = !this.isPostContentEditable;
+        this.$router.replace('/');
     },
 
     editPostComments(index) {
       let currentComment = this.comments[index];
 
-      axios.put(`comments/${currentComment.id}`, currentComment)
-      .then(res => {
-        toastr.success('Comment edited');
-        this.isCommentEditable = !this.isCommentEditable;
-      })
-      .catch(err => toastr.error(err))
+      if(confirm('Are you sure about editing this comment?') == true) {
+        axios.put(`comments/${currentComment.id}`, currentComment)
+        .then(res => {
+          toastr.success('Comment edited');
+          this.isCommentEditable = !this.isCommentEditable;
+        })
+        .catch(err => toastr.error(err));
+      }
+    },
+
+    deletePost(postData) {
+      if(confirm('Are you sure about deleting this post?') == true) {
+
+          postData.state.drafted = false;
+          postData.state.deleted = true;
+          postData.state.published = false;
+
+          axios.put(`posts/${postData.id}`, postData)
+            .then(res => {
+                toastr.success('Post deleted');
+                this.$router.replace('/');
+            }).catch(err => toastr.error(err));
+        }
     },
 
     deleteComment(index){
       let currentComment = this.comments[index];
-      this.comments.splice(currentComment.id, 1);
 
-      axios.delete(`comments/${currentComment.id}`)
-      .then(res => {
-        this.post.comments--;
-        this.getComments();
-        axios.put(`posts/${currentComment.postId}`, this.post)
-          .then()
-          .catch(err => toastr.error(err))
-        toastr.success('Comment deleted');
-      })
-      .catch(err => toastr.error(err))
+      if(confirm('Are you sure about deleting this comment?') == true) {
+
+        this.comments.splice(currentComment.id, 1);
+
+        axios.delete(`comments/${currentComment.id}`)
+        .then(res => {
+          this.post.comments--;
+          this.getComments();
+          axios.put(`posts/${currentComment.postId}`, this.post)
+            .then()
+            .catch(err => toastr.error(err))
+          toastr.success('Comment deleted');
+        })
+        .catch(err => toastr.error(err))
+      }
     },
 
     goToLogin() {

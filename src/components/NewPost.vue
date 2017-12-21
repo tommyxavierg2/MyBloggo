@@ -10,6 +10,20 @@
 
     <h1>Create Post</h1>
 
+    <div v-if="newPost.title || newPost.content" class="post-view">
+      <h3>Preview</h3>
+      <span>
+        <img class="user-avatar" :src="user.avatar"></span> <br>
+        <span class="titles">{{user.name}} {{user.lastname}}</span>
+        <span class="titles"></span>
+        <h4 class="titles">{{newPost.title}}</h4>
+        <span class="inline-display">Created at: {{newPost.creationDate}}</span>
+        <span class="inline-display">Published on: {{newPost.publicationDate}}</span>
+        <div class="post-view-content">
+          <span readonly>{{newPost.content}}</span>
+        </div>
+    </div>
+
     <form @submit.prevent="createPost">
 
       <div class="input-group">
@@ -18,7 +32,7 @@
       </div>
       <div class="input-group">
         <span class="input-group-addon">Content:</span>
-        <textarea v-model.trim="newPost.content" rows="4" cols="40" class="form-control" required></textarea>
+        <textarea v-model.trim="newPost.content" rows="4" cols="40" class="form-control" required placeholder="Here enter the post content"></textarea>
       </div>
       <div class="input-group">
         <span class="input-group-addon">
@@ -45,16 +59,22 @@ export default {
     return {
       newPost: {
         avatar: "",
-        comments: null,
+        comments: 0,
         commentsAllowed: true,
         content: "",
         creationDate: "",
+        publicationDate: "",
         edited: false,
         id: null,
-        likes: null,
+        likes: 0,
         title: "",
         userId: null,
-        userName: ""
+        userName: "",
+        state: {
+          published: false,
+          drafted: false,
+          deleted: false
+        }
       },
       user: {
         name: "",
@@ -79,18 +99,14 @@ export default {
   methods: {
     createPost() {
      let date = new Date().toString();
-     axios.post('posts', {
-       title: this.newPost.title,
-       content: this.newPost.content,
-       commentsAllowed: this.newPost.commentsAllowed,
-       likes: this.newPost.likes,
-       comments: this.newPost.comments,
-       creationDate: date.substr(8, 16),
-       userName: this.user.name + ' ' + this.user.lastname,
-       userId: this.user.id,
-       avatar: this.user.avatar,
-       edited: false
-     })
+     this.newPost.state.published = true;
+     this.newPost.creationDate = date.substr(8,16);
+     this.newPost.publicationDate = date.substr(8,16);
+     this.newPost.userName = this.user.name + ' ' + this.user.lastname;
+     this.newPost.userId = this.user.id;
+     this.newPost.avatar = this.user.avatar;
+
+     axios.post('posts', this.newPost)
      .then(res => {
        this.clearData(this.newPost);
        toastr.success('Sucessfully posted');
@@ -112,7 +128,14 @@ export default {
    },
 
    savePostDraft(postData) {
-     axios.post('drafted_posts', postData)
+     let date = new Date().toString();
+     postData.state.drafted = true;
+     this.newPost.creationDate = date.substr(8,16);
+     postData.userName = this.user.name + ' ' + this.user.lastname;
+     postData.userId = this.user.id;
+     postData.avatar = this.user.avatar;
+
+     axios.post('posts', postData)
      .then(res => {
        toastr.success('Post saved as draft');
        this.$router.replace('/');

@@ -20,7 +20,7 @@
 
       <h2 class="titles">Posts</h2>
 
-      <div v-for="(post, index) in posts" class="post-list">
+      <div v-for="(post, index) in published_posts" class="post-list">
 
           <span class="icons-left-float">{{index+1}}</span>
 
@@ -74,19 +74,30 @@ export default {
   },
 
   created() {
-    this.getPosts();
     this.getUserData();
+  },
+
+  mounted() {
+    this.getPosts();
+  },
+
+  computed: {
+    published_posts() {
+      return this.posts.filter(post => post.state.published == true);
+    }
+
   },
 
   methods: {
     addLike(index, post, userLikedPosts) {
 
       this.postValidation = userLikedPosts.some(userPost => post.id == userPost);
+      let currentPost = this.published_posts[index];
 
       if(!this.postValidation) {
-          this.posts[index].likes++;
+          this.published_posts[index].likes++;
 
-          axios.put(`posts/${post.id}`, this.posts[index])
+          axios.put(`posts/${post.id}`, currentPost)
           .then(res => {
               this.user.likedPostId.push(post.id);
               toastr.success('You liked the post');
@@ -97,9 +108,9 @@ export default {
           .catch(err => toastr.error(err));
       }
       else {
-        this.posts[index].likes--;
+        this.published_posts[index].likes--;
 
-        axios.put(`posts/${post.id}`, this.posts[index])
+        axios.put(`posts/${post.id}`, currentPost)
           .then(res => {
               let likedPostIndex = this.user.likedPostId.indexOf(post.id);
               this.user.likedPostId.splice(likedPostIndex, 1);
@@ -114,27 +125,24 @@ export default {
 
     getPosts() {
       axios.get('posts?_limit=25')
-        .then(res => this.posts = res.data.reverse())
+        .then(res => {
+          this.posts = res.data.reverse();
+        })
         .catch(err => toastr.error(err));
     },
 
     deletePost(index){
       if(confirm('Are you sure about deleting this post?') == true) {
 
-          let currentPost = this.posts[index];
+          let currentPost = this.published_posts[index];
+          currentPost.state.published = false;
+          currentPost.state.deleted = true;
 
-          axios.post('deleted_posts', currentPost)
+          axios.put(`posts/${currentPost.id}`, currentPost)
             .then(res => {
-                this.posts.splice(currentPost.id, 1);
-
-                axios.delete(`posts/${currentPost.id}`)
-                 .then(res => {
-                    this.getPosts();
-                    toastr.success('Post deleted');
-                 })
-                .catch(err => toastr.error(err))
-
-            }).catch(err => toastr.error(err))
+                this.published_posts.splice(currentPost.id, 1);
+                toastr.success('Post deleted');
+            }).catch(err => toastr.error(err));
         }
     },
 
