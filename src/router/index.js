@@ -25,7 +25,8 @@ export default new Router({
     {
       path: '/profile',
       name: 'profile',
-      component: Profile
+      component: Profile,
+      meta: { requiresAuth: true},
     },
     {
       path: '/',
@@ -35,7 +36,8 @@ export default new Router({
     {
       path: '/newpost',
       name: 'newpost',
-      component: NewPost
+      component: NewPost,
+      meta: { requiresAuth: true}
     },
     {
       path: '/postview',
@@ -43,4 +45,17 @@ export default new Router({
       component: PostView
     }
   ]
+
 })
+
+this.$router.beforeEach(to, from, next) => {
+  if(to.meta.requiresAuth) {
+    const authUser = JSON.parse(localStorage.getItem('userData'));
+    if(authUser && authUser.access_token) {
+      next()
+    }
+    else {
+      next({name: '/'})
+    }
+  }
+}

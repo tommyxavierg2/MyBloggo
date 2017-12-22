@@ -1,13 +1,6 @@
 <template>
   <div>
 
-    <ul id="navBar" class="list-inline align-left">
-      <li><router-link class="navBarItems" to="/">Bloggo</router-link></li>
-      <li><router-link v-if="user" class="navBarItems" :to="{name: 'newpost', params: {user: user}}">| New Post |</router-link></li>
-      <li><router-link v-if="user" class="navBarItems" :to="{name: 'profile', params: {user: user}}">Profile</router-link></li>
-     <li><button v-if="user" type="button" class="btn btn-primary icons-right-float" @click="logout">Logout</button></li>
-    </ul>
-
     <h1>Create Post</h1>
 
     <div v-if="newPost.title || newPost.content" class="post-view">
@@ -52,7 +45,6 @@
 </template>
 
 <script>
-
 export default {
   name: 'newPostsView',
   data() {
@@ -89,7 +81,7 @@ export default {
   },
 
   created() {
-    this.user = this.$route.params.user;
+    this.user = JSON.parse(localStorage.getItem('userData'));
     if(!this.user) {
       toastr.warning('In order to perform any action you first need to log In');
       this.$router.replace('login');
@@ -157,7 +149,7 @@ export default {
        postData[key] = '';
      }
    }
-  }
+ }
 }
 </script>
 

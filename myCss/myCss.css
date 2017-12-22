@@ -7,11 +7,18 @@
   font-weight: bold;
 }
 
+.navBar {
+  background-color: #D0D3D4;
+  height: 50px;
+  padding: 5px;
+  margin: 5px;
+}
+
 .navBarItems {
   font-size: x-large;
   font-weight: bold;
   color: #138D75;
-  float: left;
+  padding-right: 10px;
 }
 
 .user-avatar {
@@ -128,12 +135,7 @@
   display: block;
 }
 
-#navBar {
-  background-color: #D0D3D4;
-  height: 50px;
-  padding: 5px;
-  margin: 5px;
-}
+
 
 #searchBox {
   width: 400px;

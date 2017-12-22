@@ -1,21 +1,6 @@
 <template>
   <div id="profileView">
 
-    <ul id="navBar" class="list-inline align-left">
-      <li><router-link class="navBarItems" to="/">Bloggo</router-link></li>
-      <li><router-link v-if="user" class="navBarItems" :to="{name: 'newpost', params: {user: user}}">| New Post |</router-link></li>
-      <li><router-link v-if="user" class="navBarItems" :to="{name: 'profile', params: {user: user}}">Profile</router-link></li>
-      <li>
-        <div class="input-group icons-right-float" id="searchBox">
-            <input type="text" class="form-control" placeholder="Search">
-            <span class="input-group-addon">
-              <i class="fa fa-search"></i>
-            </span>
-        </div>
-      </li>
-      <li><button v-if="user" type="button" class="btn btn-primary icons-right-float" @click="logout">Logout</button></li>
-    </ul>
-
     <h1>Profile</h1>
 
     <button v-if="!viewer" type="button" class="icons-right-float" @click="isProfileEditable = !isProfileEditable">
@@ -169,7 +154,7 @@
 
     methods: {
       init(){
-        if(this.user) {
+        if(this.user && !this.viewer) {
           this.getUserProfile(this.user.id);
           this.getPosts(this.user.id);
           this.copyData(this.user, this.originalUserData)
@@ -257,7 +242,7 @@
             this.user = 0;
             toastr.success(`You've been logged out`);
             this.$router.replace('/');
-            
+
         }
       },
 

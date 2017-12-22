@@ -1,14 +1,14 @@
 <template>
   <div id="loginView">
 
-    <ul id="navBar" class="list-inline align-left">
-      <li><router-link class="navBarItems" to="/">Bloggo</router-link></li>
-      <li><button v-if="!user" type="button" class="btn btn-primary icons-right-float" @click="goToRegister">Register</button></li>
-    </ul>
-
-    <h1 class="titles">Welcome to bloggo</h1>
+    <!-- <app-nav-bar class="list-inline ">
+       <app-nav-bar-item url='/' name='Bloggo'></app-nav-bar-item>
+       <app-nav-bar-item url='register' name='Register'></app-nav-bar-item>
+    </app-nav-bar> -->
 
     <form @submit.prevent="login()">
+
+         <h1 class="titles">Login</h1>
 
         <div class="input-group">
           <span class="input-group-addon">Email:</span>
@@ -32,7 +32,6 @@
     </form>
 
   </div>
-
 </template>
 
 <script>
@@ -54,7 +53,7 @@
         }
       }
     },
-
+    
     created() {
       this.loggedUser = JSON.parse(localStorage.getItem('userData'));
       if(this.loggedUser) {

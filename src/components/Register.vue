@@ -1,10 +1,6 @@
 <template>
   <div id="registerView">
 
-    <ul id="navBar" class="list-inline align-left">
-      <li><router-link class="navBarItems" to="/">Bloggo</router-link></li>
-    </ul>
-
     <h1 class="titles">Register</h1>
 
     <form @submit.prevent="registerNewUser">
