@@ -1,13 +1,15 @@
 {
   "users": [
     {
-      "name": "Test",
+      "name": "Test 0",
       "lastname": "Testing",
       "email": "test@test.com",
       "password": "qweasd",
       "id": 1,
       "fullName": "Test Testing",
-      "likedPostId": []
+      "likedPostId": [],
+      "remembered": true,
+      "confirmPassword": "qweasd"
     },
     {
       "name": "Test 1",
@@ -18,7 +20,8 @@
       "fullName": "Test 1 Testing",
       "likedPostId": [],
       "isUserLogged": false,
-      "confirmPassword": "qweasd"
+      "confirmPassword": "qweasd",
+      "remembered": false
     }
   ],
   "posts": [
@@ -57,6 +60,42 @@
         "published": false,
         "drafted": true,
         "deleted": false
+      }
+    },
+    {
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "Testing drafted posts",
+      "creationDate": "26 2017 09:08:42",
+      "publicationDate": "",
+      "edited": false,
+      "id": 3,
+      "likes": 0,
+      "title": "Testing drafted posts",
+      "userId": 1,
+      "userName": "Test Testing",
+      "state": {
+        "published": false,
+        "drafted": true,
+        "deleted": false
+      }
+    },
+    {
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "Testing an oficial deleted post",
+      "creationDate": "26 2017 09:09:19",
+      "publicationDate": "26 2017 09:09:19",
+      "edited": false,
+      "id": 4,
+      "likes": 0,
+      "title": "Testing oficial deleted post",
+      "userId": 1,
+      "userName": "Test Testing",
+      "state": {
+        "published": false,
+        "drafted": false,
+        "deleted": true
       }
     }
   ],

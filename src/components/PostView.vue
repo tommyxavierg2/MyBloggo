@@ -116,10 +116,12 @@ export default {
         lastname: "",
         email: "",
         password: "",
-        id: 0,
-        avatar: "",
+        id: null,
+        fullName: '',
         likedPostId: [],
-        isUserLogged: false
+        isUserLogged: false,
+        remembered: false,
+        profileState: false
       },
       post: {
         avatar: "",
@@ -169,20 +171,11 @@ export default {
   },
 
   created() {
-    this.user = JSON.parse(localStorage.getItem('userData'));
-    if(this.user) {
-      this.user.isUserLogged = true;
-      this.isUserLogged = this.user.isUserLogged;
-    }
-    else {
-      this.isUserLogged = false;
-      this.user = 0;
-    }
-
+    this.getPost();
   },
 
   mounted() {
-    this.getPost();
+    this.getUser();
   },
 
   methods: {
@@ -211,9 +204,24 @@ export default {
       .catch(err => toastr.error(err));
     },
 
+    getUser() {
+      this.user = JSON.parse(localStorage.getItem('userData'));
+      if(this.user) {
+        this.user.isUserLogged = true;
+        this.isUserLogged = this.user.isUserLogged;
+      }
+      else {
+        this.isUserLogged = false;
+        this.user = 0;
+      }
+    },
+
     getPost() {
       this.post = this.$route.params.post;
+
       if(this.post) {
+         // let requiresPost = this.$route.params.post;
+         // window.location = window.location + '/' + requiresPost.id;
          this.getComments();
       }
       else {

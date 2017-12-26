@@ -62,11 +62,13 @@ export default {
     },
 
     getUserData() {
-      this.user = JSON.parse(localStorage.getItem('userData'));
-      if(!this.user) {
-        this.user = 0;
+      let temporaryUserData = JSON.parse(localStorage.getItem('userData'));
+
+      if(!temporaryUserData) {
+          this.user = 0;
       } else {
-        this.user.isUserLogged = true;
+         temporaryUserData.isUserLogged = true;
+         this.user = temporaryUserData;
       }
     }
   }

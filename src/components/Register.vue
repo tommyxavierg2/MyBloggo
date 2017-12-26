@@ -64,7 +64,9 @@
           id: null,
           fullName: '',
           likedPostId: [],
-          isUserLogged: false
+          isUserLogged: false,
+          remembered: false,
+          profileState: false
         },
         captchaInfo: {
           captchaKey: "6LfkxDwUAAAAAEPuCXV8_WI_5fLy48GiGToegZcC",

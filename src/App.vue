@@ -1,9 +1,11 @@
 <template>
-  <div id="app">
+  <div class="html">
     <ul class="navbar list-inline">
          <li><router-link class="navBarItems" to="/">Bloggo</router-link></li>
-         <li><router-link  v-if="user"class="navBarItems" to="newpost">New Post</router-link></li>
-         <li><router-link v-if="user" class="navBarItems" to="profile">Profile</router-link></li>
+         <li><router-link  v-if="loggedUser"class="navBarItems" to="newpost">New Post</router-link></li>
+         <li><router-link v-if="loggedUser" class="navBarItems" to="profile">Profile</router-link></li>
+         <li><router-link v-if="loggedUser" class="navBarItems" to="settings">Settings
+           <i class="fa fa-cog"></i></router-link></li>
          <li>
            <div class="input-group" id="searchBox">
                <input type="text" class="form-control" placeholder="Search">
@@ -12,11 +14,14 @@
                </span>
            </div>
         </li>
-        <li><button v-if="!user" type="button" class="btn btn-primary icons-right-float" @click="goToLogin">Login</button></li>
-        <li><button v-if="!user" type="button" class="btn btn-primary icons-right-float" @click="goToRegister">Register</button></li>
-        <li><button v-if="user" type="button" class="btn btn-primary icons-right-float" @click="logout">Logout</button></li>
-       </ul>
-    <router-view/>
+        <li><button v-if="!loggedUser" type="button" class="btn btn-primary icons-right-float" @click="goToLogin">Login</button></li>
+        <li><button v-if="!loggedUser" type="button" class="btn btn-primary icons-right-float" @click="goToRegister">Register</button></li>
+        <li><button v-if="loggedUser" type="button" class="btn btn-primary icons-right-float" @click="logout">Logout</button></li>
+    </ul>
+   <div id="app">
+
+     <router-view/>
+   </div>
   </div>
 </template>
 
@@ -25,7 +30,13 @@
   export default {
     name: 'app',
     data() {
-      return {}
+      return {
+        loggedUser: {}
+      }
+    },
+
+    created() {
+      this.loggedUser = this.user;
     },
 
     computed: {
@@ -62,6 +73,7 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   background-color: #5D6D7E;
-  padding: 10px;
+  padding: 15px;
+  width: 100%;
 }
 </style>

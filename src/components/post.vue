@@ -13,7 +13,7 @@
           </router-link>
         </div>
         <div>
-          <router-link class="user-name-router" :to="{name: 'postview', params: {post: post, viewer: user}}">Posted on: {{post.creationDate}}</router-link>
+          <router-link class="user-name-router" :to="{path: `/postview/${post.id}`}">Posted on: {{post.creationDate}}</router-link>
           <i v-if="user.id == post.userId" class="fa fa-times icons-right-float" @click="deletePost(post, index)"></i>
         </div>
         <div>

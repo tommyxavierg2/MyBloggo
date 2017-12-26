@@ -18,6 +18,12 @@
         </div>
 
         <div class="input-group">
+          <span class="input-group-addon">
+            <input type="radio" @click="loginUser.remembered = !loginUser.remembered" :checked="loginUser.remembered"> Remember me
+        </span>
+        </div>
+
+        <div class="input-group">
           <span class="input-group-btn">
             <button id="loginButton" type="submit" :disabled="!loginUser.password || !loginUser.email"
                     class="btn btn-primary btn-block">Enter</button>
@@ -35,7 +41,8 @@
       return {
         loginUser: {
           password: "",
-          email: ""
+          email: "",
+          remembered: false
         },
         loggedUser: {
           avatar: "",
@@ -44,16 +51,20 @@
           lastname: "",
           likedPostId: [],
           name: "",
-          password: ""
+          password: "",
+          isUserLogged: false,
+          remembered: false
         }
       }
     },
 
     created() {
       this.loggedUser = JSON.parse(localStorage.getItem('userData'));
+    },
+
+    mounted() {
       if(this.loggedUser) {
-        this.$router.push('/');
-        location.reload();
+          this.$router.push('/');
       }
     },
 
@@ -82,7 +93,9 @@
 
               if(post){
                 this.goToPostView(res.data[0], post);
-              } else {
+              }
+              else {
+                res.data[0].remembered = this.loginUser.remembered;
                 this.goToPosts(res.data[0]);
               }
           }
@@ -99,10 +112,6 @@
       goToPostView(data, post){
         localStorage.setItem('userData', JSON.stringify(data));
         this.$router.push({name: 'postview', params: {post: post}});
-      },
-
-      searchPost(data) {
-
       }
     }
  }
