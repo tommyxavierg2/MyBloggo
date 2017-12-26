@@ -1,11 +1,6 @@
 <template>
   <div id="loginView">
 
-    <!-- <app-nav-bar class="list-inline ">
-       <app-nav-bar-item url='/' name='Bloggo'></app-nav-bar-item>
-       <app-nav-bar-item url='register' name='Register'></app-nav-bar-item>
-    </app-nav-bar> -->
-
     <form @submit.prevent="login()">
 
          <h1 class="titles">Login</h1>
@@ -53,11 +48,12 @@
         }
       }
     },
-    
+
     created() {
       this.loggedUser = JSON.parse(localStorage.getItem('userData'));
       if(this.loggedUser) {
         this.$router.push('/');
+        location.reload();
       }
     },
 
@@ -94,14 +90,10 @@
         .catch(err => toastr.warning(err));
       },
 
-      goToRegister() {
-        this.$router.replace('register');
-      },
-
       goToPosts(data) {
         this.loginUser = data;
         localStorage.setItem('userData', JSON.stringify(data));
-        this.$router.push('/');
+        location.reload();
       },
 
       goToPostView(data, post){

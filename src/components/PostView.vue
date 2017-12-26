@@ -4,23 +4,24 @@
     <div class="post-view">
       <router-link class="user-name-router icons-left-float" :to="{path: '/', params: {post: user}}">
         <i class="fa fa-arrow-circle-o-left">Return</i></router-link>
-      <router-link class="user-name-router" :to="{name: 'profile', params: {postUserId: post.userId, viewer: user}}">
-        <img class="user-avatar" :src="post.avatar"></router-link> <br>
+        <router-link class="user-name-router" :to="{name: 'profile', params: {postUserId: post.userId, viewer: user}}">
+          <avatar :username="post.userName" class="gravatar" :size="100"></avatar>
+        </router-link> <br>
         <router-link class="user-name-router titles" :to="{name: 'profile', params: {postUserId: post.userId, viewer: user}}">{{post.userName}}</router-link>
         <span class="titles"></span>
-      <button v-if="user" type="button" class="icons-right-float" @click="isPostContentEditable = !isPostContentEditable">
+        <button v-if="isUserLogged && post.userId == user.id" type="button" class="icons-right-float" @click="isPostContentEditable = !isPostContentEditable">
         Edit <i class="fa fa-pencil"></i></button>
       <h4 class="titles">{{post.title}}</h4>
       <span>Created at: {{post.creationDate}}</span>
       <div class="post-view-content">
-        <span readonly="isUserLogged">{{post.content}}</span>
+        <span :readonly="isUserLogged">{{post.content}}</span>
       </div>
         <button type="button" @click="addLike()" :disabled="!isUserLogged" class="transparent-button">Likes {{post.likes}}</button>
         <span>Comments {{post.comments}} </span>
         <span v-if="post.edited">(Edited)</span>
     </div>
 
-    <form v-if="isPostContentEditable" @submit.prevent="editPost(post)">
+    <form v-if="user && isPostContentEditable" @submit.prevent="editPost(post)">
       <h4>Post edition</h4>
 
       <div class="input-group">
@@ -39,7 +40,7 @@
       </div>
       <div class="input-group">
         <span class="input-group-btn">
-          <button type="button" class="btn btn-warning" @click="deletePost(post)">Delete</button>
+          <button v-if="isUserLogged && post.userId == user.id" type="button" class="btn btn-warning" @click="deletePost(post)">Delete</button>
           <button type="button" class="btn btn-danger" @click="cancelPostEdition">Cancel</button>
           <button v-if="post.state.published" type="submit" class="btn btn-primary">Update</button>
           <button v-if="post.state.drafted || post.state.deleted" type="button" class="btn btn-success" @click="createPost(post)">Post</button>
@@ -52,7 +53,7 @@
       <h4>New Comment</h4>
       <div class="input-group">
         <span class="input-group-addon">Content</span>
-        <textarea class="form-control" v-model="newComment.comment"  @keyup.enter="addComment" v-bind:readonly="!isUserLogged"></textarea>
+        <textarea class="form-control" v-model="newComment.comment"  @keyup.enter="addComment" :readonly="!isUserLogged"></textarea>
       </div>
       <div v-if="newComment.comment">
         <button type="button" class="btn btn-danger" @click="newComment.comment = ''">Cancel</button>
@@ -67,7 +68,7 @@
       <div class="row post-list">
         <div class="col-xs-4">
           <span class="icons-left-float">{{index+1}}</span>
-          <img :src="comment.userAvatar" class="comment-avatar-img">
+          <avatar :username="comment.userName" class="gravatar" :size="100"></avatar>
           <span>{{comment.userName}}</span>
         </div>
         <div class="col-xs-8">
@@ -105,6 +106,8 @@
 </template>
 
 <script>
+import form from './form.vue';
+
 export default {
   data() {
     return {
@@ -113,9 +116,10 @@ export default {
         lastname: "",
         email: "",
         password: "",
-        id: null,
+        id: 0,
         avatar: "",
-        likedPostId: []
+        likedPostId: [],
+        isUserLogged: false
       },
       post: {
         avatar: "",
@@ -148,34 +152,37 @@ export default {
         postId: null,
         userId: null,
         userName: "",
-        userAvatar: "",
         date: "",
         id: null
       },
       comments: [],
-      isUserLogged: false,
       optionsButtonsActive: false,
+      isUserLogged: false,
       isCommentEditable: true,
       isPostEditable: false,
       isPostContentEditable: false
     }
   },
 
+  components: {
+    'app-form': form
+  },
+
   created() {
     this.user = JSON.parse(localStorage.getItem('userData'));
-    this.getPost()
-
-    if(this.post && this.user) {
-        this.isUserLogged = true;
-        this.getComments();
-    }
-    else if(this.post) {
-      this.getComments();
+    if(this.user) {
+      this.user.isUserLogged = true;
+      this.isUserLogged = this.user.isUserLogged;
     }
     else {
-      toastr.warning(`There's no post to show, please make sure to select a post first`);
-      this.$router.replace('/');
+      this.isUserLogged = false;
+      this.user = 0;
     }
+
+  },
+
+  mounted() {
+    this.getPost();
   },
 
   methods: {
@@ -191,8 +198,7 @@ export default {
         comment: this.newComment.comment,
         postId: this.post.id,
         userId: this.user.id,
-        userName: this.user.name,
-        userAvatar: this.user.avatar,
+        userName: `${this.user.name} ${this.user.lastname}`,
         date: date.substr(8, 16)
       })
       .then(res => {
@@ -207,6 +213,14 @@ export default {
 
     getPost() {
       this.post = this.$route.params.post;
+      if(this.post) {
+         this.getComments();
+      }
+      else {
+          toastr.warning(`Post not found`);
+          this.$router.replace('/');
+      }
+
       this.originalPost = {
         commentsAllowed: this.post.commentsAllowed,
         content: this.post.content.slice(),
@@ -318,20 +332,7 @@ export default {
     },
 
     goToLogin() {
-      this.$router.push({name: 'login', params: {post: this.post} });
-    },
-
-    goToRegister() {
-      this.$router.replace('register');
-    },
-
-    logout() {
-      if(confirm('Are you sure about logging out?') == true) {
-          localStorage.removeItem('userData');
-          this.user = 0;
-          toastr.success(`You've been logged out`);
-          this.$router.replace('/');
-      }
+      this.$router.push({name: 'login', params: {post: this.post}});
     }
   }
 }

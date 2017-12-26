@@ -5,16 +5,15 @@
 
     <div v-if="newPost.title || newPost.content" class="post-view">
       <h3>Preview</h3>
-      <span>
-        <img class="user-avatar" :src="user.avatar"></span> <br>
-        <span class="titles">{{user.name}} {{user.lastname}}</span>
-        <span class="titles"></span>
-        <h4 class="titles">{{newPost.title}}</h4>
-        <span class="inline-display">Created at: {{newPost.creationDate}}</span>
-        <span class="inline-display">Published on: {{newPost.publicationDate}}</span>
-        <div class="post-view-content">
-          <span readonly>{{newPost.content}}</span>
-        </div>
+      <avatar :username="user.fullName" class="gravatar" :size="100"></avatar> <br>
+      <span class="titles">{{user.name}} {{user.lastname}}</span>
+      <span class="titles"></span>
+      <h4 class="titles">{{newPost.title}}</h4>
+      <span class="inline-display">Created at: {{newPost.creationDate}}</span>
+      <span class="inline-display">Published on: {{newPost.publicationDate}}</span>
+      <div class="post-view-content">
+        <span readonly>{{newPost.content}}</span>
+      </div>
     </div>
 
     <form @submit.prevent="createPost">

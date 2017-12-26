@@ -25,83 +25,22 @@
   export default {
     name: 'app',
     data() {
-      return {
-        user: {
-          name: "",
-          lastname: "",
-          email: "",
-          password: "",
-          id: null,
-          avatar: "",
-          likedPostId: []
-        },
+      return {}
+    },
+
+    computed: {
+      user() {
+        return JSON.parse(localStorage.getItem('userData'));
       }
     },
 
-    created() {
-      this.getUser();
-    },
-
     methods: {
-      getUser() {
-        this.user = JSON.parse(localStorage.getItem('userData'));
-      },
-
-      addLike(index, post, userLikedPosts) {
-
-        this.postValidation = userLikedPosts.some(userPost => post.id == userPost);
-        let currentPost = this.published_posts[index];
-
-        if(!this.postValidation) {
-            this.published_posts[index].likes++;
-
-            axios.put(`posts/${post.id}`, currentPost)
-            .then(res => {
-                this.user.likedPostId.push(post.id);
-                toastr.success('You liked the post');
-
-                axios.put(`users/${this.user.id}`, this.user)
-                  .then().catch(err => toastr.error(err));
-            })
-            .catch(err => toastr.error(err));
-        }
-        else {
-          this.published_posts[index].likes--;
-
-          axios.put(`posts/${post.id}`, currentPost)
-            .then(res => {
-                let likedPostIndex = this.user.likedPostId.indexOf(post.id);
-                this.user.likedPostId.splice(likedPostIndex, 1);
-
-                axios.put(`users/${this.user.id}`, this.user)
-                  .then(res => toastr.success('Post disliked'))
-                  .catch(err => toastr.error(err));
-            })
-            .catch(err => toastr.error(err));
-       }
-      },
-
-      deletePost(index){
-        if(confirm('Are you sure about deleting this post?') == true) {
-
-            let currentPost = this.published_posts[index];
-            currentPost.state.published = false;
-            currentPost.state.deleted = true;
-
-            axios.put(`posts/${currentPost.id}`, currentPost)
-              .then(res => {
-                  this.published_posts.splice(currentPost.id, 1);
-                  toastr.success('Post deleted');
-              }).catch(err => toastr.error(err));
-          }
-      },
-
       logout() {
         if(confirm('Are you sure about logging out?') == true) {
             localStorage.removeItem('userData');
-            this.user = 0;
             toastr.success(`You've been logged out`);
             this.$router.replace('/');
+            location.reload();
         }
       },
 

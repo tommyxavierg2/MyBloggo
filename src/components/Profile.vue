@@ -10,7 +10,7 @@
       <h3>User information</h3>
 
         <div class="post-view">
-          <img :src="user.avatar" class="user-profile"> <br>
+          <avatar :username="fullName" class="gravatar" :size="100"></avatar><br>
           <label>Name:</label>
           <span>{{user.name}} {{user.lastname}}</span> <br>
           <label>Email:</label>
@@ -39,62 +39,21 @@
     </div>
 
       <h3>Posts</h3>
-      <ul class="nav nav-tabs nav-justified">
-         <li><a class="tabs" data-toggle="tab" href="#published">Published</a></li>
-         <li><a class="tabs" data-toggle="tab" href="#drafts">Drafts</a></li>
-         <li><a class="tabs" data-toggle="tab" href="#deleted">Deleted</a></li>
-      </ul>
 
-      <div class="tab-content">
-
-        <div id="published" class="tab-pane fade">
-          <div v-for="(post, index) in published_posts" class="post-list">
-            <i v-if="user.id == post.userId" class="fa fa-times icons-right-float" @click="deletePost(post, index)"></i>
-            <span class="icons-left-float">{{index+1}}</span>
-            <router-link class="user-name-router inline-display titles" :to="{name: 'postview', params: {post: post}}">{{post.title}}</router-link>
-            <router-link class="user-name-router inline-display" :to="{name: 'postview', params: {post: post}}">Created on: {{post.creationDate}}</router-link>
-            <router-link class="user-name-router inline-display" :to="{name: 'postview', params: {post: post}}">Published on: {{post.publicationDate}}</router-link>
-            <span>{{post.content}}</span> <br>
-            <button type="button" disabled>{{post.likes}} Likes</button>
-            <button type="button" disabled>{{post.comments}} Comments</button>
-            <span v-if="post.edited">(Edited)</span>
-          </div>
-        </div>
-
-        <div id="drafts" class="tab-pane fade">
-          <div v-for="(post, index) in drafted_posts" class="drafted_posts-list">
-            <i v-if="user.id == post.userId" class="fa fa-times icons-right-float" @click="deletePost(post, index)"></i>
-            <h3 v-if="!drafted_posts">No post has been drafted yet</h3>
-            <span class="icons-left-float">{{index+1}}</span>
-            <router-link class="drafted-router inline-display titles" :to="{name: 'postview', params: {post: post}}">{{post.title}}</router-link>
-            <router-link class="drafted-router inline-display" :to="{name: 'postview', params: {post: post}}">Created on: {{post.creationDate}}</router-link>
-            <router-link class="drafted-router inline-display" :to="{name: 'postview', params: {post: post}}">Published on: {{post.publicationDate}}</router-link>
-            <span>{{post.content}}</span> <br>
-            <span v-if="post.edited">(Edited)</span>
-            <span>Likes {{post.likes}}</span>
-            <span>Comments {{post.comments}}</span>
-          </div>
-        </div>
-
-        <div id="deleted" class="tab-pane fade" >
-          <div class="deleted-posts-list" v-for="(post, index) in deleted_posts">
-            <h3 v-if="!deleted_posts">No post has been deleted yet</h3>
-            <span class="icons-left-float">{{index+1}}</span>
-            <router-link class="deleted-router inline-display titles" :to="{name: 'postview', params: {post: post}}">{{post.title}}</router-link>
-            <router-link class="deleted-router inline-display" :to="{name: 'postview', params: {post: post}}">Created on: {{post.creationDate}}</router-link>
-            <router-link class="deleted-router inline-display" :to="{name: 'postview', params: {post: post}}">Published on: {{post.publicationDate}}</router-link>
-            <span>{{post.content}}</span> <br>
-            <span v-if="post.edited">(Edited)</span>
-            <span>Likes {{post.likes}}</span>
-            <span>Comments {{post.comments}}</span>
-          </div>
-        </div>
-      </div>
+      <app-tab :tabs="tabsInfo.tabs" :tabs_content="published_posts" :user="user">
+        <app-tab-content :tabs_content="published_posts" tab_id="published" :user="user"></app-tab-content>
+        <app-tab-content :tabs_content="drafted_posts" tab_id="drafted" :user="user"></app-tab-content>
+        <app-tab-content :tabs_content="deleted_posts" tab_id="deleted" :user="user"></app-tab-content>
+      </app-tab>
 
   </div>
 </template>
 
 <script>
+  import post from './post.vue';
+  import tabs from './tabs.vue';
+  import tabs_content from './tabs_content.vue';
+
   export default {
     data(){
       return {
@@ -105,7 +64,8 @@
           password: "",
           id: null,
           avatar: "",
-          likedPostId: []
+          likedPostId: [],
+          isUserLogged: false
         },
         viewer: {
           name: "",
@@ -125,13 +85,27 @@
           likedPostId: []
         },
         posts: [],
+        tabsInfo: [],
         isProfileEditable: false,
       }
+    },
+
+    components: {
+      'app-post': post,
+      'app-tab': tabs,
+      'app-tab-content': tabs_content
     },
 
     created() {
       this.user = this.$route.params.user;
       this.viewer = this.$route.params.viewer;
+      this.tabsInfo = {
+        tabs: [
+          {name: 'Published', ref: '#published'},
+          {name: 'Drafted', ref: '#drafted' },
+          {name: 'Deleted', ref: '#deleted' }
+        ]
+      }
     },
 
     mounted() {
@@ -149,6 +123,10 @@
 
       drafted_posts() {
         return this.posts.filter(post => post.state.drafted);
+      },
+
+      fullName() {
+        return `${this.user.name} ${this.user.lastname}`;
       }
     },
 
@@ -164,15 +142,11 @@
             this.getUserProfile(this.user);
             this.getPosts(this.user);
         }
-        else if (!this.user) {
+        else {
           this.user = JSON.parse(localStorage.getItem('userData'));
           if(this.user) {
             this.getPosts(this.user.id);
             this.copyData(this.user, this.originalUserData)
-          }
-          else {
-            toastr.warning('In order to perform any action you first need to log In');
-            this.$router.replace('login');
           }
         }
       },
@@ -181,6 +155,10 @@
         axios.get(`users?id=${userId}`)
         .then(res => {
           this.user = res.data[0];
+          if(!this.viewer) {
+            this.user.fullName = this.fullName;
+            this.user.isUserLogged = true;
+          }
         })
       },
 

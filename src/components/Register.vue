@@ -1,9 +1,11 @@
 <template>
-  <div id="registerView">
+  <div id="registerView" class="align-center">
 
     <h1 class="titles">Register</h1>
 
     <form @submit.prevent="registerNewUser">
+
+      <avatar  class="gravatar coverage" v-if="newUser.lastname" :username="fullName" :size="100" :src="newUser.avatar"></avatar>
 
       <div class="input-group">
         <span class="input-group-addon">Name:</span>
@@ -45,6 +47,7 @@
 </template>
 
 <script type="text/javascript">
+
   window.captchaResponse = (response) => {
     sessionStorage.setItem('reCaptcha', response);
   };
@@ -59,8 +62,9 @@
           email: "",
           password: "",
           id: null,
-          avatar: "",
-          likedPostId: []
+          fullName: '',
+          likedPostId: [],
+          isUserLogged: false
         },
         captchaInfo: {
           captchaKey: "6LfkxDwUAAAAAEPuCXV8_WI_5fLy48GiGToegZcC",
@@ -68,6 +72,13 @@
         }
       }
    },
+
+   computed: {
+     fullName() {
+       return `${this.newUser.name} ${this.newUser.lastname}`;
+     }
+   },
+
    methods: {
      isEmailAvailable: function(newEmail) {
        axios.get(`users?email=${newEmail}`).then(res => {
@@ -82,6 +93,7 @@
 
      registerNewUser: function() {
            this.captchaInfo.isCaptchaChecked = sessionStorage.getItem('reCaptcha');
+           this.newUser.fullName = this.fullName;
 
            if (!this.captchaInfo.isCaptchaChecked) {
                 toastr.warning('First check the captcha box first.');
@@ -97,10 +109,10 @@
            } else {
              axios.post('users', this.newUser)
               .then(res => {
-                 toastr.success('Thank you for joining us and welcome to the family! Now redirecting to the home page.');
+                 toastr.success('Thank you for joining us and welcome to the family! now, ¿what do you thinkg about creating your first post?.');
                  localStorage.setItem('userData', JSON.stringify(res.data));
                  sessionStorage.removeItem('reCaptcha');
-                 this.$router.replace('/');
+                 this.$router.replace('newpost');
               })
               .catch(err => toastr.warning(err));
            }

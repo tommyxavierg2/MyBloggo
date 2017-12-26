@@ -4,7 +4,7 @@ import Router from 'vue-router'
 import Login from '@/components/Login'
 import Register from '@/components/Register'
 import Profile from '@/components/Profile'
-import Posts from '@/components/Posts'
+import PostsList from '@/components/PostsList'
 import NewPost from '@/components/NewPost'
 import PostView from '@/components/PostView'
 
@@ -27,11 +27,23 @@ export default new Router({
       name: 'profile',
       component: Profile,
       meta: { requiresAuth: true},
+      beforeEnter: (to, from, next) => {
+        if(to.meta.requiresAuth) {
+          let authUser = JSON.parse(localStorage.getItem('userData'));
+          if(authUser) {
+            next()
+          }
+          else {
+            toastr.warning('In order to perform any action you first need to log In');
+            next({name: 'login'})
+          }
+        }
+      }
     },
     {
       path: '/',
-      name: 'posts',
-      component: Posts
+      name: 'postslist',
+      component: PostsList
     },
     {
       path: '/newpost',
@@ -47,15 +59,3 @@ export default new Router({
   ]
 
 })
-
-this.$router.beforeEach(to, from, next) => {
-  if(to.meta.requiresAuth) {
-    const authUser = JSON.parse(localStorage.getItem('userData'));
-    if(authUser && authUser.access_token) {
-      next()
-    }
-    else {
-      next({name: '/'})
-    }
-  }
-}
