@@ -38,9 +38,9 @@
       "userId": 1,
       "fullName": "Test Testing",
       "state": {
-        "published": true,
+        "published": false,
         "drafted": false,
-        "deleted": false
+        "deleted": true
       }
     },
     {
@@ -84,7 +84,7 @@
       "commentsAllowed": true,
       "content": "Testing an oficial deleted post",
       "creationDate": "26 2017 09:09:19",
-      "publicationDate": "26 2017 09:09:19",
+      "publicationDate": "27 2017 17:01:54",
       "edited": false,
       "id": 4,
       "likes": 0,
@@ -92,9 +92,9 @@
       "userId": 1,
       "fullName": "Test Testing",
       "state": {
-        "published": false,
+        "published": true,
         "drafted": false,
-        "deleted": true
+        "deleted": false
       }
     },
     {
