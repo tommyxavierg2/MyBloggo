@@ -1,7 +1,7 @@
 <template>
   <div id="postsView">
 
-      <h2 class="titles">Posts</h2>
+      <h1 class="titles ">Posts</h1>
 
       <h2 v-if="!posts">There are no post to show</h2>
 

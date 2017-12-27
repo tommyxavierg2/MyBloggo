@@ -16,16 +16,6 @@ toastr.options = { timeOut: 1000, positionClass: 'toast-top-right', showMethod: 
 import "../node_modules/toastr/build/toastr.css";
 window.toastr = toastr;
 
-/*require('froala-editor/js/froala_editor.pkgd.min')
-
-// Require Froala Editor css files.
-require('froala-editor/css/froala_editor.pkgd.min.css')
-require('font-awesome/css/font-awesome.css')
-require('froala-editor/css/froala_style.min.css')*/
-
-import VueFroala from 'vue-froala-wysiwyg';
-Vue.use(VueFroala);
-
 Vue.config.productionTip = false;
 /* eslint-disable no-new */
 window.VueInstance = new Vue({

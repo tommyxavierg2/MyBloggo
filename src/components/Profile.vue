@@ -20,7 +20,7 @@
 
       <app-tab :tabs="tabsInfo.tabs" :tabs_content="published_posts" :user="user">
         <app-tab-content :tabs_content="published_posts" tab_id="published" :user="user"></app-tab-content>
-        <app-tab-content :tabs_content="drafted_posts" tab_id="drafted" :user="user"></app-tab-content>
+        <app-tab-content :tabs_content="drafted_posts" tab_id="drafted"  :user="user"></app-tab-content>
         <app-tab-content :tabs_content="deleted_posts" tab_id="deleted" :user="user"></app-tab-content>
       </app-tab>
 

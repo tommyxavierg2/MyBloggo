@@ -1,17 +1,10 @@
 .logo {
-  width: 100px;
-  height: 60px;
+  font-size: x-large;
+  font-weight: bold;
 }
 
 .titles {
   font-weight: bold;
-}
-
-.navBarItems {
-  font-size: x-large;
-  font-weight: bold;
-  color: #CEECF5;
-  float: left;
 }
 
 .user-avatar {
@@ -27,8 +20,8 @@
 }
 
 .user-avatar {
-  width: 150px;
-  height: 100px;
+  width: 750px;
+  height: 300px;
   padding: 5px;
   border: 1px solid black;
 }
@@ -46,8 +39,9 @@
 }
 
 .post-list {
-  border: 1px solid gray;
+  border: 1px solid white;
   background-color: white;
+  margin-bottom: 5px;
 }
 
 .deleted-posts-list {
@@ -63,7 +57,7 @@
 }
 
 .post-view {
-  background-color: #cee8ff;
+  background-color: white;
   border: 1px solid gray;
 }
 
@@ -119,15 +113,6 @@
   color: inherit;
 }
 
-.coverage {
-  margin: 5px;
-  padding: 5px;
-}
-
-.inline-display {
-  display: block;
-}
-
 .align-center {
   text-align:center;
 }
@@ -143,12 +128,29 @@
   height: 50px;
   padding: 5px;
   margin: 5px;
+  font-size: large;
+  font-weight: bold;
 }
 
 .html {
-  background-color: #0B3B39;
+  background-color: #5D6D7E;
+}
+
+.box {
+  border-top: 1px solid gray;
+  background-color: lightgray;
+}
+
+.box1 {
+  border-bottom: 1px solid gray;
+}
+
+#postsView {
+  margin-left: 25%;
+  text-align: center;
 }
 
 #searchBox {
   width: 400px;
+  margin-right: 5px;
 }

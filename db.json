@@ -19,7 +19,7 @@
       "id": 2,
       "fullName": "Test 1 Testing",
       "likedPostId": [],
-      "isUserLogged": false,
+      "isUserLogged": true,
       "confirmPassword": "qweasd",
       "remembered": false
     }

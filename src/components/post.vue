@@ -1,30 +1,25 @@
 <template>
-  <div class="post-list list-inline">
+  <div class="post-list">
 
       <span class="icons-left-float">{{index+1}}</span>
 
-      <div class="row post-list">
-        <div class="col-xs-6">
+        <i v-if="user.id == post.userId" class="fa fa-times icons-right-float" @click="deletePost(post, index)"></i>
+        <div class="panel-heading box1">
+          <router-link :to="{name: 'profile', params: {postUserId: post.userId, viewer: user}}">
+            <avatar :username="post.fullName" class="gravatar" :size="200"></avatar></router-link>
           <router-link class="user-name-router" :to="{name: 'profile', params: {postUserId: post.userId, viewer: user}}">
-            <avatar :username="post.fullName" class="gravatar" :size="100"></avatar>
-          </router-link> <br>
-          <router-link class="user-name-router" :to="{name: 'profile', params: {postUserId: post.userId, viewer: user}}">
-            <span class="titles">{{post.fullName}}</span>
-          </router-link>
+            <span class="titles">{{post.fullName}}</span></router-link>
         </div>
         <div>
-          <router-link class="user-name-router" :to="{path: `postview/${post.id}`}">Posted on: {{post.creationDate}}</router-link>
-          <i v-if="user.id == post.userId" class="fa fa-times icons-right-float" @click="deletePost(post, index)"></i>
-        </div>
-        <div>
-          <router-link class="user-name-router titles" :to="{path: `postview/${post.id}`}">{{post.title}}</router-link>
-        </div>
-          <span readonly="!user.isUserLogged">{{content}}</span>
-        <div class="col-xs-6">
+          <router-link :to="{path: `postview/${post.id}`}">
+            <h3 class="user-name-router titles">{{post.title}}</h3></router-link>
+          <span readonly="!user.isUserLogged">{{content}}</span> <br>
           <button type="button" @click="addLike(index, post, user.likedPostId)" :disabled="!user.isUserLogged">Likes {{post.likes}}</button>
-          <router-link class="user-name-router" :to="{name: 'postview', params: {post: post, viewer: user}}">Comments {{post.comments}}</router-link>
+          <router-link class="user-name-router" :to="{path: `postview/${post.id}`}">Comments {{post.comments}}</router-link>
         </div>
-     </div>
+        <div class="panel-heading box titles">
+          <router-link :to="{path: `postview/${post.id}`}">Posted on: {{post.creationDate}}</router-link> <br>
+        </div>
 
   </div>
 </template>

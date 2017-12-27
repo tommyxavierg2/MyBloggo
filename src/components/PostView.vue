@@ -2,14 +2,13 @@
   <div id="postView">
 
     <div class="post-view">
+       <i v-if="isUserLogged && post.userId == user.id" class="fa fa-pencil icons-right-float" @click="isPostContentEditable = !isPostContentEditable">Edit</i>
       <router-link class="user-name-router icons-left-float" :to="{path: '/', params: {post: user}}">
         <i class="fa fa-arrow-circle-o-left">Return</i></router-link>
         <router-link class="user-name-router" :to="{name: 'profile', params: {postUserId: post.userId, viewer: user}}">
           <avatar v-if="post.fullName" :username="post.fullName" class="gravatar" :size="100"></avatar></router-link>
         <router-link class="user-name-router titles" :to="{name: 'profile', params: {postUserId: post.userId, viewer: user}}">{{post.fullName}}</router-link>
         <span class="titles"></span>
-        <button v-if="isUserLogged && post.userId == user.id" type="button" class="icons-right-float" @click="isPostContentEditable = !isPostContentEditable">
-        Edit <i class="fa fa-pencil"></i></button>
       <h4 class="titles">{{post.title}}</h4>
       <span>Created at: {{post.creationDate}}</span>
       <div class="post-view-content">
@@ -67,26 +66,26 @@
       <div class="row post-list">
         <div class="col-xs-4">
           <span class="icons-left-float">{{index+1}}</span>
-          <avatar :username="comment.fullName" class="gravatar" :size="100"></avatar>
-          <span>{{comment.fullName}}</span>
+          <div class="thumbnail">
+            <avatar :username="comment.fullName" class="img-responsive user-photo gravatar" :size="100"></avatar>
+            <span class="titles">{{comment.fullName}}</span>
+          </div>
         </div>
+        <i class="fa fa-times icons-right-float" @click="deleteComment(index)"></i>
+        <span>{{comment.date}}</span>
         <div class="col-xs-8">
-          <button v-if="user && user.id == comment.userId && optionsButtonsActive" type="button" @click="isCommentEditable = !isCommentEditable">
-            <i class="fa fa-pencil"></i></button>
-
-          <button type="button" @click="deleteComment(index)" class="icons-right-float">
-            <i class="fa fa-times"></i></button>
-          <span>{{comment.date}}</span>
-          <textarea v-model="comment.comment" @mouseover="optionsButtonsActive = !optionsButtonsActive" readonly class="form-control"></textarea> <br>
-
+          <div class="panel panel-default">
+            <i class="fa fa-pencil icons-right-float" v-if="user && user.id == comment.userId && optionsButtonsActive" @click="isCommentEditable = !isCommentEditable"></i>
+            <span @mouseover="optionsButtonsActive = !optionsButtonsActive">{{comment.comment}}</span>
+          </div>
           <div v-if="!isCommentEditable">
             <div class="input-group">
               <span class="input-group-addon">Comment:</span>
               <input placeholder="Comment" v-model.trim="comment.comment" class="form-control" autofocus></input>
-            </div> <br>
+            </div>
               <button type="button" class="btn btn-danger" @click="isCommentEditable = !isCommentEditable">Cancel</button>
               <button type="button" class="btn btn-primary" @click="editPostComments(index)">Save</button>
-          </div> <br>
+          </div>
         </div>
      </div>
 
