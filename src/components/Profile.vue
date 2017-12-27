@@ -61,6 +61,7 @@
         },
         posts: [],
         tabsInfo: [],
+        postUserId: 0
       }
     },
 
@@ -71,8 +72,10 @@
     },
 
     created() {
-      this.user = this.$route.params.user;
+      this.user = JSON.parse(localStorage.getItem('userData'));
       this.viewer = this.$route.params.viewer;
+      this.postUserId = this.$route.params.postUserId;
+
       this.tabsInfo = {
         tabs: [
           {name: 'Published', ref: '#published'},
@@ -106,20 +109,17 @@
 
     methods: {
       init(){
-        if(this.user && !this.viewer) {
-          this.getUserProfile(this.user.id);
-          this.getPosts(this.user.id);
+        if(this.postUserId && this.viewer) {
+            this.getUserProfile(this.postUserId);
+            this.getPosts(this.postUserId);
         }
-        else if(!this.user && this.viewer) {
-            this.user = this.$route.params.postUserId;
-            this.getUserProfile(this.user);
-            this.getPosts(this.user);
+        else if(this.user && !this.viewer) {
+            this.getUserProfile(this.user.id);
+            this.getPosts(this.user.id);
         }
         else {
-          this.user = JSON.parse(localStorage.getItem('userData'));
-          if(this.user) {
-            this.getPosts(this.user.id);
-          }
+          toastr.warning('In order to see other users information you firstn need to log in');
+          this.$router.replace('/');
         }
       },
 

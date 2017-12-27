@@ -12,6 +12,8 @@
   },
   "dependencies": {
     "axios": "^0.17.1",
+    "babel-plugin-syntax-jsx": "^6.18.0",
+    "babel-plugin-transform-vue-jsx": "^3.5.0",
     "bootstrap": "^4.0.0-beta.2",
     "froala-editor": "^2.7.3",
     "react-mentions": "^1.2.1",

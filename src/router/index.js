@@ -66,9 +66,8 @@ export default new Router({
     },
     {
       path: '/postview/:id',
-      name: 'postview',
-      component: PostView,
-      meta: { requiresPost: true}
+      name: 'postview/:id',
+      component: PostView
     },
     {
       path: '/settings',

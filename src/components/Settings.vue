@@ -6,11 +6,11 @@
       <h4>To change your personal information, please validate the following password</h4>
       <div class="input-group">
         <span class="input-group-addon">Email:</span>
-        <input type="text" placeholder="Email" v-model="userValidation.email" class="form-control" required>
+        <input type="text" placeholder="Email" v-model.trim="userValidation.email" class="form-control" required>
       </div>
       <div class="input-group">
         <span class="input-group-addon">Password:</span>
-        <input type="password" placeholder="Password" v-model="userValidation.password" class="form-control" required>
+        <input type="password" placeholder="Password" v-model.trim="userValidation.password" class="form-control" required>
       </div>
       <div class="d-flex justify-content-center">
          <button type="submit" class="btn btn-default btn-block" @click="userCredentialsValidation()">Validate</button>
@@ -96,7 +96,6 @@
           password: '',
           confirmPassword: '',
           id: null,
-          avatar: '',
           likedPostId: [],
           isUserLogged: false,
           remembered: false,
@@ -152,10 +151,7 @@
 
       updateProfile(userId) {
 
-        if(!this.user.name || !this.user.lastname || !this.user.email || !this.user.password || !this.user.confirmPassword) {
-          toastr.warning('Please make sure all fields are properly filled');
-        }
-        else if(confirm('Do you want to apply these changes?') == true) {
+        if(confirm('Do you want to apply these changes?') == true) {
           axios.put(`users/${userId}`, this.user)
            .then(res => {
              this.copyData(this.user, this.originalUserData);
@@ -173,7 +169,7 @@
           this.user.name = this.originalUserData.name;
           this.user.lastname = this.originalUserData.lastname;
           this.user.email = this.originalUserData.email;
-          toastr.success('Profile updated');
+          toastr.success('Profile edition cancelled');
         }
       },
 

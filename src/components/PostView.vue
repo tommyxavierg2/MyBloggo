@@ -5,8 +5,7 @@
       <router-link class="user-name-router icons-left-float" :to="{path: '/', params: {post: user}}">
         <i class="fa fa-arrow-circle-o-left">Return</i></router-link>
         <router-link class="user-name-router" :to="{name: 'profile', params: {postUserId: post.userId, viewer: user}}">
-          <avatar :username="post.fullName" class="gravatar" :size="100"></avatar>
-        </router-link> <br>
+          <avatar v-if="post.fullName" :username="post.fullName" class="gravatar" :size="100"></avatar></router-link>
         <router-link class="user-name-router titles" :to="{name: 'profile', params: {postUserId: post.userId, viewer: user}}">{{post.fullName}}</router-link>
         <span class="titles"></span>
         <button v-if="isUserLogged && post.userId == user.id" type="button" class="icons-right-float" @click="isPostContentEditable = !isPostContentEditable">
@@ -125,15 +124,15 @@ export default {
       post: {
         comments: 0,
         commentsAllowed: true,
-        content: "",
-        creationDate: "",
-        publicationDate: "",
+        content: '',
+        creationDate: '',
+        publicationDate: '',
         edited: false,
         id: null,
         likes: 0,
-        title: "",
+        title: '',
         userId: null,
-        fullName: "",
+        fullName: '',
         state: {
           published: true,
           drafted: false,
@@ -165,11 +164,17 @@ export default {
   },
 
   created() {
-    this.getPost();
+    this.getUser();
   },
 
   mounted() {
-    this.getUser();
+    this.getPost();
+  },
+
+  computed: {
+    fullName() {
+      return this.post.fullName;
+    }
   },
 
   methods: {
@@ -214,7 +219,6 @@ export default {
       this.post = this.$route.params.id;
 
       if(this.post) {
-
          axios.get(`posts/${this.post}`)
           .then(res => {
             this.post = res.data;
@@ -229,8 +233,8 @@ export default {
           .catch(err => toastr.error(err));
       }
       else {
-          // toastr.warning(`Post not found`);
-          // this.$router.replace('/');
+          toastr.warning(`Post not found`);
+          this.$router.replace('/');
       }
     },
 
