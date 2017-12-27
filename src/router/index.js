@@ -65,20 +65,10 @@ export default new Router({
       }
     },
     {
-      path: '/postview',
+      path: '/postview/:id',
       name: 'postview',
       component: PostView,
-      meta: { requiresPost: true},
-      beforeEnter: (to, from, next) => {
-        if(to.meta.requiresPost) {
-          let requiresPost = to.params.post;
-          next()
-        }
-        else {
-          toastr.warning('In order to perform any action you first need to log In');
-          next({name: '/'})
-        }
-      }
+      meta: { requiresPost: true}
     },
     {
       path: '/settings',

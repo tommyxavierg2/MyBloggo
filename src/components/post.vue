@@ -6,14 +6,14 @@
       <div class="row post-list">
         <div class="col-xs-6">
           <router-link class="user-name-router" :to="{name: 'profile', params: {postUserId: post.userId, viewer: user}}">
-            <avatar :username="post.userName" class="gravatar" :size="100"></avatar>
+            <avatar :username="post.fullName" class="gravatar" :size="100"></avatar>
           </router-link> <br>
           <router-link class="user-name-router" :to="{name: 'profile', params: {postUserId: post.userId, viewer: user}}">
-            <span class="titles">{{post.userName}}</span>
+            <span class="titles">{{post.fullName}}</span>
           </router-link>
         </div>
         <div>
-          <router-link class="user-name-router" :to="{path: `/postview/${post.id}`}">Posted on: {{post.creationDate}}</router-link>
+          <router-link class="user-name-router" :to="{path: `postview/${post.id}`}">Posted on: {{post.creationDate}}</router-link>
           <i v-if="user.id == post.userId" class="fa fa-times icons-right-float" @click="deletePost(post, index)"></i>
         </div>
         <div>

@@ -49,7 +49,6 @@ export default {
   data() {
     return {
       newPost: {
-        avatar: "",
         comments: 0,
         commentsAllowed: true,
         content: "",
@@ -60,7 +59,7 @@ export default {
         likes: 0,
         title: "",
         userId: null,
-        userName: "",
+        fullName: "",
         state: {
           published: false,
           drafted: false,
@@ -93,9 +92,8 @@ export default {
      this.newPost.state.published = true;
      this.newPost.creationDate = date.substr(8,16);
      this.newPost.publicationDate = date.substr(8,16);
-     this.newPost.userName = this.user.name + ' ' + this.user.lastname;
+     this.newPost.fullName = this.user.name + ' ' + this.user.lastname;
      this.newPost.userId = this.user.id;
-     this.newPost.avatar = this.user.avatar;
 
      axios.post('posts', this.newPost)
      .then(res => {

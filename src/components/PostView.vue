@@ -5,9 +5,9 @@
       <router-link class="user-name-router icons-left-float" :to="{path: '/', params: {post: user}}">
         <i class="fa fa-arrow-circle-o-left">Return</i></router-link>
         <router-link class="user-name-router" :to="{name: 'profile', params: {postUserId: post.userId, viewer: user}}">
-          <avatar :username="post.userName" class="gravatar" :size="100"></avatar>
+          <avatar :username="post.fullName" class="gravatar" :size="100"></avatar>
         </router-link> <br>
-        <router-link class="user-name-router titles" :to="{name: 'profile', params: {postUserId: post.userId, viewer: user}}">{{post.userName}}</router-link>
+        <router-link class="user-name-router titles" :to="{name: 'profile', params: {postUserId: post.userId, viewer: user}}">{{post.fullName}}</router-link>
         <span class="titles"></span>
         <button v-if="isUserLogged && post.userId == user.id" type="button" class="icons-right-float" @click="isPostContentEditable = !isPostContentEditable">
         Edit <i class="fa fa-pencil"></i></button>
@@ -68,8 +68,8 @@
       <div class="row post-list">
         <div class="col-xs-4">
           <span class="icons-left-float">{{index+1}}</span>
-          <avatar :username="comment.userName" class="gravatar" :size="100"></avatar>
-          <span>{{comment.userName}}</span>
+          <avatar :username="comment.fullName" class="gravatar" :size="100"></avatar>
+          <span>{{comment.fullName}}</span>
         </div>
         <div class="col-xs-8">
           <button v-if="user && user.id == comment.userId && optionsButtonsActive" type="button" @click="isCommentEditable = !isCommentEditable">
@@ -106,7 +106,6 @@
 </template>
 
 <script>
-import form from './form.vue';
 
 export default {
   data() {
@@ -124,7 +123,6 @@ export default {
         profileState: false
       },
       post: {
-        avatar: "",
         comments: 0,
         commentsAllowed: true,
         content: "",
@@ -135,7 +133,7 @@ export default {
         likes: 0,
         title: "",
         userId: null,
-        userName: "",
+        fullName: "",
         state: {
           published: true,
           drafted: false,
@@ -153,7 +151,7 @@ export default {
         comment: "",
         postId: null,
         userId: null,
-        userName: "",
+        fullName: "",
         date: "",
         id: null
       },
@@ -164,10 +162,6 @@ export default {
       isPostEditable: false,
       isPostContentEditable: false
     }
-  },
-
-  components: {
-    'app-form': form
   },
 
   created() {
@@ -191,7 +185,7 @@ export default {
         comment: this.newComment.comment,
         postId: this.post.id,
         userId: this.user.id,
-        userName: `${this.user.name} ${this.user.lastname}`,
+        fullName: `${this.user.name} ${this.user.lastname}`,
         date: date.substr(8, 16)
       })
       .then(res => {
@@ -217,23 +211,26 @@ export default {
     },
 
     getPost() {
-      this.post = this.$route.params.post;
+      this.post = this.$route.params.id;
 
       if(this.post) {
-         // let requiresPost = this.$route.params.post;
-         // window.location = window.location + '/' + requiresPost.id;
-         this.getComments();
+
+         axios.get(`posts/${this.post}`)
+          .then(res => {
+            this.post = res.data;
+            this.getComments();
+            this.originalPost = {
+              commentsAllowed: this.post.commentsAllowed,
+              content: this.post.content.slice(),
+              edited: this.post.edited,
+              title: this.post.title.slice(),
+            }
+          })
+          .catch(err => toastr.error(err));
       }
       else {
-          toastr.warning(`Post not found`);
-          this.$router.replace('/');
-      }
-
-      this.originalPost = {
-        commentsAllowed: this.post.commentsAllowed,
-        content: this.post.content.slice(),
-        edited: this.post.edited,
-        title: this.post.title.slice(),
+          // toastr.warning(`Post not found`);
+          // this.$router.replace('/');
       }
     },
 
@@ -253,7 +250,7 @@ export default {
       if(confirm('Are you sure about this?')) {
         let date = new Date().toString();
         postData.publicationDate = date.substr(8,16);
-        postData.userName = this.user.name + ' ' + this.user.lastname;
+        postData.fullName = this.user.name + ' ' + this.user.lastname;
         postData.state.deleted = false;
         postData.state.drafted = false;
         postData.state.published = true;

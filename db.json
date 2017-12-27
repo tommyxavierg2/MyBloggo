@@ -26,8 +26,7 @@
   ],
   "posts": [
     {
-      "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
-      "comments": 0,
+      "comments": 1,
       "commentsAllowed": true,
       "content": "Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing",
       "creationDate": "25 2017 13:15:51",
@@ -37,7 +36,7 @@
       "likes": 0,
       "title": "Testing",
       "userId": 1,
-      "userName": "Test Testing",
+      "fullName": "Test Testing",
       "state": {
         "published": true,
         "drafted": false,
@@ -55,7 +54,7 @@
       "likes": 0,
       "title": "My first post",
       "userId": 2,
-      "userName": "Test 1 Testing",
+      "fullName": "Test 1 Testing",
       "state": {
         "published": false,
         "drafted": true,
@@ -73,7 +72,7 @@
       "likes": 0,
       "title": "Testing drafted posts",
       "userId": 1,
-      "userName": "Test Testing",
+      "fullName": "Test Testing",
       "state": {
         "published": false,
         "drafted": true,
@@ -91,7 +90,7 @@
       "likes": 0,
       "title": "Testing oficial deleted post",
       "userId": 1,
-      "userName": "Test Testing",
+      "fullName": "Test Testing",
       "state": {
         "published": false,
         "drafted": false,
@@ -99,5 +98,14 @@
       }
     }
   ],
-  "comments": []
+  "comments": [
+    {
+      "comment": "Testing a post testing",
+      "postId": 1,
+      "userId": 1,
+      "fullName": "Test Testing",
+      "date": "27 2017 00:10:23",
+      "id": 1
+    }
+  ]
 }
