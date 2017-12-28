@@ -1,27 +1,19 @@
 <template>
   <div>
 
-    <ul id="navBar" class="list-inline align-left">
-      <li><router-link class="navBarItems" to="/">Bloggo</router-link></li>
-      <li><router-link v-if="user" class="navBarItems" :to="{name: 'newpost', params: {user: user}}">| New Post |</router-link></li>
-      <li><router-link v-if="user" class="navBarItems" :to="{name: 'profile', params: {user: user}}">Profile</router-link></li>
-     <li><button v-if="user" type="button" class="btn btn-primary icons-right-float" @click="logout">Logout</button></li>
-    </ul>
-
-    <h1>Create Post</h1>
+    <h1 class="jumbotron titles">Create Post</h1>
 
     <div v-if="newPost.title || newPost.content" class="post-view">
       <h3>Preview</h3>
-      <span>
-        <img class="user-avatar" :src="user.avatar"></span> <br>
-        <span class="titles">{{user.name}} {{user.lastname}}</span>
-        <span class="titles"></span>
-        <h4 class="titles">{{newPost.title}}</h4>
-        <span class="inline-display">Created at: {{newPost.creationDate}}</span>
-        <span class="inline-display">Published on: {{newPost.publicationDate}}</span>
-        <div class="post-view-content">
-          <span readonly>{{newPost.content}}</span>
-        </div>
+      <avatar :username="user.fullName" class="gravatar" :size="100"></avatar> <br>
+      <span class="titles">{{user.name}} {{user.lastname}}</span>
+      <span class="titles"></span>
+      <h4 class="titles">{{newPost.title}}</h4>
+      <span class="inline-display">Created at: {{newPost.creationDate}}</span>
+      <span class="inline-display">Published on: {{newPost.publicationDate}}</span>
+      <div class="post-view-content">
+        <span readonly>{{newPost.content}}</span>
+      </div>
     </div>
 
     <form @submit.prevent="createPost">
@@ -52,13 +44,11 @@
 </template>
 
 <script>
-
 export default {
   name: 'newPostsView',
   data() {
     return {
       newPost: {
-        avatar: "",
         comments: 0,
         commentsAllowed: true,
         content: "",
@@ -69,7 +59,7 @@ export default {
         likes: 0,
         title: "",
         userId: null,
-        userName: "",
+        fullName: "",
         state: {
           published: false,
           drafted: false,
@@ -89,7 +79,7 @@ export default {
   },
 
   created() {
-    this.user = this.$route.params.user;
+    this.user = JSON.parse(localStorage.getItem('userData'));
     if(!this.user) {
       toastr.warning('In order to perform any action you first need to log In');
       this.$router.replace('login');
@@ -102,9 +92,8 @@ export default {
      this.newPost.state.published = true;
      this.newPost.creationDate = date.substr(8,16);
      this.newPost.publicationDate = date.substr(8,16);
-     this.newPost.userName = this.user.name + ' ' + this.user.lastname;
+     this.newPost.fullName = this.user.name + ' ' + this.user.lastname;
      this.newPost.userId = this.user.id;
-     this.newPost.avatar = this.user.avatar;
 
      axios.post('posts', this.newPost)
      .then(res => {
@@ -157,7 +146,7 @@ export default {
        postData[key] = '';
      }
    }
-  }
+ }
 }
 </script>
 

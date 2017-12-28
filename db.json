@@ -6,10 +6,11 @@
       "email": "test@test.com",
       "password": "qweasd",
       "id": 1,
-      "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
-      "likedPostId": [
-        14
-      ]
+      "fullName": "Test Testing",
+      "likedPostId": [],
+      "remembered": false,
+      "confirmPassword": "qweasd",
+      "isUserLogged": true
     },
     {
       "name": "Test 1",
@@ -17,276 +18,242 @@
       "email": "test1@test.com",
       "password": "qweasd",
       "id": 2,
-      "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
-      "likedPostId": []
-    },
-    {
-      "name": "Test 2",
-      "lastname": "Testing",
-      "email": "test2@test.com",
-      "password": "qweasd",
-      "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
+      "fullName": "Test 1 Testing",
       "likedPostId": [],
-      "id": 3
+      "isUserLogged": true,
+      "confirmPassword": "qweasd",
+      "remembered": false
     }
   ],
   "posts": [
     {
-      "title": "Testing new structure published",
-      "content": "Testing",
+      "comments": 1,
       "commentsAllowed": true,
-      "likes": 0,
-      "comments": 0,
-      "creationDate": "20 2017 23:26:15",
-      "publicationDate": "20 2017 23:26:15",
-      "userName": "Test Testing",
-      "userId": 1,
-      "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
+      "content": "Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing",
+      "creationDate": "25 2017 13:15:51",
+      "publicationDate": "25 2017 13:15:51",
       "edited": false,
+      "id": 1,
+      "likes": 0,
+      "title": "Testing",
+      "userId": 1,
+      "fullName": "Test Testing",
       "state": {
         "published": false,
         "drafted": false,
         "deleted": true
-      },
-      "id": 1
+      }
     },
     {
-      "title": "Testing new structure 1 published",
-      "content": "Testing",
-      "commentsAllowed": true,
-      "likes": 1,
       "comments": 0,
-      "creationDate": "20 2017 23:26:15",
-      "publicationDate": "20 2017 23:26:15",
-      "userName": "Test Testing",
-      "userId": 1,
-      "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
-      "edited": false,
-      "state": {
-        "published": false,
-        "drafted": false,
-        "deleted": true
-      },
-      "id": 2
-    },
-    {
-      "title": "Testing new structure 2 published",
-      "content": "Testing",
       "commentsAllowed": true,
+      "content": "Posting my first post as an oficial bloggo user",
+      "creationDate": "25 2017 23:27:53",
+      "publicationDate": "",
+      "edited": false,
+      "id": 2,
       "likes": 0,
-      "comments": 0,
-      "creationDate": "20 2017 23:26:15",
-      "publicationDate": "20 2017 23:26:15",
-      "userName": "Test Testing",
-      "userId": 1,
-      "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
-      "edited": false,
-      "state": {
-        "published": false,
-        "drafted": false,
-        "deleted": true
-      },
-      "id": 3
-    },
-    {
-      "title": "Testing new structure drafted",
-      "content": "Testing",
-      "commentsAllowed": true,
-      "likes": 0,
-      "comments": 0,
-      "creationDate": "20 2017 23:26:15",
-      "publicationDate": "20 2017 23:26:15",
-      "userName": "Test Testing",
-      "userId": 1,
-      "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
-      "edited": false,
+      "title": "My first post",
+      "userId": 2,
+      "fullName": "Test 1 Testing",
       "state": {
         "published": false,
         "drafted": true,
         "deleted": false
-      },
-      "id": 4
+      }
     },
     {
-      "title": "Testing new structure drafted",
-      "content": "Testing",
-      "commentsAllowed": true,
-      "likes": 0,
       "comments": 0,
-      "creationDate": "20 2017 23:26:15",
-      "userName": "Test Testing",
-      "userId": 1,
-      "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
+      "commentsAllowed": true,
+      "content": "Testing drafted posts",
+      "creationDate": "26 2017 09:08:42",
+      "publicationDate": "",
       "edited": false,
+      "id": 3,
+      "likes": 0,
+      "title": "Testing drafted posts",
+      "userId": 1,
+      "fullName": "Test Testing",
       "state": {
         "published": false,
-        "drafted": false,
-        "deleted": true
-      },
-      "id": 5
+        "drafted": true,
+        "deleted": false
+      }
     },
     {
-      "title": "Testing new structure drafted 1",
-      "content": "Testing",
-      "commentsAllowed": true,
-      "likes": 0,
       "comments": 0,
-      "creationDate": "20 2017 23:26:15",
-      "publicationDate": "21 2017 16:27:12",
-      "userName": "Test Testing",
-      "userId": 1,
-      "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
+      "commentsAllowed": true,
+      "content": "Testing an oficial deleted post",
+      "creationDate": "26 2017 09:09:19",
+      "publicationDate": "27 2017 17:01:54",
       "edited": false,
+      "id": 4,
+      "likes": 0,
+      "title": "Testing oficial deleted post",
+      "userId": 1,
+      "fullName": "Test Testing",
       "state": {
         "published": true,
         "drafted": false,
         "deleted": false
-      },
-      "id": 6
+      }
     },
     {
-      "title": "Testing new structure deleted",
-      "content": "Testing",
+      "comments": 1,
       "commentsAllowed": true,
-      "likes": 0,
-      "comments": 0,
-      "creationDate": "20 2017 23:26:15",
-      "userName": "Test Testing",
-      "userId": 1,
-      "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
+      "content": "Testing a test testing Testing a test testing Testing a test testing",
+      "creationDate": "27 2017 09:03:24",
+      "publicationDate": "27 2017 09:03:24",
       "edited": false,
-      "state": {
-        "published": false,
-        "drafted": false,
-        "deleted": true
-      },
-      "id": 7
-    },
-    {
-      "title": "Testing new structure deleted",
-      "content": "Testing",
-      "commentsAllowed": true,
+      "id": 5,
       "likes": 0,
-      "comments": 0,
-      "creationDate": "20 2017 23:26:15",
-      "publicationDate": "20 2017 23:26:15",
-      "userName": "Test Testing",
-      "userId": 1,
-      "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
-      "edited": false,
+      "title": "Testing a test testing",
+      "userId": 2,
+      "fullName": "Test 1 Testing",
       "state": {
-        "published": false,
+        "published": true,
         "drafted": false,
-        "deleted": true
-      },
-      "id": 8
+        "deleted": false
+      }
     },
     {
-      "title": "Testing new structure deleted",
-      "content": "Testing",
+      "comments": 0,
       "commentsAllowed": true,
+      "content": "asdasdds",
+      "creationDate": "28 2017 13:16:43",
+      "publicationDate": "28 2017 13:16:43",
+      "edited": false,
+      "id": 6,
       "likes": 0,
-      "comments": 0,
-      "creationDate": "20 2017 23:26:15",
-      "publicationDate": "20 2017 23:26:15",
-      "userName": "Test Testing",
+      "title": "asdasdsadasdasd",
       "userId": 1,
-      "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
-      "edited": false,
+      "fullName": "Test Testing",
       "state": {
-        "published": false,
+        "published": true,
         "drafted": false,
-        "deleted": true
-      },
-      "id": 9
+        "deleted": false
+      }
     },
     {
-      "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
       "comments": 0,
       "commentsAllowed": true,
-      "content": "Once upon a time... XD",
-      "creationDate": "Thu Dec 21 2017 10:41:03 GMT-0400 (AST)",
-      "publicationDate": "20 2017 23:26:15",
+      "content": "asdasdds",
+      "creationDate": "28 2017 13:16:43",
+      "publicationDate": "28 2017 13:16:43",
+      "edited": false,
+      "id": 7,
+      "likes": 0,
+      "title": "asdasdsadasdasd",
+      "userId": 1,
+      "fullName": "Test Testing",
+      "state": {
+        "published": true,
+        "drafted": false,
+        "deleted": false
+      }
+    },
+    {
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "asdasdds",
+      "creationDate": "28 2017 13:16:43",
+      "publicationDate": "28 2017 13:16:43",
+      "edited": false,
+      "id": 8,
+      "likes": 0,
+      "title": "asdasdsadasdasd",
+      "userId": 1,
+      "fullName": "Test Testing",
+      "state": {
+        "published": true,
+        "drafted": false,
+        "deleted": false
+      }
+    },
+    {
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "asdasdds",
+      "creationDate": "28 2017 13:16:43",
+      "publicationDate": "28 2017 13:16:43",
+      "edited": false,
+      "id": 9,
+      "likes": 0,
+      "title": "asdasdsadasdasd",
+      "userId": 1,
+      "fullName": "Test Testing",
+      "state": {
+        "published": true,
+        "drafted": false,
+        "deleted": false
+      }
+    },
+    {
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "asdasdds",
+      "creationDate": "28 2017 13:16:43",
+      "publicationDate": "28 2017 13:16:43",
       "edited": false,
       "id": 10,
       "likes": 0,
-      "title": "Testing post edition",
+      "title": "asdasdsadasdasd",
       "userId": 1,
-      "userName": "Test Testing",
+      "fullName": "Test Testing",
       "state": {
-        "published": false,
+        "published": true,
         "drafted": false,
-        "deleted": true
+        "deleted": false
       }
     },
     {
-      "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
       "comments": 0,
       "commentsAllowed": true,
-      "content": "Testing posting a previously deleted post",
-      "creationDate": "Thu Dec 21 2017 10:43:46",
+      "content": "asdasdds",
+      "creationDate": "28 2017 13:16:43",
+      "publicationDate": "28 2017 13:16:43",
       "edited": false,
       "id": 11,
       "likes": 0,
-      "title": "Testing posting deleted posts",
+      "title": "asdasdsadasdasd",
       "userId": 1,
-      "userName": "Test Testing",
+      "fullName": "Test Testing",
       "state": {
         "published": true,
         "drafted": false,
         "deleted": false
-      },
-      "publicationDate": "21 2017 16:10:44"
+      }
     },
     {
-      "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
       "comments": 0,
       "commentsAllowed": true,
-      "content": "Testing drafted posts posting",
-      "creationDate": "",
+      "content": "asdasdds",
+      "creationDate": "28 2017 13:16:43",
+      "publicationDate": "28 2017 13:16:43",
       "edited": false,
       "id": 12,
       "likes": 0,
-      "title": "Testing drafted posts edition",
+      "title": "asdasdsadasdasd",
       "userId": 1,
-      "userName": "Test Testing",
+      "fullName": "Test Testing",
       "state": {
         "published": true,
         "drafted": false,
         "deleted": false
-      },
-      "publicationDate": "21 2017 15:59:56"
+      }
     },
     {
-      "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
       "comments": 0,
       "commentsAllowed": true,
-      "content": "zxczxczxczxc",
-      "creationDate": "",
+      "content": "asdasdds",
+      "creationDate": "28 2017 13:16:43",
+      "publicationDate": "28 2017 13:16:43",
       "edited": false,
       "id": 13,
       "likes": 0,
-      "title": "xzcczxczxczxc",
+      "title": "asdasdsadasdasd",
       "userId": 1,
-      "userName": "Test Testing",
-      "state": {
-        "published": false,
-        "drafted": false,
-        "deleted": true
-      }
-    },
-    {
-      "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
-      "comments": 1,
-      "commentsAllowed": true,
-      "content": "Once upon a time that happened",
-      "creationDate": "21 2017 11:47:53",
-      "edited": false,
-      "id": 14,
-      "likes": 1,
-      "title": "Testing edition 1",
-      "userId": 1,
-      "userName": "Test Testing",
+      "fullName": "Test Testing",
       "state": {
         "published": true,
         "drafted": false,
@@ -294,18 +261,53 @@
       }
     },
     {
-      "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
       "comments": 0,
       "commentsAllowed": true,
-      "content": "sadasds",
-      "creationDate": "21 2017 12:32:56",
-      "publicationDate": "",
+      "content": "asdasdds",
+      "creationDate": "28 2017 13:16:43",
+      "publicationDate": "28 2017 13:16:43",
+      "edited": false,
+      "id": 14,
+      "likes": 0,
+      "title": "asdasdsadasdasd",
+      "userId": 1,
+      "fullName": "Test Testing",
+      "state": {
+        "published": true,
+        "drafted": false,
+        "deleted": false
+      }
+    },
+    {
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "asdasdds",
+      "creationDate": "28 2017 13:16:43",
+      "publicationDate": "28 2017 13:16:43",
       "edited": false,
       "id": 15,
       "likes": 0,
-      "title": "asdsad",
+      "title": "asdasdsadasdasd",
       "userId": 1,
-      "userName": "Test Testing",
+      "fullName": "Test Testing",
+      "state": {
+        "published": true,
+        "drafted": false,
+        "deleted": false
+      }
+    },
+    {
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "asdasdds",
+      "creationDate": "28 2017 13:16:43",
+      "publicationDate": "28 2017 13:16:43",
+      "edited": false,
+      "id": 16,
+      "likes": 0,
+      "title": "asdasdsadasdasd",
+      "userId": 1,
+      "fullName": "Test Testing",
       "state": {
         "published": false,
         "drafted": false,
@@ -313,126 +315,346 @@
       }
     },
     {
-      "title": "Testing new structure 2 published",
-      "content": "Testing",
-      "commentsAllowed": true,
-      "likes": 0,
       "comments": 0,
-      "creationDate": "20 2017 23:26:15",
-      "publicationDate": "20 2017 23:26:15",
-      "userName": "Test Testing",
-      "userId": 1,
-      "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
+      "commentsAllowed": true,
+      "content": "asdasdds",
+      "creationDate": "28 2017 13:16:43",
+      "publicationDate": "28 2017 13:16:43",
       "edited": false,
+      "id": 17,
+      "likes": 0,
+      "title": "asdasdsadasdasd",
+      "userId": 1,
+      "fullName": "Test Testing",
       "state": {
-        "published": false,
+        "published": true,
         "drafted": false,
-        "deleted": true
-      },
-      "id": 16
+        "deleted": false
+      }
     },
     {
-      "title": "Testing new structure 2 published",
-      "content": "Testing",
-      "commentsAllowed": true,
-      "likes": 0,
-      "comments": 0,
-      "creationDate": "20 2017 23:26:15",
-      "publicationDate": "20 2017 23:26:15",
-      "userName": "Test Testing",
-      "userId": 1,
-      "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
-      "edited": false,
-      "state": {
-        "published": false,
-        "drafted": false,
-        "deleted": true
-      },
-      "id": 17
-    },
-    {
-      "avatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
       "comments": 0,
       "commentsAllowed": true,
-      "content": "dsadasdasdasdasd",
-      "creationDate": "21 2017 16:14:22",
-      "publicationDate": "21 2017 16:14:22",
+      "content": "asdasdds",
+      "creationDate": "28 2017 13:16:43",
+      "publicationDate": "28 2017 13:16:43",
       "edited": false,
       "id": 18,
       "likes": 0,
-      "title": "asdasdasdasdasd",
+      "title": "asdasdsadasdasd",
       "userId": 1,
-      "userName": "Test Testing",
+      "fullName": "Test Testing",
+      "state": {
+        "published": true,
+        "drafted": false,
+        "deleted": false
+      }
+    },
+    {
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "asdasdds",
+      "creationDate": "28 2017 13:16:43",
+      "publicationDate": "28 2017 13:16:43",
+      "edited": false,
+      "id": 19,
+      "likes": 0,
+      "title": "asdasdsadasdasd",
+      "userId": 1,
+      "fullName": "Test Testing",
+      "state": {
+        "published": true,
+        "drafted": false,
+        "deleted": false
+      }
+    },
+    {
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "asdasdds",
+      "creationDate": "28 2017 13:16:43",
+      "publicationDate": "28 2017 13:16:43",
+      "edited": false,
+      "id": 20,
+      "likes": 0,
+      "title": "asdasdsadasdasd",
+      "userId": 1,
+      "fullName": "Test Testing",
+      "state": {
+        "published": true,
+        "drafted": false,
+        "deleted": false
+      }
+    },
+    {
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "asdasdds",
+      "creationDate": "28 2017 13:16:43",
+      "publicationDate": "28 2017 13:16:43",
+      "edited": false,
+      "id": 21,
+      "likes": 0,
+      "title": "asdasdsadasdasd",
+      "userId": 1,
+      "fullName": "Test Testing",
+      "state": {
+        "published": true,
+        "drafted": false,
+        "deleted": false
+      }
+    },
+    {
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "asdasdds",
+      "creationDate": "28 2017 13:16:43",
+      "publicationDate": "28 2017 13:16:43",
+      "edited": false,
+      "id": 22,
+      "likes": 0,
+      "title": "asdasdsadasdasd",
+      "userId": 1,
+      "fullName": "Test Testing",
+      "state": {
+        "published": true,
+        "drafted": false,
+        "deleted": false
+      }
+    },
+    {
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "asdasdds",
+      "creationDate": "28 2017 13:16:43",
+      "publicationDate": "28 2017 13:16:43",
+      "edited": false,
+      "id": 23,
+      "likes": 0,
+      "title": "asdasdsadasdasd",
+      "userId": 1,
+      "fullName": "Test Testing",
+      "state": {
+        "published": true,
+        "drafted": false,
+        "deleted": false
+      }
+    },
+    {
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "asdasdds",
+      "creationDate": "28 2017 13:16:43",
+      "publicationDate": "28 2017 13:16:43",
+      "edited": false,
+      "id": 24,
+      "likes": 0,
+      "title": "asdasdsadasdasd",
+      "userId": 1,
+      "fullName": "Test Testing",
+      "state": {
+        "published": true,
+        "drafted": false,
+        "deleted": false
+      }
+    },
+    {
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "asdasdds",
+      "creationDate": "28 2017 13:16:43",
+      "publicationDate": "28 2017 13:16:43",
+      "edited": false,
+      "id": 25,
+      "likes": 0,
+      "title": "asdasdsadasdasd",
+      "userId": 1,
+      "fullName": "Test Testing",
+      "state": {
+        "published": true,
+        "drafted": false,
+        "deleted": false
+      }
+    },
+    {
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "asdasdds",
+      "creationDate": "28 2017 13:16:43",
+      "publicationDate": "28 2017 13:16:43",
+      "edited": false,
+      "id": 26,
+      "likes": 0,
+      "title": "asdasdsadasdasd",
+      "userId": 1,
+      "fullName": "Test Testing",
+      "state": {
+        "published": true,
+        "drafted": false,
+        "deleted": false
+      }
+    },
+    {
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "asdasdds",
+      "creationDate": "28 2017 13:16:43",
+      "publicationDate": "28 2017 13:16:43",
+      "edited": false,
+      "id": 27,
+      "likes": 0,
+      "title": "asdasdsadasdasd",
+      "userId": 1,
+      "fullName": "Test Testing",
+      "state": {
+        "published": true,
+        "drafted": false,
+        "deleted": false
+      }
+    },
+    {
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "asdasdds",
+      "creationDate": "28 2017 13:16:43",
+      "publicationDate": "28 2017 13:16:43",
+      "edited": false,
+      "id": 28,
+      "likes": 0,
+      "title": "asdasdsadasdasd",
+      "userId": 1,
+      "fullName": "Test Testing",
+      "state": {
+        "published": true,
+        "drafted": false,
+        "deleted": false
+      }
+    },
+    {
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "asdasdds",
+      "creationDate": "28 2017 13:16:43",
+      "publicationDate": "28 2017 13:16:43",
+      "edited": false,
+      "id": 29,
+      "likes": 0,
+      "title": "asdasdsadasdasd",
+      "userId": 1,
+      "fullName": "Test Testing",
+      "state": {
+        "published": true,
+        "drafted": false,
+        "deleted": false
+      }
+    },
+    {
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "asdasdds",
+      "creationDate": "28 2017 13:16:43",
+      "publicationDate": "28 2017 13:16:43",
+      "edited": false,
+      "id": 30,
+      "likes": 0,
+      "title": "asdasdsadasdasd",
+      "userId": 1,
+      "fullName": "Test Testing",
+      "state": {
+        "published": true,
+        "drafted": false,
+        "deleted": false
+      }
+    },
+    {
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "sadsada",
+      "creationDate": "28 2017 13:40:39",
+      "publicationDate": "28 2017 13:40:39",
+      "edited": false,
+      "id": 33,
+      "likes": 0,
+      "title": "asdsadsd",
+      "userId": 1,
+      "fullName": "Test Testing",
+      "state": {
+        "published": true,
+        "drafted": false,
+        "deleted": false
+      }
+    },
+    {
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "Testing a nice reversed",
+      "creationDate": "28 2017 14:13:36",
+      "publicationDate": "28 2017 14:13:36",
+      "edited": false,
+      "id": 34,
+      "likes": 0,
+      "title": "Testing nice reversed",
+      "userId": 1,
+      "fullName": "Test Testing",
       "state": {
         "published": false,
         "drafted": false,
         "deleted": true
+      }
+    },
+    {
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "Testing a nice reversed message 2",
+      "creationDate": "28 2017 15:02:51",
+      "publicationDate": "28 2017 15:02:51",
+      "edited": false,
+      "id": 35,
+      "likes": 0,
+      "title": "Testing a nice reversed",
+      "userId": 1,
+      "fullName": "Test Testing",
+      "state": {
+        "published": true,
+        "drafted": false,
+        "deleted": false
+      }
+    },
+    {
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "testing a nice reversed with json server",
+      "creationDate": "28 2017 15:39:47",
+      "publicationDate": "28 2017 15:39:47",
+      "edited": false,
+      "id": 36,
+      "likes": 0,
+      "title": "testing a nice reversed with json server",
+      "userId": 1,
+      "fullName": "Test Testing",
+      "state": {
+        "published": true,
+        "drafted": false,
+        "deleted": false
       }
     }
   ],
   "comments": [
     {
-      "comment": "Testing a test in a test for a test Testing a test in a test for a test Testing a test in a test for a tester\n",
-      "postId": 8,
-      "userId": 2,
-      "userName": "Test 1",
-      "userAvatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
-      "date": "17 2017 15:12",
+      "comment": "Testing a post testing",
+      "postId": 1,
+      "userId": 1,
+      "fullName": "Test Testing",
+      "date": "27 2017 00:10:23",
       "id": 1
     },
     {
-      "comment": "asasdasdasd",
-      "postId": 8,
+      "comment": "fgcfgfgfgg",
+      "postId": 5,
       "userId": 1,
-      "userName": "Test",
-      "userAvatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
-      "date": "18 2017 16:10",
+      "fullName": "Test Testing",
+      "date": "28 2017 11:38:07",
       "id": 2
-    },
-    {
-      "comment": "Testing a test in a test for a test Testing a test in a test for a test Testing a test in a test for a tester\n",
-      "postId": 8,
-      "userId": 2,
-      "userName": "Test 1",
-      "userAvatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
-      "date": "17 2017 15:12",
-      "id": 3
-    },
-    {
-      "comment": "asasdasdasd",
-      "postId": 8,
-      "userId": 1,
-      "userName": "Test",
-      "userAvatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
-      "date": "18 2017 16:10",
-      "id": 4
-    },
-    {
-      "comment": "Testing a test in a test for a test Testing a test in a test for a test Testing a test in a test for a tester\n",
-      "postId": 8,
-      "userId": 2,
-      "userName": "Test 1",
-      "userAvatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
-      "date": "17 2017 15:12",
-      "id": 6
-    },
-    {
-      "comment": "asasdasdasd",
-      "postId": 8,
-      "userId": 1,
-      "userName": "Test",
-      "userAvatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
-      "date": "18 2017 16:10",
-      "id": 7
-    },
-    {
-      "comment": "Testing this post comment",
-      "postId": 14,
-      "userId": 1,
-      "userName": "Test",
-      "userAvatar": "https://firebasestorage.googleapis.com/v0/b/todo-app-1feb3.appspot.com/o/default.png?alt=media&token=b1c8a2a0-3f31-4f33-ad89-e57bead0bc0d",
-      "date": "21 2017 11:52",
-      "id": 8
     }
   ]
 }

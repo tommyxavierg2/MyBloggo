@@ -1,14 +1,9 @@
 <template>
   <div id="loginView">
 
-    <ul id="navBar" class="list-inline align-left">
-      <li><router-link class="navBarItems" to="/">Bloggo</router-link></li>
-      <li><button v-if="!user" type="button" class="btn btn-primary icons-right-float" @click="goToRegister">Register</button></li>
-    </ul>
-
-    <h1 class="titles">Welcome to bloggo</h1>
-
     <form @submit.prevent="login()">
+
+         <h1 class="jumbotron titles">Login</h1>
 
         <div class="input-group">
           <span class="input-group-addon">Email:</span>
@@ -23,6 +18,12 @@
         </div>
 
         <div class="input-group">
+          <span class="input-group-addon">
+            <input type="radio" @click="loginUser.remembered = !loginUser.remembered" :checked="loginUser.remembered"> Remember me
+        </span>
+        </div>
+
+        <div class="input-group">
           <span class="input-group-btn">
             <button id="loginButton" type="submit" :disabled="!loginUser.password || !loginUser.email"
                     class="btn btn-primary btn-block">Enter</button>
@@ -32,7 +33,6 @@
     </form>
 
   </div>
-
 </template>
 
 <script>
@@ -41,7 +41,8 @@
       return {
         loginUser: {
           password: "",
-          email: ""
+          email: "",
+          remembered: false
         },
         loggedUser: {
           avatar: "",
@@ -50,15 +51,20 @@
           lastname: "",
           likedPostId: [],
           name: "",
-          password: ""
+          password: "",
+          isUserLogged: false,
+          remembered: false
         }
       }
     },
 
     created() {
       this.loggedUser = JSON.parse(localStorage.getItem('userData'));
+    },
+
+    mounted() {
       if(this.loggedUser) {
-        this.$router.push('/');
+          this.$router.push('/');
       }
     },
 
@@ -87,7 +93,9 @@
 
               if(post){
                 this.goToPostView(res.data[0], post);
-              } else {
+              }
+              else {
+                res.data[0].remembered = this.loginUser.remembered;
                 this.goToPosts(res.data[0]);
               }
           }
@@ -95,23 +103,15 @@
         .catch(err => toastr.warning(err));
       },
 
-      goToRegister() {
-        this.$router.replace('register');
-      },
-
       goToPosts(data) {
         this.loginUser = data;
         localStorage.setItem('userData', JSON.stringify(data));
-        this.$router.push('/');
+        location.reload();
       },
 
       goToPostView(data, post){
         localStorage.setItem('userData', JSON.stringify(data));
         this.$router.push({name: 'postview', params: {post: post}});
-      },
-
-      searchPost(data) {
-
       }
     }
  }
