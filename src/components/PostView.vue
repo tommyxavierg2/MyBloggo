@@ -44,8 +44,9 @@
           <button v-if="post.state.drafted || post.state.deleted" type="button" class="btn btn-success" @click="createPost(post)">Post</button>
         </span>
       </div>
-
     </form>
+
+    <h3 v-if="!post.commentsAllowed">Comments disabled for this post</h3>
 
     <div v-if="user && post.commentsAllowed">
       <h4>New Comment</h4>

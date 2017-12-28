@@ -603,7 +603,7 @@
       }
     },
     {
-      "comments": 0,
+      "comments": 1,
       "commentsAllowed": true,
       "content": "Testing a nice reversed message 2",
       "creationDate": "28 2017 15:02:51",
@@ -622,7 +622,7 @@
     },
     {
       "comments": 0,
-      "commentsAllowed": true,
+      "commentsAllowed": false,
       "content": "testing a nice reversed with json server",
       "creationDate": "28 2017 15:39:47",
       "publicationDate": "28 2017 15:39:47",
@@ -630,6 +630,24 @@
       "id": 36,
       "likes": 0,
       "title": "testing a nice reversed with json server",
+      "userId": 1,
+      "fullName": "Test Testing",
+      "state": {
+        "published": true,
+        "drafted": false,
+        "deleted": false
+      }
+    },
+    {
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "asdsadasd",
+      "creationDate": "28 2017 17:32:10",
+      "publicationDate": "28 2017 17:32:10",
+      "edited": false,
+      "id": 37,
+      "likes": 0,
+      "title": "sadasdsadsad",
       "userId": 1,
       "fullName": "Test Testing",
       "state": {
@@ -655,6 +673,14 @@
       "fullName": "Test Testing",
       "date": "28 2017 11:38:07",
       "id": 2
+    },
+    {
+      "comment": "ehtfgnb nh",
+      "postId": 35,
+      "userId": 1,
+      "fullName": "Test Testing",
+      "date": "28 2017 17:24:08",
+      "id": 3
     }
   ]
 }
