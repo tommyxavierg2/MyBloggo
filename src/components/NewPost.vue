@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <h1>Create Post</h1>
+    <h1 class="jumbotron titles">Create Post</h1>
 
     <div v-if="newPost.title || newPost.content" class="post-view">
       <h3>Preview</h3>

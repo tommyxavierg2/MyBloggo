@@ -1,24 +1,26 @@
 <template>
-  <div class="post-list">
+  <div class="post-list container-fluid">
 
       <span class="icons-left-float">{{index+1}}</span>
-
         <i v-if="user.id == post.userId" class="fa fa-times icons-right-float" @click="deletePost(post, index)"></i>
-        <div class="panel-heading box1">
-          <router-link :to="{name: 'profile', params: {postUserId: post.userId, viewer: user}}">
-            <avatar :username="post.fullName" class="gravatar" :size="200"></avatar></router-link>
-          <router-link class="user-name-router" :to="{name: 'profile', params: {postUserId: post.userId, viewer: user}}">
-            <span class="titles">{{post.fullName}}</span></router-link>
-        </div>
-        <div>
-          <router-link :to="{path: `postview/${post.id}`}">
-            <h3 class="user-name-router titles">{{post.title}}</h3></router-link>
-          <span readonly="!user.isUserLogged">{{content}}</span> <br>
-          <button type="button" @click="addLike(index, post, user.likedPostId)" :disabled="!user.isUserLogged">Likes {{post.likes}}</button>
-          <router-link class="user-name-router" :to="{path: `postview/${post.id}`}">Comments {{post.comments}}</router-link>
-        </div>
-        <div class="panel-heading box titles">
-          <router-link :to="{path: `postview/${post.id}`}">Posted on: {{post.creationDate}}</router-link> <br>
+
+        <div class="row">
+          <div class="box titles">
+            <router-link :to="{path: `postview/${post.id}`}">Posted on: {{post.creationDate}}</router-link> <br>
+          </div>
+          <div class="col-sm-3 col-md-6">
+            <router-link :to="{name: 'profile', params: {postUserId: post.userId, viewer: user}}">
+              <avatar :username="post.fullName" class="gravatar" :size="200"></avatar></router-link>
+            <router-link class="user-name-router" :to="{name: 'profile', params: {postUserId: post.userId, viewer: user}}">
+              <span class="titles">{{post.fullName}}</span></router-link>
+          </div>
+          <div class="col-sm-9 col-md-6">
+            <router-link :to="{path: `postview/${post.id}`}">
+              <h3 class="user-name-router titles">{{post.title}}</h3></router-link>
+            <span readonly="!user.isUserLogged">{{content}}</span> <br>
+            <button type="button" @click="addLike(index, post, user.likedPostId)" :disabled="!user.isUserLogged">Likes {{post.likes}}</button>
+            <router-link class="user-name-router" :to="{path: `postview/${post.id}`}">Comments {{post.comments}}</router-link>
+          </div>
         </div>
 
   </div>

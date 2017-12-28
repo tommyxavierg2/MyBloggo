@@ -137,11 +137,12 @@
 }
 
 #postsView {
-  margin-left: 15%;
+  margin-left: 10%;
+  margin-right: 30%;
   text-align: center;
 }
 
 #searchBox {
-  width: 400px;
+  width: 200px;
   margin-right: 5px;
 }

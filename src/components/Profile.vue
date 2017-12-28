@@ -1,7 +1,7 @@
 <template>
   <div id="profileView">
 
-    <h1>Profile</h1>
+    <h1 class="jumbotron titles">Profile</h1>
 
     <div v-if="user">
       <h3>User information</h3>

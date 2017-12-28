@@ -9,7 +9,22 @@
     <script src='https://www.google.com/recaptcha/api.js?onload=captchaResponse' async defer></script>
     <link rel="stylesheet" href="/myCss/myCss.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
+    <script>
 
+      // Enable pusher logging - don't include this in production
+      Pusher.logToConsole = true;
+
+      var pusher = new Pusher('dc27cdf64618a574090d', {
+        cluster: 'us2',
+        encrypted: true
+      });
+
+      var channel = pusher.subscribe('notifications');
+      channel.bind('new-notification', (data) => {
+        toastr.success(data);
+      });
+    </script>
     <title>MyBloggo</title>
   </head>
   <body>

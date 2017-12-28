@@ -3,7 +3,7 @@
 
     <form @submit.prevent="login()">
 
-         <h1 class="titles">Login</h1>
+         <h1 class="jumbotron titles">Login</h1>
 
         <div class="input-group">
           <span class="input-group-addon">Email:</span>

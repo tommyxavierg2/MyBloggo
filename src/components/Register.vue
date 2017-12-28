@@ -1,7 +1,7 @@
 <template>
   <div id="registerView" class="align-center">
 
-    <h1 class="titles">Register</h1>
+    <h1 class="jumbotron titles">Register</h1>
 
     <form @submit.prevent="registerNewUser">
 

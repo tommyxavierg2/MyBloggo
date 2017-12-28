@@ -10,14 +10,6 @@
            <li><router-link v-if="loggedUser" to="profile">Profile</router-link></li>
            <li><router-link v-if="loggedUser" to="settings">Settings
              <i class="fa fa-cog"></i></router-link></li>
-           <li>
-             <div class="input-group" id="searchBox">
-                 <input type="text" class="form-control" placeholder="Search">
-                 <span class="input-group-addon">
-                   <i class="fa fa-search"></i>
-                 </span>
-             </div>
-          </li>
           <li><button v-if="!loggedUser" type="button" class="btn btn-primary icons-right-float" @click="goToLogin">Login</button></li>
           <li><button v-if="!loggedUser" type="button" class="btn btn-primary icons-right-float" @click="goToRegister">Register</button></li>
           <li><button v-if="loggedUser" type="button" class="btn btn-primary icons-right-float" @click="logout">Logout</button></li>
@@ -79,8 +71,6 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   background-color: #5D6D7E;
-  padding: 50px;
-  margin: 80px;
   width: 100%;
 }
 </style>

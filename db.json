@@ -8,8 +8,9 @@
       "id": 1,
       "fullName": "Test Testing",
       "likedPostId": [],
-      "remembered": true,
-      "confirmPassword": "qweasd"
+      "remembered": false,
+      "confirmPassword": "qweasd",
+      "isUserLogged": true
     },
     {
       "name": "Test 1",
@@ -98,7 +99,7 @@
       }
     },
     {
-      "comments": 0,
+      "comments": 1,
       "commentsAllowed": true,
       "content": "Testing a test testing Testing a test testing Testing a test testing",
       "creationDate": "27 2017 09:03:24",
@@ -114,6 +115,528 @@
         "drafted": false,
         "deleted": false
       }
+    },
+    {
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "asdasdds",
+      "creationDate": "28 2017 13:16:43",
+      "publicationDate": "28 2017 13:16:43",
+      "edited": false,
+      "id": 6,
+      "likes": 0,
+      "title": "asdasdsadasdasd",
+      "userId": 1,
+      "fullName": "Test Testing",
+      "state": {
+        "published": true,
+        "drafted": false,
+        "deleted": false
+      }
+    },
+    {
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "asdasdds",
+      "creationDate": "28 2017 13:16:43",
+      "publicationDate": "28 2017 13:16:43",
+      "edited": false,
+      "id": 7,
+      "likes": 0,
+      "title": "asdasdsadasdasd",
+      "userId": 1,
+      "fullName": "Test Testing",
+      "state": {
+        "published": true,
+        "drafted": false,
+        "deleted": false
+      }
+    },
+    {
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "asdasdds",
+      "creationDate": "28 2017 13:16:43",
+      "publicationDate": "28 2017 13:16:43",
+      "edited": false,
+      "id": 8,
+      "likes": 0,
+      "title": "asdasdsadasdasd",
+      "userId": 1,
+      "fullName": "Test Testing",
+      "state": {
+        "published": true,
+        "drafted": false,
+        "deleted": false
+      }
+    },
+    {
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "asdasdds",
+      "creationDate": "28 2017 13:16:43",
+      "publicationDate": "28 2017 13:16:43",
+      "edited": false,
+      "id": 9,
+      "likes": 0,
+      "title": "asdasdsadasdasd",
+      "userId": 1,
+      "fullName": "Test Testing",
+      "state": {
+        "published": true,
+        "drafted": false,
+        "deleted": false
+      }
+    },
+    {
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "asdasdds",
+      "creationDate": "28 2017 13:16:43",
+      "publicationDate": "28 2017 13:16:43",
+      "edited": false,
+      "id": 10,
+      "likes": 0,
+      "title": "asdasdsadasdasd",
+      "userId": 1,
+      "fullName": "Test Testing",
+      "state": {
+        "published": true,
+        "drafted": false,
+        "deleted": false
+      }
+    },
+    {
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "asdasdds",
+      "creationDate": "28 2017 13:16:43",
+      "publicationDate": "28 2017 13:16:43",
+      "edited": false,
+      "id": 11,
+      "likes": 0,
+      "title": "asdasdsadasdasd",
+      "userId": 1,
+      "fullName": "Test Testing",
+      "state": {
+        "published": true,
+        "drafted": false,
+        "deleted": false
+      }
+    },
+    {
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "asdasdds",
+      "creationDate": "28 2017 13:16:43",
+      "publicationDate": "28 2017 13:16:43",
+      "edited": false,
+      "id": 12,
+      "likes": 0,
+      "title": "asdasdsadasdasd",
+      "userId": 1,
+      "fullName": "Test Testing",
+      "state": {
+        "published": true,
+        "drafted": false,
+        "deleted": false
+      }
+    },
+    {
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "asdasdds",
+      "creationDate": "28 2017 13:16:43",
+      "publicationDate": "28 2017 13:16:43",
+      "edited": false,
+      "id": 13,
+      "likes": 0,
+      "title": "asdasdsadasdasd",
+      "userId": 1,
+      "fullName": "Test Testing",
+      "state": {
+        "published": true,
+        "drafted": false,
+        "deleted": false
+      }
+    },
+    {
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "asdasdds",
+      "creationDate": "28 2017 13:16:43",
+      "publicationDate": "28 2017 13:16:43",
+      "edited": false,
+      "id": 14,
+      "likes": 0,
+      "title": "asdasdsadasdasd",
+      "userId": 1,
+      "fullName": "Test Testing",
+      "state": {
+        "published": true,
+        "drafted": false,
+        "deleted": false
+      }
+    },
+    {
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "asdasdds",
+      "creationDate": "28 2017 13:16:43",
+      "publicationDate": "28 2017 13:16:43",
+      "edited": false,
+      "id": 15,
+      "likes": 0,
+      "title": "asdasdsadasdasd",
+      "userId": 1,
+      "fullName": "Test Testing",
+      "state": {
+        "published": true,
+        "drafted": false,
+        "deleted": false
+      }
+    },
+    {
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "asdasdds",
+      "creationDate": "28 2017 13:16:43",
+      "publicationDate": "28 2017 13:16:43",
+      "edited": false,
+      "id": 16,
+      "likes": 0,
+      "title": "asdasdsadasdasd",
+      "userId": 1,
+      "fullName": "Test Testing",
+      "state": {
+        "published": false,
+        "drafted": false,
+        "deleted": true
+      }
+    },
+    {
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "asdasdds",
+      "creationDate": "28 2017 13:16:43",
+      "publicationDate": "28 2017 13:16:43",
+      "edited": false,
+      "id": 17,
+      "likes": 0,
+      "title": "asdasdsadasdasd",
+      "userId": 1,
+      "fullName": "Test Testing",
+      "state": {
+        "published": true,
+        "drafted": false,
+        "deleted": false
+      }
+    },
+    {
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "asdasdds",
+      "creationDate": "28 2017 13:16:43",
+      "publicationDate": "28 2017 13:16:43",
+      "edited": false,
+      "id": 18,
+      "likes": 0,
+      "title": "asdasdsadasdasd",
+      "userId": 1,
+      "fullName": "Test Testing",
+      "state": {
+        "published": true,
+        "drafted": false,
+        "deleted": false
+      }
+    },
+    {
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "asdasdds",
+      "creationDate": "28 2017 13:16:43",
+      "publicationDate": "28 2017 13:16:43",
+      "edited": false,
+      "id": 19,
+      "likes": 0,
+      "title": "asdasdsadasdasd",
+      "userId": 1,
+      "fullName": "Test Testing",
+      "state": {
+        "published": true,
+        "drafted": false,
+        "deleted": false
+      }
+    },
+    {
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "asdasdds",
+      "creationDate": "28 2017 13:16:43",
+      "publicationDate": "28 2017 13:16:43",
+      "edited": false,
+      "id": 20,
+      "likes": 0,
+      "title": "asdasdsadasdasd",
+      "userId": 1,
+      "fullName": "Test Testing",
+      "state": {
+        "published": true,
+        "drafted": false,
+        "deleted": false
+      }
+    },
+    {
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "asdasdds",
+      "creationDate": "28 2017 13:16:43",
+      "publicationDate": "28 2017 13:16:43",
+      "edited": false,
+      "id": 21,
+      "likes": 0,
+      "title": "asdasdsadasdasd",
+      "userId": 1,
+      "fullName": "Test Testing",
+      "state": {
+        "published": true,
+        "drafted": false,
+        "deleted": false
+      }
+    },
+    {
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "asdasdds",
+      "creationDate": "28 2017 13:16:43",
+      "publicationDate": "28 2017 13:16:43",
+      "edited": false,
+      "id": 22,
+      "likes": 0,
+      "title": "asdasdsadasdasd",
+      "userId": 1,
+      "fullName": "Test Testing",
+      "state": {
+        "published": true,
+        "drafted": false,
+        "deleted": false
+      }
+    },
+    {
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "asdasdds",
+      "creationDate": "28 2017 13:16:43",
+      "publicationDate": "28 2017 13:16:43",
+      "edited": false,
+      "id": 23,
+      "likes": 0,
+      "title": "asdasdsadasdasd",
+      "userId": 1,
+      "fullName": "Test Testing",
+      "state": {
+        "published": true,
+        "drafted": false,
+        "deleted": false
+      }
+    },
+    {
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "asdasdds",
+      "creationDate": "28 2017 13:16:43",
+      "publicationDate": "28 2017 13:16:43",
+      "edited": false,
+      "id": 24,
+      "likes": 0,
+      "title": "asdasdsadasdasd",
+      "userId": 1,
+      "fullName": "Test Testing",
+      "state": {
+        "published": true,
+        "drafted": false,
+        "deleted": false
+      }
+    },
+    {
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "asdasdds",
+      "creationDate": "28 2017 13:16:43",
+      "publicationDate": "28 2017 13:16:43",
+      "edited": false,
+      "id": 25,
+      "likes": 0,
+      "title": "asdasdsadasdasd",
+      "userId": 1,
+      "fullName": "Test Testing",
+      "state": {
+        "published": true,
+        "drafted": false,
+        "deleted": false
+      }
+    },
+    {
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "asdasdds",
+      "creationDate": "28 2017 13:16:43",
+      "publicationDate": "28 2017 13:16:43",
+      "edited": false,
+      "id": 26,
+      "likes": 0,
+      "title": "asdasdsadasdasd",
+      "userId": 1,
+      "fullName": "Test Testing",
+      "state": {
+        "published": true,
+        "drafted": false,
+        "deleted": false
+      }
+    },
+    {
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "asdasdds",
+      "creationDate": "28 2017 13:16:43",
+      "publicationDate": "28 2017 13:16:43",
+      "edited": false,
+      "id": 27,
+      "likes": 0,
+      "title": "asdasdsadasdasd",
+      "userId": 1,
+      "fullName": "Test Testing",
+      "state": {
+        "published": true,
+        "drafted": false,
+        "deleted": false
+      }
+    },
+    {
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "asdasdds",
+      "creationDate": "28 2017 13:16:43",
+      "publicationDate": "28 2017 13:16:43",
+      "edited": false,
+      "id": 28,
+      "likes": 0,
+      "title": "asdasdsadasdasd",
+      "userId": 1,
+      "fullName": "Test Testing",
+      "state": {
+        "published": true,
+        "drafted": false,
+        "deleted": false
+      }
+    },
+    {
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "asdasdds",
+      "creationDate": "28 2017 13:16:43",
+      "publicationDate": "28 2017 13:16:43",
+      "edited": false,
+      "id": 29,
+      "likes": 0,
+      "title": "asdasdsadasdasd",
+      "userId": 1,
+      "fullName": "Test Testing",
+      "state": {
+        "published": true,
+        "drafted": false,
+        "deleted": false
+      }
+    },
+    {
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "asdasdds",
+      "creationDate": "28 2017 13:16:43",
+      "publicationDate": "28 2017 13:16:43",
+      "edited": false,
+      "id": 30,
+      "likes": 0,
+      "title": "asdasdsadasdasd",
+      "userId": 1,
+      "fullName": "Test Testing",
+      "state": {
+        "published": true,
+        "drafted": false,
+        "deleted": false
+      }
+    },
+    {
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "sadsada",
+      "creationDate": "28 2017 13:40:39",
+      "publicationDate": "28 2017 13:40:39",
+      "edited": false,
+      "id": 33,
+      "likes": 0,
+      "title": "asdsadsd",
+      "userId": 1,
+      "fullName": "Test Testing",
+      "state": {
+        "published": true,
+        "drafted": false,
+        "deleted": false
+      }
+    },
+    {
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "Testing a nice reversed",
+      "creationDate": "28 2017 14:13:36",
+      "publicationDate": "28 2017 14:13:36",
+      "edited": false,
+      "id": 34,
+      "likes": 0,
+      "title": "Testing nice reversed",
+      "userId": 1,
+      "fullName": "Test Testing",
+      "state": {
+        "published": false,
+        "drafted": false,
+        "deleted": true
+      }
+    },
+    {
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "Testing a nice reversed message 2",
+      "creationDate": "28 2017 15:02:51",
+      "publicationDate": "28 2017 15:02:51",
+      "edited": false,
+      "id": 35,
+      "likes": 0,
+      "title": "Testing a nice reversed",
+      "userId": 1,
+      "fullName": "Test Testing",
+      "state": {
+        "published": true,
+        "drafted": false,
+        "deleted": false
+      }
+    },
+    {
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "testing a nice reversed with json server",
+      "creationDate": "28 2017 15:39:47",
+      "publicationDate": "28 2017 15:39:47",
+      "edited": false,
+      "id": 36,
+      "likes": 0,
+      "title": "testing a nice reversed with json server",
+      "userId": 1,
+      "fullName": "Test Testing",
+      "state": {
+        "published": true,
+        "drafted": false,
+        "deleted": false
+      }
     }
   ],
   "comments": [
@@ -124,6 +647,14 @@
       "fullName": "Test Testing",
       "date": "27 2017 00:10:23",
       "id": 1
+    },
+    {
+      "comment": "fgcfgfgfgg",
+      "postId": 5,
+      "userId": 1,
+      "fullName": "Test Testing",
+      "date": "28 2017 11:38:07",
+      "id": 2
     }
   ]
 }

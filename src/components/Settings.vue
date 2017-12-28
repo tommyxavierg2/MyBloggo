@@ -1,6 +1,7 @@
 <template>
-  <div class="">
-    <h1>Settings</h1>
+  <div>
+
+    <h1 class="jumbotron titles">Settings</h1>
 
     <div v-if="!userValidation.validated">
       <h4>To change your personal information, please validate the following password</h4>
