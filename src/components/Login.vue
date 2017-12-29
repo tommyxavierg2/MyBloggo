@@ -64,7 +64,7 @@
 
     mounted() {
       if(this.loggedUser) {
-          this.$router.push('/');
+          this.$router.push('/1');
       }
     },
 

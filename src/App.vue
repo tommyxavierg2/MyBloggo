@@ -3,7 +3,7 @@
     <nav class="navbar navbar-inverse">
       <div class="container-fluid">
         <div class="navbar-header">
-          <router-link class="logo navbar-brand" to="/">Bloggo</router-link>
+          <router-link class="logo navbar-brand" to="/1">Bloggo</router-link>
         </div>
         <ul class="nav navbar-nav">
            <li><router-link  v-if="loggedUser" to="newpost">New Post</router-link></li>
