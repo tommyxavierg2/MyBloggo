@@ -64,7 +64,7 @@
 
     mounted() {
       if(this.loggedUser) {
-          this.$router.push('/');
+          this.$router.push('/1');
       }
     },
 
@@ -106,12 +106,14 @@
       goToPosts(data) {
         this.loginUser = data;
         localStorage.setItem('userData', JSON.stringify(data));
-        location.reload();
+        this.$router.push({ path: '/1', params: {id: 1}});
+        Event.fire('logged', this.loginUser);
       },
 
       goToPostView(data, post){
         localStorage.setItem('userData', JSON.stringify(data));
-        this.$router.push({name: 'postview', params: {post: post}});
+        this.$router.push({path: `postview/${post.id}`, params: {id: post.id}});
+        Event.fire('logged', this.loginUser);
       }
     }
  }

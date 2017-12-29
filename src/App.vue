@@ -3,16 +3,16 @@
     <nav class="navbar navbar-inverse">
       <div class="container-fluid">
         <div class="navbar-header">
-          <router-link class="logo navbar-brand" to="/">Bloggo</router-link>
+          <router-link class="logo navbar-brand" to="/1">Bloggo</router-link>
         </div>
         <ul class="nav navbar-nav">
-           <li><router-link  v-if="loggedUser" to="newpost">New Post</router-link></li>
-           <li><router-link v-if="loggedUser" to="profile">Profile</router-link></li>
-           <li><router-link v-if="loggedUser" to="settings">Settings
+           <li><router-link v-if="user" :to="{name: 'newpost'}">New Post</router-link></li>
+           <li><router-link v-if="user" to="profile">Profile</router-link></li>
+           <li><router-link v-if="user" :to="{name: 'settings'}">Settings
              <i class="fa fa-cog"></i></router-link></li>
-          <li><button v-if="!loggedUser" type="button" class="btn btn-primary icons-right-float" @click="goToLogin">Login</button></li>
-          <li><button v-if="!loggedUser" type="button" class="btn btn-primary icons-right-float" @click="goToRegister">Register</button></li>
-          <li><button v-if="loggedUser" type="button" class="btn btn-primary icons-right-float" @click="logout">Logout</button></li>
+          <li><button v-if="!user" type="button" class="btn btn-primary icons-right-float" @click="goToLogin">Login</button></li>
+          <li><button v-if="!user" type="button" class="btn btn-primary icons-right-float" @click="goToRegister">Register</button></li>
+          <li><button v-if="user" type="button" class="btn btn-primary icons-right-float" @click="logout">Logout</button></li>
         </ul>
       </div>
     </nav>
@@ -29,17 +29,24 @@
     name: 'app',
     data() {
       return {
-        loggedUser: {}
+        user: {}
       }
     },
 
     created() {
-      this.loggedUser = this.user;
+      this.validateUserState;
     },
 
     computed: {
-      user() {
-        return JSON.parse(localStorage.getItem('userData'));
+      validateUserState() {
+        Event.listen('logged', (data) => {
+          if(data) {
+            this.user = data;
+          }
+          else {
+            this.user = JSON.parse(localStorage.getItem('userData'));
+          }
+        });
       }
     },
 
@@ -47,9 +54,9 @@
       logout() {
         if(confirm('Are you sure about logging out?') == true) {
             localStorage.removeItem('userData');
-            toastr.success(`You've been logged out`);
-            this.$router.replace('/');
-            location.reload();
+            this.user = '';
+            toastr.success(`You've been logged out, hope to see you soon`);
+            Event.fire('loggedOut');
         }
       },
 

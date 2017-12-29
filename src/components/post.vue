@@ -2,7 +2,7 @@
   <div class="post-list container-fluid">
 
       <span class="icons-left-float">{{index+1}}</span>
-        <i v-if="user.id == post.userId" class="fa fa-times icons-right-float" @click="deletePost(post, index)"></i>
+        <i v-if="user && user.id == post.userId" class="fa fa-times icons-right-float" @click="deletePost(post, index)"></i>
 
         <div class="row">
           <div class="box titles">
@@ -17,7 +17,7 @@
           <div class="col-sm-9 col-md-6">
             <router-link :to="{path: `postview/${post.id}`}">
               <h3 class="user-name-router titles">{{post.title}}</h3></router-link>
-            <span readonly="!user.isUserLogged">{{content}}</span> <br>
+              <p class="text-center">{{content.substr(0, 200)}}</p>
             <button type="button" @click="addLike(index, post, user.likedPostId)" :disabled="!user.isUserLogged">Likes {{post.likes}}</button>
             <router-link class="user-name-router" :to="{path: `postview/${post.id}`}">Comments {{post.comments}}</router-link>
           </div>

@@ -19,7 +19,7 @@
         <app-post :post="post" :index="index" :user="user"></app-post>
       </div>
 
-      <pagination :records="posts.length" :per-page="20" @paginate="getPaginationPosts"></pagination>
+      <pagination :records="total" :per-page="20" @paginate="getPosts"></pagination>
 
   </div>
 
@@ -46,7 +46,9 @@ export default {
         },
         posts: [],
         isUserPost: false,
-        page: 1
+        page: 1,
+        offset: 24,
+        total: 25
        }
   },
 
@@ -56,54 +58,35 @@ export default {
   },
 
   created() {
-    this.getUserData();
+    this.page = this.$route.params.id;
   },
 
   mounted() {
-    this.getPosts();
+    this.getPosts(this.page);
+    this.getUserData;
   },
 
   computed: {
-    published_posts() {
-      return this.posts;
+    getUserData() {
+      this.user = JSON.parse(localStorage.getItem('userData'));
+
+      if(this.user) {
+          this.user.isUserLogged = true;
+      } else {
+        this.user = 0;
+      }
     }
   },
 
   methods: {
-    getPosts() {
-      axios.get(`posts?_sort=id&_order=desc&_page=${this.page}&state.published=true&_limit=25`)
+    getPosts(page) {
+      axios.get(`posts?_sort=id&_order=desc&_page=${page}&state.published=true&_limit=25`)
         .then(res => {
-          this.posts = res.data;
-          this.page++;
+            this.posts = res.data;
+            this.total = parseInt(res.headers['x-total-count']);
+            this.$router.push({path: `/${page}`, params: {id: page}});
         })
         .catch(err => toastr.error(err));
-    },
-
-    getPaginationPosts() {
-
-      axios.get(`posts?_sort=views&_order=desc&_page=${this.page}&_limit=25&state.published=true`)
-        .then(res => {
-          let data = res.data;
-
-          if(data) {
-            data.forEach(val => {
-                this.posts.push(val);
-            });
-            this.page++;
-          }
-        })
-        .catch(err => toastr.error(err));
-    },
-
-    getUserData() {
-      let temporaryUserData = JSON.parse(localStorage.getItem('userData'));
-
-      if(!temporaryUserData) {
-          this.user = 0;
-      } else {
-         temporaryUserData.isUserLogged = true;
-         this.user = temporaryUserData;
-      }
     }
   }
 }

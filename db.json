@@ -7,7 +7,9 @@
       "password": "qweasd",
       "id": 1,
       "fullName": "Test Testing",
-      "likedPostId": [],
+      "likedPostId": [
+        41
+      ],
       "remembered": false,
       "confirmPassword": "qweasd",
       "isUserLogged": true
@@ -83,19 +85,19 @@
     {
       "comments": 0,
       "commentsAllowed": true,
-      "content": "Testing an oficial deleted post",
+      "content": "Testing an oficial deleted post 1",
       "creationDate": "26 2017 09:09:19",
       "publicationDate": "27 2017 17:01:54",
       "edited": false,
       "id": 4,
       "likes": 0,
-      "title": "Testing oficial deleted post",
+      "title": "Testing oficial deleted post 1",
       "userId": 1,
       "fullName": "Test Testing",
       "state": {
-        "published": true,
+        "published": false,
         "drafted": false,
-        "deleted": false
+        "deleted": true
       }
     },
     {
@@ -637,6 +639,150 @@
         "drafted": false,
         "deleted": false
       }
+    },
+    {
+      "comments": 1,
+      "commentsAllowed": true,
+      "content": "Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing",
+      "creationDate": "25 2017 13:15:51",
+      "publicationDate": "25 2017 13:15:51",
+      "edited": false,
+      "id": 37,
+      "likes": 0,
+      "title": "Testing",
+      "userId": 1,
+      "fullName": "Test Testing",
+      "state": {
+        "published": false,
+        "drafted": false,
+        "deleted": true
+      }
+    },
+    {
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "Posting my first post as an oficial bloggo user",
+      "creationDate": "25 2017 23:27:53",
+      "publicationDate": "",
+      "edited": false,
+      "id": 38,
+      "likes": 0,
+      "title": "My first post",
+      "userId": 2,
+      "fullName": "Test 1 Testing",
+      "state": {
+        "published": false,
+        "drafted": true,
+        "deleted": false
+      }
+    },
+    {
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "Testing drafted posts",
+      "creationDate": "26 2017 09:08:42",
+      "publicationDate": "",
+      "edited": false,
+      "id": 39,
+      "likes": 0,
+      "title": "Testing drafted posts",
+      "userId": 1,
+      "fullName": "Test Testing",
+      "state": {
+        "published": false,
+        "drafted": true,
+        "deleted": false
+      }
+    },
+    {
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "Testing an oficial deleted post",
+      "creationDate": "26 2017 09:09:19",
+      "publicationDate": "27 2017 17:01:54",
+      "edited": false,
+      "id": 40,
+      "likes": 0,
+      "title": "Testing oficial deleted post",
+      "userId": 1,
+      "fullName": "Test Testing",
+      "state": {
+        "published": true,
+        "drafted": false,
+        "deleted": false
+      }
+    },
+    {
+      "comments": 2,
+      "commentsAllowed": true,
+      "content": "Testing a test testing Testing a test testing Testing a test testing",
+      "creationDate": "27 2017 09:03:24",
+      "publicationDate": "27 2017 09:03:24",
+      "edited": false,
+      "id": 41,
+      "likes": 1,
+      "title": "Testing a test testing",
+      "userId": 2,
+      "fullName": "Test 1 Testing",
+      "state": {
+        "published": true,
+        "drafted": false,
+        "deleted": false
+      }
+    },
+    {
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "asdasdds",
+      "creationDate": "28 2017 13:16:43",
+      "publicationDate": "28 2017 13:16:43",
+      "edited": false,
+      "id": 42,
+      "likes": 0,
+      "title": "asdasdsadasdasd",
+      "userId": 1,
+      "fullName": "Test Testing",
+      "state": {
+        "published": false,
+        "drafted": false,
+        "deleted": true
+      }
+    },
+    {
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "asdasdds",
+      "creationDate": "28 2017 13:16:43",
+      "publicationDate": "28 2017 13:16:43",
+      "edited": false,
+      "id": 43,
+      "likes": 0,
+      "title": "asdasdsadasdasd",
+      "userId": 1,
+      "fullName": "Test Testing",
+      "state": {
+        "published": false,
+        "drafted": false,
+        "deleted": true
+      }
+    },
+    {
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "sadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxccz",
+      "creationDate": "29 2017 13:56:33",
+      "publicationDate": "29 2017 13:56:33",
+      "edited": false,
+      "id": 44,
+      "likes": 0,
+      "title": "asdasdasdsad",
+      "userId": 1,
+      "fullName": "Test Testing",
+      "state": {
+        "published": true,
+        "drafted": false,
+        "deleted": false
+      }
     }
   ],
   "comments": [
@@ -655,6 +801,14 @@
       "fullName": "Test Testing",
       "date": "28 2017 11:38:07",
       "id": 2
+    },
+    {
+      "comment": "asdasdasd",
+      "postId": 41,
+      "userId": 1,
+      "fullName": "Test Testing",
+      "date": "29 2017 09:33:32",
+      "id": 3
     }
   ]
 }
