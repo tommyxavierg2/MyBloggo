@@ -42,7 +42,7 @@ export default new Router({
       }
     },
     {
-      path: '/',
+      path: '/:id',
       name: 'postslist',
       component: PostsList
     },
@@ -71,7 +71,7 @@ export default new Router({
     },
     {
       path: '/settings',
-      name: '/settings',
+      name: 'settings',
       component: Settings,
       meta: { requiresAuth: true},
       beforeEnter: (to, from, next) => {
@@ -87,6 +87,9 @@ export default new Router({
         }
       }
     }
-  ]
+  ],
+  scrollBehavior(to, from, savedPosition) {
+    return { x: 0, y: 0}
+  }
 
 })

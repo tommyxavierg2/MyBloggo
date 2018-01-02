@@ -19,7 +19,11 @@
         <app-post :post="post" :index="index" :user="user"></app-post>
       </div>
 
-      <pagination :records="posts.length" :per-page="20" @paginate="getPaginationPosts"></pagination>
+<<<<<<< HEAD
+      <pagination :records="total" :per-page="20" @paginate="getPosts"></pagination>
+=======
+      <pagination :records="posts.length" :per-page="offset" @paginate="getPosts"></pagination>
+>>>>>>> 7b47f181b01f65bab9c9e2b82d67552f3e788cb1
 
   </div>
 
@@ -28,6 +32,7 @@
 <script>
  import post from './post.vue';
  import {Pagination} from 'vue-pagination-2';
+ import VuePaginator from 'vuejs-paginator';
 
 export default {
   data() {
@@ -46,7 +51,13 @@ export default {
         },
         posts: [],
         isUserPost: false,
-        page: 1
+        page: 1,
+<<<<<<< HEAD
+        offset: 24,
+        total: 25
+=======
+        offset: 24
+>>>>>>> 7b47f181b01f65bab9c9e2b82d67552f3e788cb1
        }
   },
 
@@ -56,54 +67,69 @@ export default {
   },
 
   created() {
-    this.getUserData();
+    this.page = this.$route.params.id;
+<<<<<<< HEAD
   },
 
   mounted() {
-    this.getPosts();
+    this.getPosts(this.page);
+    this.getUserData;
+=======
+
+    this.getPosts(this.page);
+    this.getUserData();
+>>>>>>> 7b47f181b01f65bab9c9e2b82d67552f3e788cb1
   },
 
   computed: {
-    published_posts() {
-      return this.posts;
+    getUserData() {
+      this.user = JSON.parse(localStorage.getItem('userData'));
+
+      if(this.user) {
+          this.user.isUserLogged = true;
+      } else {
+        this.user = 0;
+      }
     }
   },
 
   methods: {
-    getPosts() {
-      axios.get(`posts?_sort=id&_order=desc&_page=${this.page}&state.published=true&_limit=25`)
+    getPosts(page) {
+      axios.get(`posts?_sort=id&_order=desc&_page=${page}&state.published=true&_limit=25`)
         .then(res => {
-          this.posts = res.data;
-          this.page++;
+<<<<<<< HEAD
+            this.posts = res.data;
+            this.total = parseInt(res.headers['x-total-count']);
+            this.$router.push({path: `/${page}`, params: {id: page}});
         })
         .catch(err => toastr.error(err));
-    },
+=======
+            if(res.data.length < this.offset) {
+              this.offset = 5;
+              this.posts = res.data;
+              this.$router.push({path: `/${page}`, params: {id: page}});
+            }
+            else {
+              this.offset = 24;
+              this.posts = res.data;
+              this.$router.push({path: `/${page}`, params: {id: page}});
+            }
 
-    getPaginationPosts() {
-
-      axios.get(`posts?_sort=views&_order=desc&_page=${this.page}&_limit=25&state.published=true`)
-        .then(res => {
-          let data = res.data;
-
-          if(data) {
-            data.forEach(val => {
-                this.posts.push(val);
-            });
-            this.page++;
-          }
+            // let data = res.data;
+            // data.forEach(val => {
+            //     this.posts.push(val);
+            // });
         })
         .catch(err => toastr.error(err));
     },
 
     getUserData() {
-      let temporaryUserData = JSON.parse(localStorage.getItem('userData'));
+      this.user = JSON.parse(localStorage.getItem('userData'));
 
-      if(!temporaryUserData) {
-          this.user = 0;
-      } else {
-         temporaryUserData.isUserLogged = true;
-         this.user = temporaryUserData;
+      if(this.user) {
+          this.user.isUserLogged = true;
       }
+>>>>>>> 7b47f181b01f65bab9c9e2b82d67552f3e788cb1
     }
   }
 }

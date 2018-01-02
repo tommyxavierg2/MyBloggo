@@ -119,7 +119,7 @@
         }
         else {
           toastr.warning('In order to see other users information you firstn need to log in');
-          this.$router.replace('/');
+          this.$router.replace('login');
         }
       },
 
@@ -155,7 +155,6 @@
               .then(res => {
                   this.posts.splice(currentPost.id, 1);
                   toastr.success('Post deleted');
-                  this.$router.replace('/');
               }).catch(err => toastr.error(err));
           }
       },
@@ -166,7 +165,7 @@
             localStorage.removeItem('userData');
             this.user = 0;
             toastr.success(`You've been logged out`);
-            this.$router.replace('/');
+            this.$router.replace('/1');
 
         }
       }

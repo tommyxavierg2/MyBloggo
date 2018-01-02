@@ -165,10 +165,19 @@ export default {
 
   created() {
     this.getUser();
+    Event.listen('loggedOut', () => {
+      this.user = 0;
+    });
   },
 
   mounted() {
     this.getPost();
+
+    Event.listen('pusher', (data) => {
+      toastr.success(data.message);
+    })
+
+
   },
 
   computed: {
@@ -234,7 +243,7 @@ export default {
       }
       else {
           toastr.warning(`Post not found`);
-          this.$router.replace('/');
+          this.$router.replace('/1');
       }
     },
 
@@ -262,7 +271,7 @@ export default {
         axios.put(`posts/${postData.id}`, postData)
         .then(res => {
           toastr.success('Sucessfully posted');
-          this.$router.replace('/');
+          this.$router.replace('/1');
         })
         .catch(err => toastr.error(err));
       }
@@ -275,7 +284,7 @@ export default {
         .then(res => {
           toastr.success('Post updated');
           this.isPostContentEditable = !this.isPostContentEditable;
-          this.$router.replace('/');
+          this.$router.replace('/1');
         })
         .catch(err => toastr.error(err));
       } else {
@@ -289,7 +298,7 @@ export default {
         this.post.content = this.originalPost.content;
         this.post.edited = this.post.edited;
         this.isPostContentEditable = !this.isPostContentEditable;
-        this.$router.replace('/');
+        this.$router.replace('/1');
     },
 
     editPostComments(index) {
@@ -315,7 +324,7 @@ export default {
           axios.put(`posts/${postData.id}`, postData)
             .then(res => {
                 toastr.success('Post deleted');
-                this.$router.replace('/');
+                this.$router.replace('/1');
             }).catch(err => toastr.error(err));
         }
     },

@@ -99,7 +99,7 @@ export default {
      .then(res => {
        this.clearData(this.newPost);
        toastr.success('Sucessfully posted');
-       this.$router.replace('/');
+       this.$router.replace('/1');
      })
      .catch(err => toastr.error(err));
    },
@@ -108,10 +108,10 @@ export default {
      if(confirm('Are you sure about canceling the post creation?') == true) {
        if(postData){
          this.clearData(postData);
-         this.$router.replace('/');
+         this.$router.replace('/1');
        }
        else {
-         this.$router.replace('/');
+         this.$router.replace('/1');
        }
      }
    },
@@ -127,7 +127,7 @@ export default {
      axios.post('posts', postData)
      .then(res => {
        toastr.success('Post saved as draft');
-       this.$router.replace('/');
+       this.$router.replace('/1');
      })
      .catch(err => toastr.error(err));
    },
@@ -137,7 +137,7 @@ export default {
          localStorage.removeItem('userData');
          this.user = 0;
          toastr.success(`You've been logged out`);
-         this.$router.replace('/');
+         this.$router.replace('/1');
      }
    },
 

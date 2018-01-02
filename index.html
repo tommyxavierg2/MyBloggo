@@ -12,9 +12,6 @@
     <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
     <script>
 
-      // Enable pusher logging - don't include this in production
-      Pusher.logToConsole = true;
-
       var pusher = new Pusher('dc27cdf64618a574090d', {
         cluster: 'us2',
         encrypted: true
@@ -22,8 +19,9 @@
 
       var channel = pusher.subscribe('notifications');
       channel.bind('new-notification', (data) => {
-        toastr.success(data);
+        Event.fire('pusher', data);
       });
+
     </script>
     <title>MyBloggo</title>
   </head>
