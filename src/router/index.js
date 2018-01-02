@@ -1,13 +1,13 @@
-import Vue from 'vue';
-import Router from 'vue-router';
+import Vue from 'vue'
+import Router from 'vue-router'
 
-import Login from '@/components/Login';
-import Register from '@/components/Register';
-import Profile from '@/components/Profile';
-import PostsList from '@/components/PostsList';
-import NewPost from '@/components/NewPost';
-import PostView from '@/components/PostView';
-import Settings from '@/components/Settings';
+import Login from '@/components/Login'
+import Register from '@/components/Register'
+import Profile from '@/components/Profile'
+import PostsList from '@/components/PostsList'
+import NewPost from '@/components/NewPost'
+import PostView from '@/components/PostView'
+import Settings from '@/components/Settings'
 
 Vue.use(Router)
 
@@ -27,15 +27,14 @@ export default new Router({
       path: '/profile',
       name: 'profile',
       component: Profile,
-      meta: { requiresAuth: true},
+      meta: {requiresAuth: true},
       beforeEnter: (to, from, next) => {
-        if(to.meta.requiresAuth) {
-          let authUser = JSON.parse(localStorage.getItem('userData'));
-          if(authUser) {
+        if (to.meta.requiresAuth) {
+          let authUser = JSON.parse(localStorage.getItem('userData'))
+          if (authUser) {
             next()
-          }
-          else {
-            toastr.warning('In order to perform any action you first need to log In');
+          } else {
+            toastr.warning('In order to perform any action you first need to log In')
             next({name: 'login'})
           }
         }
@@ -52,13 +51,12 @@ export default new Router({
       component: NewPost,
       meta: { requiresAuth: true},
       beforeEnter: (to, from, next) => {
-        if(to.meta.requiresAuth) {
-          let authUser = JSON.parse(localStorage.getItem('userData'));
-          if(authUser) {
+        if (to.meta.requiresAuth) {
+          let authUser = JSON.parse(localStorage.getItem('userData'))
+          if (authUser) {
             next()
-          }
-          else {
-            toastr.warning('In order to perform any action you first need to log In');
+          } else {
+            toastr.warning('In order to perform any action you first need to log In')
             next({name: 'login'})
           }
         }
@@ -75,20 +73,19 @@ export default new Router({
       component: Settings,
       meta: { requiresAuth: true},
       beforeEnter: (to, from, next) => {
-        if(to.meta.requiresAuth) {
-          let authUser = JSON.parse(localStorage.getItem('userData'));
-          if(authUser) {
+        if (to.meta.requiresAuth) {
+          let authUser = JSON.parse(localStorage.getItem('userData'))
+          if (authUser) {
             next()
-          }
-          else {
-            toastr.warning('In order to perform any action you first need to log In');
+          } else {
+            toastr.warning('In order to perform any action you first need to log In')
             next({name: 'login'})
           }
         }
       }
     }
   ],
-  scrollBehavior(to, from, savedPosition) {
+  scrollBehavior (to, from, savedPosition) {
     return { x: 0, y: 0}
   }
 

@@ -25,6 +25,8 @@
 
 <script>
 
+import axios from 'axios';
+
   export default {
     name: 'app',
     data() {
@@ -33,7 +35,7 @@
       }
     },
 
-    created() {
+    mounted() {
       this.validateUserState;
     },
 
@@ -42,6 +44,8 @@
         Event.listen('logged', (data) => {
           if(data) {
             this.user = data;
+            pusher.pusherSubscribe(this.user.id);
+            pusher.pusherNotificationReceiver;
           }
           else {
             this.user = JSON.parse(localStorage.getItem('userData'));

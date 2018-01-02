@@ -172,12 +172,6 @@ export default {
 
   mounted() {
     this.getPost();
-
-    Event.listen('pusher', (data) => {
-      toastr.success(data.message);
-    })
-
-
   },
 
   computed: {
