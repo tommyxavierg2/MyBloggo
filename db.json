@@ -7,7 +7,9 @@
       "password": "qweasd",
       "id": 1,
       "fullName": "Test Testing",
-      "likedPostId": [],
+      "likedPostId": [
+        41
+      ],
       "remembered": false,
       "confirmPassword": "qweasd",
       "isUserLogged": true
@@ -93,9 +95,9 @@
       "userId": 1,
       "fullName": "Test Testing",
       "state": {
-        "published": true,
+        "published": false,
         "drafted": false,
-        "deleted": false
+        "deleted": true
       }
     },
     {
@@ -603,7 +605,7 @@
       }
     },
     {
-      "comments": 0,
+      "comments": 1,
       "commentsAllowed": true,
       "content": "Testing a nice reversed message 2",
       "creationDate": "28 2017 15:02:51",
@@ -622,7 +624,7 @@
     },
     {
       "comments": 0,
-      "commentsAllowed": true,
+      "commentsAllowed": false,
       "content": "testing a nice reversed with json server",
       "creationDate": "28 2017 15:39:47",
       "publicationDate": "28 2017 15:39:47",
@@ -639,6 +641,10 @@
       }
     },
     {
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 7b47f181b01f65bab9c9e2b82d67552f3e788cb1
       "comments": 1,
       "commentsAllowed": true,
       "content": "Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing",
@@ -711,14 +717,22 @@
       }
     },
     {
+<<<<<<< HEAD
+      "comments": 2,
+=======
       "comments": 1,
+>>>>>>> 7b47f181b01f65bab9c9e2b82d67552f3e788cb1
       "commentsAllowed": true,
       "content": "Testing a test testing Testing a test testing Testing a test testing",
       "creationDate": "27 2017 09:03:24",
       "publicationDate": "27 2017 09:03:24",
       "edited": false,
       "id": 41,
+<<<<<<< HEAD
+      "likes": 1,
+=======
       "likes": 0,
+>>>>>>> 7b47f181b01f65bab9c9e2b82d67552f3e788cb1
       "title": "Testing a test testing",
       "userId": 2,
       "fullName": "Test 1 Testing",
@@ -763,6 +777,38 @@
         "drafted": false,
         "deleted": true
       }
+<<<<<<< HEAD
+    },
+    {
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "sadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxcczsadasdsasdasdasddzxccz",
+      "creationDate": "29 2017 13:56:33",
+      "publicationDate": "29 2017 13:56:33",
+      "edited": false,
+      "id": 44,
+      "likes": 0,
+      "title": "asdasdasdsad",
+=======
+      "comments": 0,
+      "commentsAllowed": true,
+      "content": "asdsadasd",
+      "creationDate": "28 2017 17:32:10",
+      "publicationDate": "28 2017 17:32:10",
+      "edited": false,
+      "id": 37,
+      "likes": 0,
+      "title": "sadasdsadsad",
+>>>>>>> improvements
+      "userId": 1,
+      "fullName": "Test Testing",
+      "state": {
+        "published": true,
+        "drafted": false,
+        "deleted": false
+      }
+=======
+>>>>>>> 7b47f181b01f65bab9c9e2b82d67552f3e788cb1
     }
   ],
   "comments": [
@@ -781,6 +827,22 @@
       "fullName": "Test Testing",
       "date": "28 2017 11:38:07",
       "id": 2
+    },
+    {
+<<<<<<< HEAD
+      "comment": "asdasdasd",
+      "postId": 41,
+      "userId": 1,
+      "fullName": "Test Testing",
+      "date": "29 2017 09:33:32",
+=======
+      "comment": "ehtfgnb nh",
+      "postId": 35,
+      "userId": 1,
+      "fullName": "Test Testing",
+      "date": "28 2017 17:24:08",
+>>>>>>> improvements
+      "id": 3
     }
   ]
 }

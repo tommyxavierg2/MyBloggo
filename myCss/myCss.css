@@ -136,6 +136,10 @@
   border-bottom: 1px solid gray;
 }
 
+p {
+  word-wrap: break-word;
+}
+
 #postsView {
   margin-left: 10%;
   margin-right: 30%;

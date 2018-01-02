@@ -44,8 +44,9 @@
           <button v-if="post.state.drafted || post.state.deleted" type="button" class="btn btn-success" @click="createPost(post)">Post</button>
         </span>
       </div>
-
     </form>
+
+    <h3 v-if="!post.commentsAllowed">Comments disabled for this post</h3>
 
     <div v-if="user && post.commentsAllowed">
       <h4>New Comment</h4>
@@ -164,10 +165,19 @@ export default {
 
   created() {
     this.getUser();
+    Event.listen('loggedOut', () => {
+      this.user = 0;
+    });
   },
 
   mounted() {
     this.getPost();
+
+    Event.listen('pusher', (data) => {
+      toastr.success(data.message);
+    })
+
+
   },
 
   computed: {
