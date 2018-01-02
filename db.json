@@ -642,6 +642,9 @@
     },
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 7b47f181b01f65bab9c9e2b82d67552f3e788cb1
       "comments": 1,
       "commentsAllowed": true,
       "content": "Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing Testing",
@@ -714,14 +717,22 @@
       }
     },
     {
+<<<<<<< HEAD
       "comments": 2,
+=======
+      "comments": 1,
+>>>>>>> 7b47f181b01f65bab9c9e2b82d67552f3e788cb1
       "commentsAllowed": true,
       "content": "Testing a test testing Testing a test testing Testing a test testing",
       "creationDate": "27 2017 09:03:24",
       "publicationDate": "27 2017 09:03:24",
       "edited": false,
       "id": 41,
+<<<<<<< HEAD
       "likes": 1,
+=======
+      "likes": 0,
+>>>>>>> 7b47f181b01f65bab9c9e2b82d67552f3e788cb1
       "title": "Testing a test testing",
       "userId": 2,
       "fullName": "Test 1 Testing",
@@ -766,6 +777,7 @@
         "drafted": false,
         "deleted": true
       }
+<<<<<<< HEAD
     },
     {
       "comments": 0,
@@ -795,6 +807,8 @@
         "drafted": false,
         "deleted": false
       }
+=======
+>>>>>>> 7b47f181b01f65bab9c9e2b82d67552f3e788cb1
     }
   ],
   "comments": [
